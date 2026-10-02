@@ -1,0 +1,58 @@
+id_local;niveau;circuit;local;code_archi;surface_m2;nb_rad;type_dessine;L_dispo_mm;statut;P_base_W_rapport;remarque
+R1-01;R+1;ELEM;salle de classe élémentaire 5;B21;62.51;2;NON_SPECIFIE;1000;OK;;1 en façade + 1 cloison côté porte (ARCH_03 = CVPS_02)
+R1-02;R+1;ELEM;atelier élémentaire 2;B22;30.89;1;NON_SPECIFIE;1000;OK;;façade. Surface CVPS_02 = 30,217 m² (écart D-08)
+R1-03;R+1;ELEM;stockage 2;B31;7.56;1;NON_SPECIFIE;750;OK;;cloison côté circulation
+R1-04;R+1;ELEM;wc élém 4;B25;13.35;1;NON_SPECIFIE;750;OK;;
+R1-05;R+1;ELEM;salle de classe élémentaire 6;B21;62.14;2;NON_SPECIFIE;1000;A_CONFIRMER;;ARCH_03 : radiateur en façade ; CVPS_02 : sur mur escalier (D-07)
+R1-06;R+1;ELEM;salle de classe élémentaire 7;B21;62.14;2;NON_SPECIFIE;1000;A_CONFIRMER;;ARCH_03 : radiateur en façade ; CVPS_02 : sur mur escalier (D-07)
+R1-07;R+1;ELEM;atelier élémentaire 3;B22;31.89;1;NON_SPECIFIE;1000;OK;;façade. Surface CVPS_02 = 31,161 m² (D-08)
+R1-08;R+1;ELEM;stockage 3;B31;7.55;1;NON_SPECIFIE;750;OK;;
+R1-09;R+1;ELEM;wc élém 5;B25;13.54;1;NON_SPECIFIE;750;OK;;
+R1-10;R+1;ELEM;salle de classe élémentaire 8;B21;62.29;2;NON_SPECIFIE;1000;OK;;1 façade + 1 cloison côté porte
+R0-E01;RDC;ELEM;salle de classe élémentaire 1;B21;62.93;2;V1500x750;750;OK;;1 façade + 1 cloison circulation
+R0-E02;RDC;ELEM;atelier élémentaire 1 (nom tronqué);B22;30.19;1;V1500x750;750;A_CONFIRMER;;nom partiellement masqué sur CVPS_01
+R0-E03;RDC;ELEM;stockage 1;B31;7.56;1;V1500x750;750;OK;;
+R0-E04;RDC;ELEM;salle de classe élémentaire 2;B21;62.03;3;V1500x750;750;A_CONFIRMER;;3e radiateur (étiqueté 1500x750) en angle porte/circulation : local d'affectation ambigu (D-09)
+R0-E05;RDC;ELEM;wc élémentaire (grand);B25;31.53;2;V1500x750;750;OK;;
+R0-E06;RDC;ELEM;salle de classe élémentaire 3;B21;60.10;2;V1500x750;750;OK;;
+R0-E07;RDC;ELEM;salle de classe élémentaire 4;B21;62.14;2;V1500x750;750;OK;;
+R0-E08;RDC;ELEM;salle polyvalente / activités périscolaires élémentaires;?24;124.30;2;V1500x750;750;A_CONFIRMER;;1 radiateur étiqueté en limite salle/préau (préau 50,1 m² : chauffé ?) (D-10)
+R0-E09;RDC;ELEM;rangement (6,6 m²);B24;6.60;1;V1500x750;750;A_CONFIRMER;;étiqueté 1500x750 ; positionné sur cloison haute -> local d'affectation à confirmer
+R0-E10;RDC;ELEM;laverie élémentaire;?;5.60;1;V1500x750;750;A_CONFIRMER;;code archi illisible
+R0-E11;RDC;ELEM;dégagement près wc prof élé (non nommé);?;;1;V1500x750;750;A_CONFIRMER;;local sans nom ni surface sur CVPS_01 (D-05)
+R0-P01;RDC;PERI;wc élémentaire (14,9 m²);B25;14.90;1;V1500x750;750;OK;;
+R0-P02;RDC;PERI;rangement (13,0 m²);B24;13.02;1;V1500x750;750;OK;;
+R0-P03;RDC;PERI;direction élém;B12;12.70;1;V1500x750;750;OK;;
+R0-P04;RDC;PERI;salle des enseignants;B13;24.43;1;V1500x750;750;OK;;
+R0-P05;RDC;PERI;psychologue;C2;12.80;1;V1500x750;750;A_CONFIRMER;;radiateur sur le mur mitoyen psychologue / direction périsco
+R0-P06;RDC;PERI;direction périsco;?3;15.00;1;V1500x750;750;OK;;
+R0-P07;RDC;PERI;salle des animateurs;?4;26.69;3;V1500x750;750;A_CONFIRMER;;dont 1 radiateur dos à dos avec salle RASED sur cloison mitoyenne
+R0-P08;RDC;PERI;salle RASED;?3;24.47;1;V1500x750;750;A_CONFIRMER;;
+R0-P09;RDC;PERI;hall / entrée périsco (non chiffré);?;;1;V1500x750;750;A_CONFIRMER;;surface non lisible (D-05)
+R0-P10;RDC;PERI;salle de service des ATSEM et enseignants;A13;28.40;1;V1500x750;750;OK;;
+R0-P11;RDC;PERI;bibliothèque;?1;60.89;3;V1500x750;750;A_CONFIRMER;;1 radiateur sur cloison wc admin / bibliothèque : affectation à confirmer
+R0-P12;RDC;PERI-RESTAU;cantine élémentaire / zone de self;?;;3;PLINTHE;3000;A_CONFIRMER;;surface illisible ; réseau restauration avec V2V motorisées ; circuit d'appartenance à confirmer (D-06)
+R0-P13;RDC;PERI-RESTAU;cantine maternelle;E1;93.55;2;PLINTHE;3000;A_CONFIRMER;;radiateurs plinthe ≈ 2,8–3,0 m mesurés sur PDF
+R0-P14;RDC;PERI-RESTAU;salle des agents;E8;;1;V1500x750;750;A_CONFIRMER;;surface illisible ; circuit à confirmer
+R0-M01;RDC;MAT;direction mat;A12;12.70;1;V1500x750;750;OK;;
+R0-M02;RDC;MAT;wc maternelle (27,1 m²);A24;27.12;2;V1500x750;750;OK;;
+R0-M03;RDC;MAT;salle de motricité / activités périscolaires maternelles;A23;172.57;3;V1500x750;750;A_CONFIRMER;;1 radiateur dos à dos avec classe mat 3
+R0-M04;RDC;MAT;salle de sieste 1;A22;60.26;2;V1500x750;750;OK;;
+R0-M05;RDC;MAT;salle de classe maternelle 1;A21;60.28;2;V1500x750;750;OK;;
+R0-M06;RDC;MAT;salle de classe maternelle 3;A21;60.49;3;V1500x750;750;A_CONFIRMER;;3e radiateur étiqueté sur cloison mat 3 / mat 4 : affectation à confirmer
+R0-M07;RDC;MAT;salle de classe maternelle 4;A21;60.49;2;V1500x750;750;OK;;
+R0-M08;RDC;MAT;wc mat 3;A14;8.94;1;V1500x750;750;OK;;
+R0-M09;RDC;MAT;circulation maternelle (non chiffrée);?;;2;V1500x750;750;A_CONFIRMER;;local sans surface (D-05)
+R0-M10;RDC;MAT;salle de classe maternelle 2;A21;60.28;2;V1500x750;750;OK;;
+R0-M11;RDC;MAT;salle de sieste 2;A22;60.26;2;V1500x750;750;OK;;
+R0-M12;RDC;MAT;LT eau / wc maternelle 4;A24;24.42;1;V1500x750;750;A_CONFIRMER;;radiateur sur cloison LT eau (2,58 m²) / wc mat 4
+R0-M13;RDC;MAT;salle de classe maternelle 5;A21;60.49;2;V1500x750;750;OK;;
+R0-M14;RDC;MAT;salle de classe maternelle 6 (nom illisible);A21;59.38;2;V1500x750;750;A_CONFIRMER;;
+R0-M15;RDC;MAT;office cuisine élé;E4;25.84;1;V1500x750;750;OK;;
+R0-M16;RDC;MAT;office cuisine mat;?;;1;V1500x750;750;A_CONFIRMER;;surface illisible
+R0-M17;RDC;MAT;laverie 2 mat;E5;12.53;1;V1500x750;750;OK;;
+R0-M18;RDC;MAT;vestiaires (10,9 m²);E7;10.86;1;V1500x750;750;OK;;
+R0-M19;RDC;MAT;vestiaire (9,1 m²);E?;9.10;1;V1500x750;750;A_CONFIRMER;;
+R0-M20;RDC;MAT;local non identifié (au-dessus ménage E10);?;;1;V1500x750;750;A_CONFIRMER;;(D-05)
+R0-M21;RDC;MAT;local matériel D9 / local stockage matériel d'animation;D9;10.73;3;V1500x750;750;A_CONFIRMER;;3 radiateurs dans la zone : répartition entre locaux à confirmer
+R0-M22;RDC;MAT;buanderie A32 / wc maternelle 2 A24;A32;5.90;2;V1500x750;750;A_CONFIRMER;;wc mat 2 = 5,53 m²
