@@ -1,0 +1,4306 @@
+{
+ "repere": {
+  "origine_pdf_pt": [
+   1581.6,
+   591.0
+  ],
+  "echelle_m_par_pt": 0.035278,
+  "axe_y": "vers le haut de la feuille (nord non vérifié)",
+  "recalage_R1_vers_RDC_pt": [
+   1218.2,
+   -106.0
+  ],
+  "precision_m": 0.05
+ },
+ "unite": "m",
+ "troncons": [
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL001",
+   "amont_id": "SOURCE",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     18.372,
+     -37.374
+    ],
+    [
+     18.372,
+     -38.628
+    ],
+    [
+     18.372,
+     -38.628
+    ],
+    [
+     13.836,
+     -38.628
+    ],
+    [
+     13.835,
+     -38.628
+    ],
+    [
+     13.835,
+     -35.964
+    ],
+    [
+     13.835,
+     -35.963
+    ],
+    [
+     9.898,
+     -35.963
+    ],
+    [
+     9.898,
+     -35.963
+    ],
+    [
+     9.898,
+     -35.861
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL002",
+   "amont_id": "EL001",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -35.861
+    ],
+    [
+     9.898,
+     -34.181
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL003",
+   "amont_id": "EL002",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -34.181
+    ],
+    [
+     9.898,
+     -30.927
+    ],
+    [
+     9.898,
+     -28.949
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL004",
+   "amont_id": "EL003",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -28.949
+    ],
+    [
+     9.898,
+     -28.735
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL005",
+   "amont_id": "EL004",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -28.735
+    ],
+    [
+     9.898,
+     -28.242
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL006",
+   "amont_id": "EL005",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -28.242
+    ],
+    [
+     9.898,
+     -25.071
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL007",
+   "amont_id": "EL006",
+   "materiau": "acier",
+   "DN": 40,
+   "designation": "40/49",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -25.071
+    ],
+    [
+     9.898,
+     -20.055
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL008",
+   "amont_id": "EL007",
+   "materiau": "acier",
+   "DN": 40,
+   "designation": "40/49",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -20.055
+    ],
+    [
+     9.898,
+     -13.165
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL009",
+   "amont_id": "EL008",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -13.165
+    ],
+    [
+     9.898,
+     -12.976
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL010",
+   "amont_id": "EL009",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -12.976
+    ],
+    [
+     9.898,
+     -11.594
+    ],
+    [
+     9.898,
+     -11.433
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL011",
+   "amont_id": "EL010",
+   "materiau": "acier",
+   "DN": 25,
+   "designation": "26/34",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -11.433
+    ],
+    [
+     9.898,
+     -7.971
+    ],
+    [
+     9.898,
+     -7.971
+    ],
+    [
+     8.423,
+     -7.971
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL012",
+   "amont_id": "EL011",
+   "materiau": "acier",
+   "DN": 25,
+   "designation": "26/34",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     8.423,
+     -7.971
+    ],
+    [
+     0.129,
+     -7.971
+    ],
+    [
+     0.129,
+     -7.971
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL013",
+   "amont_id": "EL012",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-07-a"
+   ],
+   "pts_m": [
+    [
+     0.129,
+     -7.971
+    ],
+    [
+     0.129,
+     -6.627
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL014",
+   "amont_id": "EL012",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-06-a"
+   ],
+   "pts_m": [
+    [
+     0.129,
+     -7.971
+    ],
+    [
+     0.129,
+     -8.303
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL015",
+   "amont_id": "EL011",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-07-b"
+   ],
+   "pts_m": [
+    [
+     8.423,
+     -7.971
+    ],
+    [
+     8.423,
+     -7.971
+    ],
+    [
+     8.423,
+     -1.616
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL016",
+   "amont_id": "EL010",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "NR-ST1-a"
+   ],
+   "pts_m": [
+    [
+     9.898,
+     -11.433
+    ],
+    [
+     9.897,
+     -11.433
+    ],
+    [
+     8.872,
+     -11.433
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL017",
+   "amont_id": "EL009",
+   "materiau": "acier",
+   "DN": 25,
+   "designation": "26/34",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -12.976
+    ],
+    [
+     10.058,
+     -12.976
+    ],
+    [
+     12.642,
+     -12.976
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL018",
+   "amont_id": "EL017",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-10-b"
+   ],
+   "pts_m": [
+    [
+     12.642,
+     -12.976
+    ],
+    [
+     16.744,
+     -12.976
+    ],
+    [
+     16.744,
+     -12.977
+    ],
+    [
+     16.744,
+     -15.257
+    ],
+    [
+     16.744,
+     -15.257
+    ],
+    [
+     20.135,
+     -15.257
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL019",
+   "amont_id": "EL017",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-10-a"
+   ],
+   "pts_m": [
+    [
+     12.642,
+     -12.976
+    ],
+    [
+     12.642,
+     -12.996
+    ],
+    [
+     12.642,
+     -14.164
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL020",
+   "amont_id": "EL008",
+   "materiau": "cuivre",
+   "DN": 28,
+   "designation": "Cu 28x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-08-a"
+   ],
+   "pts_m": [
+    [
+     9.898,
+     -13.165
+    ],
+    [
+     9.898,
+     -13.165
+    ],
+    [
+     8.595,
+     -13.165
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL021",
+   "amont_id": "EL007",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -20.055
+    ],
+    [
+     9.898,
+     -20.055
+    ],
+    [
+     8.713,
+     -20.055
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL022",
+   "amont_id": "EL021",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-05-a"
+   ],
+   "pts_m": [
+    [
+     8.713,
+     -20.055
+    ],
+    [
+     0.111,
+     -20.055
+    ],
+    [
+     0.111,
+     -20.055
+    ],
+    [
+     0.111,
+     -16.926
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL023",
+   "amont_id": "EL021",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-05-b"
+   ],
+   "pts_m": [
+    [
+     8.713,
+     -20.055
+    ],
+    [
+     8.713,
+     -20.046
+    ],
+    [
+     8.713,
+     -19.932
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL024",
+   "amont_id": "EL006",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -25.071
+    ],
+    [
+     9.898,
+     -25.071
+    ],
+    [
+     7.682,
+     -25.071
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "B-R0-08-b",
+   "amont_id": "EL024",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-08-b"
+   ],
+   "pts_m": [
+    [
+     7.682,
+     -25.071
+    ],
+    [
+     8.057,
+     -24.68
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL025",
+   "amont_id": "EL024",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-03-a"
+   ],
+   "pts_m": [
+    [
+     7.682,
+     -25.071
+    ],
+    [
+     1.25,
+     -25.071
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL026",
+   "amont_id": "EL005",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-03-b"
+   ],
+   "pts_m": [
+    [
+     9.898,
+     -28.242
+    ],
+    [
+     9.897,
+     -28.242
+    ],
+    [
+     8.915,
+     -28.242
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL027",
+   "amont_id": "EL004",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-13-a"
+   ],
+   "pts_m": [
+    [
+     9.898,
+     -28.735
+    ],
+    [
+     9.898,
+     -28.735
+    ],
+    [
+     12.541,
+     -28.735
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL028",
+   "amont_id": "EL003",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-02-a"
+   ],
+   "pts_m": [
+    [
+     9.898,
+     -28.949
+    ],
+    [
+     9.897,
+     -28.949
+    ],
+    [
+     0.165,
+     -28.949
+    ],
+    [
+     0.165,
+     -28.949
+    ],
+    [
+     0.165,
+     -29.933
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL029",
+   "amont_id": "EL002",
+   "materiau": "acier",
+   "DN": 15,
+   "designation": "15/21",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -34.181
+    ],
+    [
+     9.898,
+     -34.181
+    ],
+    [
+     14.905,
+     -34.181
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL030",
+   "amont_id": "EL029",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-13-b"
+   ],
+   "pts_m": [
+    [
+     14.905,
+     -34.181
+    ],
+    [
+     14.909,
+     -34.181
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL031",
+   "amont_id": "EL029",
+   "materiau": "acier",
+   "DN": 15,
+   "designation": "15/21",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     14.905,
+     -34.181
+    ],
+    [
+     14.905,
+     -34.179
+    ],
+    [
+     14.905,
+     -30.882
+    ],
+    [
+     14.905,
+     -30.882
+    ],
+    [
+     18.745,
+     -30.882
+    ],
+    [
+     18.755,
+     -30.882
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL032",
+   "amont_id": "EL031",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-11-a"
+   ],
+   "pts_m": [
+    [
+     18.755,
+     -30.882
+    ],
+    [
+     18.755,
+     -28.045
+    ],
+    [
+     18.766,
+     -28.043
+    ],
+    [
+     20.906,
+     -28.043
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL033",
+   "amont_id": "EL031",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-14-a"
+   ],
+   "pts_m": [
+    [
+     18.755,
+     -30.882
+    ],
+    [
+     18.755,
+     -30.888
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL034",
+   "amont_id": "EL001",
+   "materiau": "acier",
+   "DN": 25,
+   "designation": "26/34",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     9.898,
+     -35.861
+    ],
+    [
+     9.897,
+     -35.861
+    ],
+    [
+     8.566,
+     -35.861
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL035",
+   "amont_id": "EL034",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-01-a"
+   ],
+   "pts_m": [
+    [
+     8.566,
+     -35.861
+    ],
+    [
+     0.164,
+     -35.861
+    ],
+    [
+     0.164,
+     -35.862
+    ],
+    [
+     0.164,
+     -36.167
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL036",
+   "amont_id": "EL034",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     8.566,
+     -35.861
+    ],
+    [
+     8.566,
+     -35.861
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL037",
+   "amont_id": "EL036",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-02-b"
+   ],
+   "pts_m": [
+    [
+     8.566,
+     -35.861
+    ],
+    [
+     8.566,
+     -35.291
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "EL038",
+   "amont_id": "EL036",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-01-b"
+   ],
+   "pts_m": [
+    [
+     8.566,
+     -35.861
+    ],
+    [
+     8.566,
+     -41.512
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA001",
+   "amont_id": "SOURCE",
+   "materiau": "acier",
+   "DN": 65,
+   "designation": "66/76",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     20.112,
+     -38.347
+    ],
+    [
+     20.118,
+     -38.347
+    ],
+    [
+     22.832,
+     -38.347
+    ],
+    [
+     22.835,
+     -38.347
+    ],
+    [
+     22.835,
+     -36.297
+    ],
+    [
+     22.838,
+     -36.297
+    ],
+    [
+     27.259,
+     -36.297
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA002",
+   "amont_id": "MA001",
+   "materiau": "acier",
+   "DN": 65,
+   "designation": "66/76",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     27.259,
+     -36.297
+    ],
+    [
+     42.529,
+     -36.297
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA003",
+   "amont_id": "MA002",
+   "materiau": "acier",
+   "DN": 65,
+   "designation": "66/76",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     42.529,
+     -36.297
+    ],
+    [
+     45.393,
+     -36.297
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA004",
+   "amont_id": "MA003",
+   "materiau": "acier",
+   "DN": 65,
+   "designation": "66/76",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     45.393,
+     -36.297
+    ],
+    [
+     48.297,
+     -36.297
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA005",
+   "amont_id": "MA004",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     48.297,
+     -36.297
+    ],
+    [
+     50.093,
+     -36.297
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA006",
+   "amont_id": "MA005",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     50.093,
+     -36.297
+    ],
+    [
+     53.09,
+     -36.297
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA007",
+   "amont_id": "MA006",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     53.09,
+     -36.297
+    ],
+    [
+     53.497,
+     -36.297
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA008",
+   "amont_id": "MA007",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     53.497,
+     -36.297
+    ],
+    [
+     55.678,
+     -36.297
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA009",
+   "amont_id": "MA008",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     55.678,
+     -36.297
+    ],
+    [
+     58.454,
+     -36.297
+    ],
+    [
+     58.454,
+     -36.296
+    ],
+    [
+     58.454,
+     -17.682
+    ],
+    [
+     58.454,
+     -11.927
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA010",
+   "amont_id": "MA009",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     58.454,
+     -11.927
+    ],
+    [
+     58.454,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA011",
+   "amont_id": "MA010",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     58.454,
+     -10.141
+    ],
+    [
+     58.454,
+     -7.52
+    ],
+    [
+     58.454,
+     -7.52
+    ],
+    [
+     56.431,
+     -7.52
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA012",
+   "amont_id": "MA011",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     56.431,
+     -7.52
+    ],
+    [
+     52.008,
+     -7.52
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA013",
+   "amont_id": "MA012",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     52.008,
+     -7.52
+    ],
+    [
+     48.202,
+     -7.52
+    ],
+    [
+     48.202,
+     -7.52
+    ],
+    [
+     48.202,
+     -9.58
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "B-R0-29-a",
+   "amont_id": "MA013",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-29-a"
+   ],
+   "pts_m": [
+    [
+     48.202,
+     -9.58
+    ],
+    [
+     48.221,
+     -9.955
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA014",
+   "amont_id": "MA013",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-27-a"
+   ],
+   "pts_m": [
+    [
+     48.202,
+     -9.58
+    ],
+    [
+     48.202,
+     -12.663
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA015",
+   "amont_id": "MA012",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-42-a"
+   ],
+   "pts_m": [
+    [
+     52.008,
+     -7.52
+    ],
+    [
+     52.008,
+     -7.37
+    ],
+    [
+     52.008,
+     -3.346
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA016",
+   "amont_id": "MA011",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-29-b"
+   ],
+   "pts_m": [
+    [
+     56.431,
+     -7.52
+    ],
+    [
+     56.431,
+     -7.52
+    ],
+    [
+     56.431,
+     -8.187
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA017",
+   "amont_id": "MA010",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     58.454,
+     -10.141
+    ],
+    [
+     58.578,
+     -10.141
+    ],
+    [
+     59.447,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA018",
+   "amont_id": "MA017",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     59.447,
+     -10.141
+    ],
+    [
+     66.633,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA019",
+   "amont_id": "MA018",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     66.633,
+     -10.141
+    ],
+    [
+     70.876,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA020",
+   "amont_id": "MA019",
+   "materiau": "acier",
+   "DN": 40,
+   "designation": "40/49",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     70.876,
+     -10.141
+    ],
+    [
+     73.25,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA021",
+   "amont_id": "MA020",
+   "materiau": "acier",
+   "DN": 40,
+   "designation": "40/49",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     73.25,
+     -10.141
+    ],
+    [
+     74.485,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA022",
+   "amont_id": "MA021",
+   "materiau": "acier",
+   "DN": 40,
+   "designation": "40/49",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     74.485,
+     -10.141
+    ],
+    [
+     74.792,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA023",
+   "amont_id": "MA022",
+   "materiau": "acier",
+   "DN": 40,
+   "designation": "40/49",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     74.792,
+     -10.141
+    ],
+    [
+     75.53,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA024",
+   "amont_id": "MA023",
+   "materiau": "acier",
+   "DN": 40,
+   "designation": "40/49",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     75.53,
+     -10.141
+    ],
+    [
+     88.771,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA025",
+   "amont_id": "MA024",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     88.771,
+     -10.141
+    ],
+    [
+     90.752,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA026",
+   "amont_id": "MA025",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     90.752,
+     -10.141
+    ],
+    [
+     90.875,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA027",
+   "amont_id": "MA026",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     90.875,
+     -10.141
+    ],
+    [
+     92.371,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA028",
+   "amont_id": "MA027",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     92.371,
+     -10.141
+    ],
+    [
+     94.592,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA029",
+   "amont_id": "MA028",
+   "materiau": "acier",
+   "DN": 25,
+   "designation": "26/34",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     94.592,
+     -10.141
+    ],
+    [
+     96.583,
+     -10.141
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA030",
+   "amont_id": "MA029",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     96.583,
+     -10.141
+    ],
+    [
+     99.769,
+     -10.141
+    ],
+    [
+     99.769,
+     -10.141
+    ],
+    [
+     99.769,
+     -12.005
+    ],
+    [
+     99.769,
+     -12.005
+    ],
+    [
+     107.679,
+     -12.005
+    ],
+    [
+     107.679,
+     -12.005
+    ],
+    [
+     107.679,
+     -12.005
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "B-R0-49-a",
+   "amont_id": "MA030",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-49-a"
+   ],
+   "pts_m": [
+    [
+     107.679,
+     -12.005
+    ],
+    [
+     107.711,
+     -12.192
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA031",
+   "amont_id": "MA030",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-49-b"
+   ],
+   "pts_m": [
+    [
+     107.679,
+     -12.005
+    ],
+    [
+     107.679,
+     -17.955
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA032",
+   "amont_id": "MA029",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     96.583,
+     -10.141
+    ],
+    [
+     96.583,
+     -10.123
+    ],
+    [
+     96.583,
+     -7.54
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA033",
+   "amont_id": "MA032",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-48-a"
+   ],
+   "pts_m": [
+    [
+     96.583,
+     -7.54
+    ],
+    [
+     96.583,
+     -0.806
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA034",
+   "amont_id": "MA032",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-48-b"
+   ],
+   "pts_m": [
+    [
+     96.583,
+     -7.54
+    ],
+    [
+     96.583,
+     -7.54
+    ],
+    [
+     103.655,
+     -7.54
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA035",
+   "amont_id": "MA028",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-52-a"
+   ],
+   "pts_m": [
+    [
+     94.592,
+     -10.141
+    ],
+    [
+     94.592,
+     -10.141
+    ],
+    [
+     94.592,
+     -11.362
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA036",
+   "amont_id": "MA027",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     92.371,
+     -10.141
+    ],
+    [
+     92.371,
+     -10.141
+    ],
+    [
+     92.371,
+     -11.715
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "B-R0-50-a",
+   "amont_id": "MA036",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-50-a"
+   ],
+   "pts_m": [
+    [
+     92.371,
+     -11.715
+    ],
+    [
+     92.407,
+     -12.09
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA037",
+   "amont_id": "MA036",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-50-b"
+   ],
+   "pts_m": [
+    [
+     92.371,
+     -11.715
+    ],
+    [
+     92.371,
+     -18.127
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA038",
+   "amont_id": "MA026",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-47-b"
+   ],
+   "pts_m": [
+    [
+     90.875,
+     -10.141
+    ],
+    [
+     90.875,
+     -10.138
+    ],
+    [
+     90.875,
+     -8.735
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA039",
+   "amont_id": "MA025",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-51-a"
+   ],
+   "pts_m": [
+    [
+     90.752,
+     -10.141
+    ],
+    [
+     90.752,
+     -10.141
+    ],
+    [
+     90.752,
+     -11.743
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA040",
+   "amont_id": "MA024",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-47-a"
+   ],
+   "pts_m": [
+    [
+     88.771,
+     -10.141
+    ],
+    [
+     88.771,
+     -10.111
+    ],
+    [
+     88.771,
+     -0.774
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA041",
+   "amont_id": "MA023",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-53-a"
+   ],
+   "pts_m": [
+    [
+     75.53,
+     -10.141
+    ],
+    [
+     75.53,
+     -10.142
+    ],
+    [
+     75.53,
+     -12.831
+    ],
+    [
+     75.53,
+     -14.012
+    ],
+    [
+     75.53,
+     -14.012
+    ],
+    [
+     75.531,
+     -14.012
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA042",
+   "amont_id": "MA022",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-56-a"
+   ],
+   "pts_m": [
+    [
+     74.792,
+     -10.141
+    ],
+    [
+     74.792,
+     -10.123
+    ],
+    [
+     74.792,
+     -9.074
+    ],
+    [
+     74.792,
+     -9.074
+    ],
+    [
+     75.057,
+     -9.074
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA043",
+   "amont_id": "MA021",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     74.485,
+     -10.141
+    ],
+    [
+     74.485,
+     -10.141
+    ],
+    [
+     74.485,
+     -11.743
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "B-R0-54-a",
+   "amont_id": "MA043",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-54-a"
+   ],
+   "pts_m": [
+    [
+     74.485,
+     -11.743
+    ],
+    [
+     74.782,
+     -12.118
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA044",
+   "amont_id": "MA043",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-54-b"
+   ],
+   "pts_m": [
+    [
+     74.485,
+     -11.743
+    ],
+    [
+     74.485,
+     -12.831
+    ],
+    [
+     74.485,
+     -14.012
+    ],
+    [
+     74.485,
+     -19.356
+    ],
+    [
+     74.485,
+     -19.356
+    ],
+    [
+     74.845,
+     -19.356
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA045",
+   "amont_id": "MA020",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-46-b"
+   ],
+   "pts_m": [
+    [
+     73.25,
+     -10.141
+    ],
+    [
+     73.25,
+     -10.111
+    ],
+    [
+     73.25,
+     -8.65
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA046",
+   "amont_id": "MA019",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     70.876,
+     -10.141
+    ],
+    [
+     70.876,
+     -10.123
+    ],
+    [
+     70.876,
+     -8.445
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA047",
+   "amont_id": "MA046",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     70.876,
+     -8.445
+    ],
+    [
+     70.876,
+     -0.821
+    ],
+    [
+     70.876,
+     -0.82
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA048",
+   "amont_id": "MA047",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-45-a"
+   ],
+   "pts_m": [
+    [
+     70.876,
+     -0.82
+    ],
+    [
+     70.686,
+     -0.82
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA049",
+   "amont_id": "MA047",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-46-a"
+   ],
+   "pts_m": [
+    [
+     70.876,
+     -0.82
+    ],
+    [
+     71.243,
+     -0.82
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA050",
+   "amont_id": "MA046",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-45-b"
+   ],
+   "pts_m": [
+    [
+     70.876,
+     -8.445
+    ],
+    [
+     70.876,
+     -8.445
+    ],
+    [
+     63.498,
+     -8.445
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA051",
+   "amont_id": "MA018",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-56-b"
+   ],
+   "pts_m": [
+    [
+     66.633,
+     -10.141
+    ],
+    [
+     66.633,
+     -10.141
+    ],
+    [
+     66.633,
+     -12.831
+    ],
+    [
+     66.634,
+     -12.831
+    ],
+    [
+     67.024,
+     -12.831
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA052",
+   "amont_id": "MA017",
+   "materiau": "acier",
+   "DN": 25,
+   "designation": "26/34",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     59.447,
+     -10.141
+    ],
+    [
+     59.447,
+     -10.141
+    ],
+    [
+     59.447,
+     -11.261
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "B-R0-55-a",
+   "amont_id": "MA052",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-55-a"
+   ],
+   "pts_m": [
+    [
+     59.447,
+     -11.261
+    ],
+    [
+     60.093,
+     -11.261
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA053",
+   "amont_id": "MA052",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     59.447,
+     -11.261
+    ],
+    [
+     59.447,
+     -17.682
+    ],
+    [
+     59.447,
+     -18.127
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "B-R0-55-b",
+   "amont_id": "MA053",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-55-b"
+   ],
+   "pts_m": [
+    [
+     59.447,
+     -18.127
+    ],
+    [
+     59.503,
+     -18.768
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA054",
+   "amont_id": "MA053",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-27-c"
+   ],
+   "pts_m": [
+    [
+     59.447,
+     -18.127
+    ],
+    [
+     59.447,
+     -18.127
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA055",
+   "amont_id": "MA009",
+   "materiau": "cuivre",
+   "DN": 22,
+   "designation": "Cu 22x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-27-b"
+   ],
+   "pts_m": [
+    [
+     58.454,
+     -11.927
+    ],
+    [
+     58.454,
+     -11.927
+    ],
+    [
+     56.077,
+     -11.927
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA056",
+   "amont_id": "MA008",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-23-a"
+   ],
+   "pts_m": [
+    [
+     55.678,
+     -36.297
+    ],
+    [
+     55.678,
+     -36.298
+    ],
+    [
+     55.678,
+     -36.813
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA057",
+   "amont_id": "MA007",
+   "materiau": "acier",
+   "DN": 15,
+   "designation": "15/21",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     53.497,
+     -36.297
+    ],
+    [
+     53.497,
+     -36.493
+    ],
+    [
+     53.497,
+     -37.856
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "B-R0-22-a",
+   "amont_id": "MA057",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-22-a"
+   ],
+   "pts_m": [
+    [
+     53.497,
+     -37.856
+    ],
+    [
+     53.545,
+     -38.414
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA058",
+   "amont_id": "MA057",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-21-b"
+   ],
+   "pts_m": [
+    [
+     53.497,
+     -37.856
+    ],
+    [
+     53.497,
+     -37.856
+    ],
+    [
+     53.496,
+     -37.856
+    ],
+    [
+     53.291,
+     -37.856
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA059",
+   "amont_id": "MA006",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     53.09,
+     -36.297
+    ],
+    [
+     53.09,
+     -36.297
+    ],
+    [
+     53.09,
+     -34.722
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA060",
+   "amont_id": "MA059",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-28-b"
+   ],
+   "pts_m": [
+    [
+     53.09,
+     -34.722
+    ],
+    [
+     53.09,
+     -34.599
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA061",
+   "amont_id": "MA059",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-28-a"
+   ],
+   "pts_m": [
+    [
+     53.09,
+     -34.722
+    ],
+    [
+     53.09,
+     -34.722
+    ],
+    [
+     53.376,
+     -34.722
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA062",
+   "amont_id": "MA005",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-21-a"
+   ],
+   "pts_m": [
+    [
+     50.093,
+     -36.297
+    ],
+    [
+     50.093,
+     -36.297
+    ],
+    [
+     50.093,
+     -38.578
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA063",
+   "amont_id": "MA004",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     48.297,
+     -36.297
+    ],
+    [
+     48.297,
+     -36.297
+    ],
+    [
+     48.297,
+     -33.051
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA064",
+   "amont_id": "MA063",
+   "materiau": "acier",
+   "DN": 15,
+   "designation": "15/21",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     48.297,
+     -33.051
+    ],
+    [
+     48.297,
+     -31.033
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA065",
+   "amont_id": "MA064",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-24-a"
+   ],
+   "pts_m": [
+    [
+     48.297,
+     -31.033
+    ],
+    [
+     48.297,
+     -29.866
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA066",
+   "amont_id": "MA064",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-26-a"
+   ],
+   "pts_m": [
+    [
+     48.297,
+     -31.033
+    ],
+    [
+     48.297,
+     -31.033
+    ],
+    [
+     54.603,
+     -31.033
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA067",
+   "amont_id": "MA063",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-25-a"
+   ],
+   "pts_m": [
+    [
+     48.297,
+     -33.051
+    ],
+    [
+     48.399,
+     -33.051
+    ],
+    [
+     49.847,
+     -33.051
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA068",
+   "amont_id": "MA003",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-20-a"
+   ],
+   "pts_m": [
+    [
+     45.393,
+     -36.297
+    ],
+    [
+     45.393,
+     -36.328
+    ],
+    [
+     45.393,
+     -37.028
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA069",
+   "amont_id": "MA002",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-19-b"
+   ],
+   "pts_m": [
+    [
+     42.529,
+     -36.297
+    ],
+    [
+     42.529,
+     -36.297
+    ],
+    [
+     42.529,
+     -36.921
+    ]
+   ]
+  },
+  {
+   "circuit": "MAT",
+   "troncon_id": "MA070",
+   "amont_id": "MA001",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-19-a"
+   ],
+   "pts_m": [
+    [
+     27.259,
+     -36.297
+    ],
+    [
+     27.259,
+     -36.328
+    ],
+    [
+     27.259,
+     -37.122
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE001",
+   "amont_id": "SOURCE",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     17.053,
+     -36.874
+    ],
+    [
+     17.054,
+     -36.874
+    ],
+    [
+     17.054,
+     -36.874
+    ],
+    [
+     17.054,
+     -37.374
+    ],
+    [
+     17.054,
+     -37.375
+    ],
+    [
+     17.56,
+     -37.375
+    ],
+    [
+     17.56,
+     -37.375
+    ],
+    [
+     17.56,
+     -38.327
+    ],
+    [
+     17.559,
+     -38.327
+    ],
+    [
+     14.136,
+     -38.327
+    ],
+    [
+     14.136,
+     -38.327
+    ],
+    [
+     14.136,
+     -35.663
+    ],
+    [
+     14.134,
+     -35.663
+    ],
+    [
+     10.199,
+     -35.663
+    ],
+    [
+     10.199,
+     -35.663
+    ],
+    [
+     10.199,
+     -7.152
+    ],
+    [
+     10.199,
+     -7.118
+    ],
+    [
+     12.612,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE002",
+   "amont_id": "PE001",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     12.612,
+     -7.118
+    ],
+    [
+     18.85,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE003",
+   "amont_id": "PE002",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     18.85,
+     -7.118
+    ],
+    [
+     20.347,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE004",
+   "amont_id": "PE003",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     20.347,
+     -7.118
+    ],
+    [
+     21.56,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE005",
+   "amont_id": "PE004",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     21.56,
+     -7.118
+    ],
+    [
+     23.112,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE006",
+   "amont_id": "PE005",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     23.112,
+     -7.118
+    ],
+    [
+     26.468,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE007",
+   "amont_id": "PE006",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     26.468,
+     -7.118
+    ],
+    [
+     26.981,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE008",
+   "amont_id": "PE007",
+   "materiau": "acier",
+   "DN": 25,
+   "designation": "26/34",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     26.981,
+     -7.118
+    ],
+    [
+     29.035,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE009",
+   "amont_id": "PE008",
+   "materiau": "acier",
+   "DN": 25,
+   "designation": "26/34",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     29.035,
+     -7.118
+    ],
+    [
+     35.424,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE010",
+   "amont_id": "PE009",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     35.424,
+     -7.118
+    ],
+    [
+     37.871,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE011",
+   "amont_id": "PE010",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     37.871,
+     -7.118
+    ],
+    [
+     41.613,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE012",
+   "amont_id": "PE011",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-30-b"
+   ],
+   "pts_m": [
+    [
+     41.613,
+     -7.118
+    ],
+    [
+     45.479,
+     -7.118
+    ],
+    [
+     45.479,
+     -7.118
+    ],
+    [
+     45.479,
+     -8.496
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE013",
+   "amont_id": "PE011",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-41-a"
+   ],
+   "pts_m": [
+    [
+     41.613,
+     -7.118
+    ],
+    [
+     41.613,
+     -7.118
+    ],
+    [
+     41.613,
+     -4.459
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE014",
+   "amont_id": "PE010",
+   "materiau": "acier",
+   "DN": 15,
+   "designation": "15/21",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     37.871,
+     -7.118
+    ],
+    [
+     37.871,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE015",
+   "amont_id": "PE014",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-30-a"
+   ],
+   "pts_m": [
+    [
+     37.871,
+     -7.118
+    ],
+    [
+     37.871,
+     -7.113
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE016",
+   "amont_id": "PE014",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-31-a"
+   ],
+   "pts_m": [
+    [
+     37.871,
+     -7.118
+    ],
+    [
+     37.871,
+     -12.668
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE017",
+   "amont_id": "PE009",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-33-a"
+   ],
+   "pts_m": [
+    [
+     35.424,
+     -7.118
+    ],
+    [
+     35.424,
+     -7.118
+    ],
+    [
+     35.424,
+     -8.968
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE018",
+   "amont_id": "PE008",
+   "materiau": "acier",
+   "DN": 15,
+   "designation": "15/21",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     29.035,
+     -7.118
+    ],
+    [
+     29.035,
+     -7.118
+    ],
+    [
+     29.035,
+     -8.534
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "B-R0-35-b",
+   "amont_id": "PE018",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-35-b"
+   ],
+   "pts_m": [
+    [
+     29.035,
+     -8.534
+    ],
+    [
+     29.09,
+     -9.091
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE019",
+   "amont_id": "PE018",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-34-a"
+   ],
+   "pts_m": [
+    [
+     29.035,
+     -8.534
+    ],
+    [
+     29.035,
+     -8.534
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE020",
+   "amont_id": "PE007",
+   "materiau": "acier",
+   "DN": 15,
+   "designation": "15/21",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     26.981,
+     -7.118
+    ],
+    [
+     26.981,
+     -7.118
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE021",
+   "amont_id": "PE020",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-38-a"
+   ],
+   "pts_m": [
+    [
+     26.981,
+     -7.118
+    ],
+    [
+     26.981,
+     -7.113
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE022",
+   "amont_id": "PE020",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-40-a"
+   ],
+   "pts_m": [
+    [
+     26.981,
+     -7.118
+    ],
+    [
+     26.981,
+     -8.187
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE023",
+   "amont_id": "PE006",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-39-a"
+   ],
+   "pts_m": [
+    [
+     26.468,
+     -7.118
+    ],
+    [
+     26.468,
+     -7.113
+    ],
+    [
+     26.468,
+     -4.453
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE024",
+   "amont_id": "PE005",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-35-a"
+   ],
+   "pts_m": [
+    [
+     23.112,
+     -7.118
+    ],
+    [
+     23.112,
+     -7.118
+    ],
+    [
+     23.112,
+     -12.001
+    ],
+    [
+     23.112,
+     -12.002
+    ],
+    [
+     23.571,
+     -12.002
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE025",
+   "amont_id": "PE004",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-36-a"
+   ],
+   "pts_m": [
+    [
+     21.56,
+     -7.118
+    ],
+    [
+     21.56,
+     -7.118
+    ],
+    [
+     21.56,
+     -8.606
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE026",
+   "amont_id": "PE003",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-37-a"
+   ],
+   "pts_m": [
+    [
+     20.347,
+     -7.118
+    ],
+    [
+     20.347,
+     -7.113
+    ],
+    [
+     20.347,
+     -6.741
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE027",
+   "amont_id": "PE002",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-12-a"
+   ],
+   "pts_m": [
+    [
+     18.85,
+     -7.118
+    ],
+    [
+     18.85,
+     -7.118
+    ],
+    [
+     18.85,
+     -8.123
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI",
+   "troncon_id": "PE028",
+   "amont_id": "PE001",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-09-a"
+   ],
+   "pts_m": [
+    [
+     12.612,
+     -7.118
+    ],
+    [
+     12.612,
+     -7.147
+    ],
+    [
+     12.612,
+     -8.132
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI-RESTAU",
+   "troncon_id": "RE001",
+   "amont_id": "SOURCE",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     21.522,
+     -36.468
+    ],
+    [
+     21.534,
+     -36.468
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI-RESTAU",
+   "troncon_id": "RE002",
+   "amont_id": "RE001",
+   "materiau": "acier",
+   "DN": 25,
+   "designation": "26/34",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     21.534,
+     -36.468
+    ],
+    [
+     36.336,
+     -36.468
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI-RESTAU",
+   "troncon_id": "RE003",
+   "amont_id": "RE002",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     36.336,
+     -36.468
+    ],
+    [
+     47.699,
+     -36.468
+    ],
+    [
+     47.699,
+     -36.468
+    ],
+    [
+     47.699,
+     -28.433
+    ],
+    [
+     44.496,
+     -28.44
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI-RESTAU",
+   "troncon_id": "B-R0-16-b",
+   "amont_id": "RE003",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-16-b"
+   ],
+   "pts_m": [
+    [
+     44.496,
+     -28.44
+    ],
+    [
+     46.038,
+     -28.42
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI-RESTAU",
+   "troncon_id": "RE004",
+   "amont_id": "RE003",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-16-a"
+   ],
+   "pts_m": [
+    [
+     44.496,
+     -28.44
+    ],
+    [
+     43.757,
+     -28.44
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI-RESTAU",
+   "troncon_id": "RE005",
+   "amont_id": "RE002",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-15-c"
+   ],
+   "pts_m": [
+    [
+     36.336,
+     -36.468
+    ],
+    [
+     36.336,
+     -36.313
+    ],
+    [
+     36.336,
+     -28.363
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI-RESTAU",
+   "troncon_id": "RE006",
+   "amont_id": "RE001",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     21.534,
+     -36.468
+    ],
+    [
+     21.534,
+     -36.468
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI-RESTAU",
+   "troncon_id": "RE007",
+   "amont_id": "RE006",
+   "materiau": "acier",
+   "DN": 20,
+   "designation": "20/27",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     21.534,
+     -36.468
+    ],
+    [
+     21.534,
+     -28.456
+    ],
+    [
+     24.707,
+     -28.438
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI-RESTAU",
+   "troncon_id": "B-R0-15-a",
+   "amont_id": "RE007",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-15-a"
+   ],
+   "pts_m": [
+    [
+     24.707,
+     -28.438
+    ],
+    [
+     23.142,
+     -28.42
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI-RESTAU",
+   "troncon_id": "RE008",
+   "amont_id": "RE007",
+   "materiau": "cuivre",
+   "DN": 18,
+   "designation": "Cu 18x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-15-b"
+   ],
+   "pts_m": [
+    [
+     24.707,
+     -28.438
+    ],
+    [
+     25.448,
+     -28.438
+    ]
+   ]
+  },
+  {
+   "circuit": "PERI-RESTAU",
+   "troncon_id": "RE009",
+   "amont_id": "RE006",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "R0-18-a"
+   ],
+   "pts_m": [
+    [
+     21.534,
+     -36.468
+    ],
+    [
+     21.534,
+     -38.358
+    ]
+   ]
+  },
+  {
+   "circuit": "CTA",
+   "troncon_id": "CT001",
+   "amont_id": "SOURCE",
+   "materiau": "acier",
+   "DN": 125,
+   "designation": "125/133",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     19.097,
+     -37.374
+    ],
+    [
+     19.097,
+     -37.762
+    ]
+   ]
+  },
+  {
+   "circuit": "CTA",
+   "troncon_id": "CT002",
+   "amont_id": "CT001",
+   "materiau": "acier",
+   "DN": 100,
+   "designation": "102/114",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     19.097,
+     -37.762
+    ],
+    [
+     19.097,
+     -38.189
+    ],
+    [
+     19.098,
+     -38.189
+    ],
+    [
+     22.713,
+     -38.189
+    ],
+    [
+     22.713,
+     -38.184
+    ],
+    [
+     22.713,
+     -36.115
+    ],
+    [
+     22.713,
+     -36.115
+    ],
+    [
+     28.369,
+     -36.115
+    ]
+   ]
+  },
+  {
+   "circuit": "CTA",
+   "troncon_id": "B-CTA-CUISINE",
+   "amont_id": "CT002",
+   "materiau": "acier",
+   "DN": 32,
+   "designation": "33/42",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "CTA-CUISINE"
+   ],
+   "pts_m": [
+    [
+     28.369,
+     -36.115
+    ],
+    [
+     28.519,
+     -37.994
+    ]
+   ]
+  },
+  {
+   "circuit": "CTA",
+   "troncon_id": "CT003",
+   "amont_id": "CT002",
+   "materiau": "acier",
+   "DN": 100,
+   "designation": "102/114",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     28.369,
+     -36.115
+    ],
+    [
+     55.85,
+     -36.115
+    ]
+   ]
+  },
+  {
+   "circuit": "CTA",
+   "troncon_id": "CT004",
+   "amont_id": "CT003",
+   "materiau": "acier",
+   "DN": 80,
+   "designation": "80/89",
+   "d_ext_mm": null,
+   "emetteurs": [],
+   "pts_m": [
+    [
+     55.85,
+     -36.115
+    ],
+    [
+     58.294,
+     -36.115
+    ],
+    [
+     58.294,
+     -36.114
+    ],
+    [
+     58.294,
+     -10.6
+    ],
+    [
+     58.295,
+     -10.599
+    ],
+    [
+     60.506,
+     -10.599
+    ]
+   ]
+  },
+  {
+   "circuit": "CTA",
+   "troncon_id": "CT005",
+   "amont_id": "CT004",
+   "materiau": "acier",
+   "DN": 65,
+   "designation": "66/76",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "CTA-MAT-EST"
+   ],
+   "pts_m": [
+    [
+     60.506,
+     -10.599
+    ],
+    [
+     100.596,
+     -10.599
+    ],
+    [
+     100.596,
+     -10.599
+    ],
+    [
+     100.596,
+     -10.432
+    ]
+   ]
+  },
+  {
+   "circuit": "CTA",
+   "troncon_id": "CT006",
+   "amont_id": "CT004",
+   "materiau": "acier",
+   "DN": 65,
+   "designation": "66/76",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "CTA-MAT-OUEST"
+   ],
+   "pts_m": [
+    [
+     60.506,
+     -10.599
+    ],
+    [
+     60.506,
+     -10.589
+    ],
+    [
+     60.506,
+     -4.705
+    ]
+   ]
+  },
+  {
+   "circuit": "CTA",
+   "troncon_id": "CT007",
+   "amont_id": "CT003",
+   "materiau": "acier",
+   "DN": 50,
+   "designation": "50/60",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "CTA-MAT-MOTRICITE"
+   ],
+   "pts_m": [
+    [
+     55.85,
+     -36.115
+    ],
+    [
+     55.85,
+     -36.115
+    ],
+    [
+     55.85,
+     -38.686
+    ]
+   ]
+  },
+  {
+   "circuit": "CTA",
+   "troncon_id": "CT008",
+   "amont_id": "CT001",
+   "materiau": "acier",
+   "DN": 100,
+   "designation": "102/114",
+   "d_ext_mm": null,
+   "emetteurs": [
+    "MONTEE-CTA-R1"
+   ],
+   "pts_m": [
+    [
+     19.097,
+     -37.762
+    ],
+    [
+     19.097,
+     -37.762
+    ],
+    [
+     18.872,
+     -37.762
+    ]
+   ]
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-R1-06-a",
+   "amont_id": "EL013",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "emetteurs": [
+    "R1-06-a"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-R1-05-a",
+   "amont_id": "EL014",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "emetteurs": [
+    "R1-05-a"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-NR-ST2-a",
+   "amont_id": "EL016",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "emetteurs": [
+    "NR-ST2-a"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-R1-06-b",
+   "amont_id": "EL016",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "emetteurs": [
+    "R1-06-b"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-R1-07-a",
+   "amont_id": "EL019",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "emetteurs": [
+    "R1-07-a"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-R1-04-b",
+   "amont_id": "EL020",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "emetteurs": [
+    "R1-04-b"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-R1-04-a",
+   "amont_id": "EL022",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "emetteurs": [
+    "R1-04-a"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-R1-03-a",
+   "amont_id": "EL025",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "emetteurs": [
+    "R1-03-a"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-R1-03-b",
+   "amont_id": "EL026",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "emetteurs": [
+    "R1-03-b"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-R1-02-a",
+   "amont_id": "EL028",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "emetteurs": [
+    "R1-02-a"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-R1-08-a",
+   "amont_id": "EL030",
+   "materiau": "cuivre",
+   "DN": 14,
+   "designation": "Cu 14x1",
+   "emetteurs": [
+    "R1-08-a"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-R1-01-a",
+   "amont_id": "EL035",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "emetteurs": [
+    "R1-01-a"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-NR-ST3-a",
+   "amont_id": "EL037",
+   "materiau": "cuivre",
+   "DN": 12,
+   "designation": "Cu 12x1",
+   "emetteurs": [
+    "NR-ST3-a"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "ELEM",
+   "troncon_id": "V-R1-01-b",
+   "amont_id": "EL037",
+   "materiau": "cuivre",
+   "DN": 16,
+   "designation": "Cu 16x1",
+   "emetteurs": [
+    "R1-01-b"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "CTA",
+   "troncon_id": "CT-R1-MONTEE",
+   "amont_id": "CT008",
+   "materiau": "acier",
+   "DN": 100,
+   "designation": "102/114",
+   "emetteurs": [],
+   "pts_m": []
+  },
+  {
+   "circuit": "CTA",
+   "troncon_id": "CT-R1-NORD",
+   "amont_id": "CT-R1-MONTEE",
+   "materiau": "acier",
+   "DN": 80,
+   "designation": "80/89",
+   "emetteurs": [
+    "CTA-ELEM-NORD"
+   ],
+   "pts_m": []
+  },
+  {
+   "circuit": "CTA",
+   "troncon_id": "CT-R1-SUD",
+   "amont_id": "CT-R1-MONTEE",
+   "materiau": "acier",
+   "DN": 100,
+   "designation": "102/114",
+   "emetteurs": [
+    "CTA-ELEM-SUD"
+   ],
+   "pts_m": []
+  }
+ ]
+}

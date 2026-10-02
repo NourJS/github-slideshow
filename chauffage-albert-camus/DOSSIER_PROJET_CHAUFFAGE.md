@@ -305,6 +305,8 @@ Automatique depuis `bilan_emetteurs_EN12831.csv`. Résultats dans `outputs/01_lo
   3. 2 tubes cuivre verticaux à travers la réservation jusqu'au robinet du radiateur R+1.
 - Si `statut_aplomb` = FLAG, le script **ne dessine pas** le parcours horizontal : il crée la réservation, marque `CVC_Statut = FLAG aplomb` et attend la décision D-28.
 
+> **Disponible (rév. E)** : `revit/build_from_json.py` réunit les étapes ci-dessus en un seul script, lancé avec `dry_run`, piloté par `revit/config_revit.json` et documenté dans `revit/LISEZMOI.md`. Il lit le modèle JSON et `model/reseau_rdc_geometrie.json`, la géométrie du réseau RDC exportée par `tools/plan_rdc_annote.py`. **Non testé dans Revit** à ce stade.
+
 ### 6.6 Les 4 départs et les filtres de couleur
 
 - Filtres par **type de système** (`CH-MAT-A` … `CH-CTA-R`) avec les couleurs de la légende du § 2.3.
@@ -721,7 +723,8 @@ catalogue, DWG ou H-xx) ; français technique du projet.
 chauffage-albert-camus/
 ├── DOSSIER_PROJET_CHAUFFAGE.md            ← ce document
 ├── model/
-│   └── modele_chauffage_albert_camus.json  ← modèle à dessiner (GÉNÉRÉ)
+│   ├── modele_chauffage_albert_camus.json  ← modèle à dessiner (GÉNÉRÉ)
+│   └── reseau_rdc_geometrie.json           ← polylignes du réseau RDC (GÉNÉRÉ)
 ├── data/
 │   ├── hypotheses.json                     ← H-xx modifiables
 │   ├── bilan_emetteurs_EN12831.csv         ← F3b retranscrit (65 locaux)
@@ -739,6 +742,9 @@ chauffage-albert-camus/
 ├── tools/
 │   └── plan_rdc_annote.py                  ← relecture du réseau PDF + plan annoté (PyMuPDF)
 ├── revit/
+│   ├── build_from_json.py                  ← construction du modèle Revit (pyRevit, dry_run)
+│   ├── config_revit.json                   ← familles, calage, hauteurs, étapes
+│   ├── LISEZMOI.md                         ← mode opératoire
 │   └── export_projet_revit.py              ← export Revit en lecture seule (pyRevit)
 └── outputs/                                ← CSV 01 à 10 + plan RDC annoté (PDF)
 ```

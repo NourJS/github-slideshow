@@ -546,6 +546,35 @@ def annoter(src_pdf, out_pdf, reseaux, res_tr, rads_eng, rads_pt, synth, journal
     out.save(out_pdf, garbage=3, deflate=True)
 
 
+# ---------------------------------------------------------------- géométrie pour Revit
+def exporter_geometrie(h, reseaux, res_tr, chemin=None):
+    """model/reseau_rdc_geometrie.json : polylignes (m, repère commun) + section retenue de chaque tronçon RDC.
+    Lu par revit/build_from_json.py pour dessiner les canalisations."""
+    chemin = chemin or os.path.join(ROOT, "model", "reseau_rdc_geometrie.json")
+    ox, oy = h["repere"]["origine_pdf_pt"]
+    s = h["repere"]["echelle_m_par_pt"]
+    by_tr = {r["troncon_id"]: r for r in res_tr}
+    out = {"repere": h["repere"], "unite": "m", "troncons": []}
+    for circ, (troncons, _, _) in reseaux.items():
+        for t in troncons:
+            r = by_tr.get(t["troncon_id"], {})
+            out["troncons"].append({
+                "circuit": CIRCUIT_ENGINE[circ], "troncon_id": t["troncon_id"], "amont_id": t["amont_id"],
+                "materiau": r.get("materiau", t.get("materiau", "acier")), "DN": r.get("DN"),
+                "designation": r.get("designation"), "d_ext_mm": None,
+                "emetteurs": [x for x in t["radiateurs"]],
+                "pts_m": [[round((x - ox) * s, 3), round((oy - y) * s, 3)] for x, y in t["pts"]]})
+    # liens R+1 et colonne CTA (pas de géométrie en plan : dessinés par le script Revit à partir des radiateurs/CTA)
+    for r in res_tr:
+        if r["troncon_id"].startswith(("V-", "CT-R1")):
+            out["troncons"].append({"circuit": r["circuit"], "troncon_id": r["troncon_id"], "amont_id": r["amont_id"],
+                                    "materiau": r["materiau"], "DN": r["DN"], "designation": r["designation"],
+                                    "emetteurs": [x for x in r.get("radiateurs", "").split(",") if x], "pts_m": []})
+    with open(chemin, "w", encoding="utf-8") as f:
+        json.dump(out, f, ensure_ascii=False, indent=1)
+    print("Géométrie réseau :", chemin, len(out["troncons"]), "tronçons")
+
+
 # ---------------------------------------------------------------- principal
 def main():
     ap = argparse.ArgumentParser()
@@ -601,6 +630,7 @@ def main():
     synth = [s for s in cc.synthese_circuits(h, rads, dn_tab, ctas) if s["circuit"] != "PERI-RESTAU"]
     annoter(a.pdf, a.out, reseaux, res_tr, rads, {r["id_radiateur"]: r["pt"] for r in rdc}, synth, journal, h, chemins,
             ctas)
+    exporter_geometrie(h, reseaux, res_tr)
     for c in chemins:
         if c["critique"] == "OUI":
             print("Critique", c["circuit"], c.get("cas", ""), c["id_radiateur"], c["longueur_aller_m"], "m", c["dP_chemin_Pa"], "Pa", c["HMT_circuit_mCE"], "mCE")

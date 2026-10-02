@@ -1,0 +1,40 @@
+{
+  "_lisezmoi": "Réglages propres au modèle Revit. À adapter AVANT de lancer build_from_json.py. Les noms de familles/types doivent exister dans le projet (familles chargées).",
+  "dry_run": true,
+  "etapes": ["niveaux", "systemes", "types_canalisation", "filtres", "radiateurs", "cta", "reservations", "reseau", "liens_R1"],
+  "niveaux": {"RDC": "RDC", "R+1": "R+1", "creer_si_absent": true},
+  "transformation": {
+    "_note": "Repère JSON (m) -> coordonnées internes Revit. Point de calage : origine du repère (nu intérieur façade ouest x mur nord classe élém. 1) = point Revit (x0_m, y0_m). angle_deg = rotation du repère JSON dans Revit (sens trigonométrique).",
+    "x0_m": 0.0,
+    "y0_m": 0.0,
+    "angle_deg": 0.0
+  },
+  "familles": {
+    "V1500x750": {"famille": "Radiateur vertical", "type": "1500x750"},
+    "NON_SPECIFIE": {"famille": "Radiateur vertical", "type": "1500x750"},
+    "PLINTHE": {"famille": "Radiateur plinthe", "type": "Standard"},
+    "CTA": {"famille": "CTA double flux", "type": "Standard"},
+    "_note": "Si une famille est introuvable, l'élément n'est pas posé : il est listé dans le journal."
+  },
+  "types_canalisation": {
+    "acier": {"nom": "CH_Acier_EN10255", "dupliquer_depuis": "Standard"},
+    "cuivre": {"nom": "CH_Cuivre_EN1057", "dupliquer_depuis": "Standard"}
+  },
+  "hauteurs_m": {
+    "_note": "HYPOTHÈSES H-22 : altitudes des réseaux par rapport au niveau (à caler sur les coupes et le mode de pose DCE).",
+    "aller_plafond": 2.70,
+    "retour_plafond": 2.85,
+    "raccord_radiateur": 0.20,
+    "cta_rdc": 0.30,
+    "cta_terrasse": 0.30
+  },
+  "longueur_min_m": 0.05,
+  "parametres": {
+    "_note": "Paramètres partagés renseignés s'ils existent dans le projet ; sinon seuls Marque et Commentaires sont remplis.",
+    "id": "CVC_Id",
+    "circuit": "CVC_Circuit",
+    "puissance": "CVC_P_Part_W",
+    "p50": "CVC_P50_requise_W",
+    "statut": "CVC_Statut"
+  }
+}
