@@ -1,15 +1,15 @@
 id;radiateur_R1;radiateur_RDC;x_m;y_m;niveau_dalle;dimensions_mm;tubes;calfeutrement;statut
-RES-R1-01;R1-06-a;R0-07-a;0.06;-2.23;plancher haut RDC / bas R+1;150x80;2 × Cu 16x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
-RES-R1-02;R1-06-b;NR-ST1-a;7.62;-7.68;plancher haut RDC / bas R+1;150x80;2 × Cu 16x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
-RES-R1-03;R1-05-a;R0-06-a;0.06;-9.52;plancher haut RDC / bas R+1;150x80;2 × Cu 16x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);OK
-RES-R1-04;NR-ST2-a;NR-ST1-a;8.89;-10.79;plancher haut RDC / bas R+1;150x80;2 × Cu 12x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);OK
-RES-R1-05;R1-07-a;R0-10-a;14.78;-10.5;plancher haut RDC / bas R+1;150x80;2 × Cu 14x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
-RES-R1-06;R1-04-a;R0-05-a;0.75;-20.32;plancher haut RDC / bas R+1;150x80;2 × Cu 14x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
-RES-R1-07;R1-04-b;R0-08-a;7.99;-13.33;plancher haut RDC / bas R+1;150x80;2 × Cu 14x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);OK
-RES-R1-08;R1-03-a;R0-03-a;0.75;-23.07;plancher haut RDC / bas R+1;150x80;2 × Cu 14x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
-RES-R1-09;R1-03-b;R0-03-b;8.02;-30.06;plancher haut RDC / bas R+1;150x80;2 × Cu 14x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
-RES-R1-10;R1-02-a;R0-02-a;0.06;-32.65;plancher haut RDC / bas R+1;150x80;2 × Cu 16x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
-RES-R1-11;NR-ST3-a;R0-02-b;8.89;-32.02;plancher haut RDC / bas R+1;150x80;2 × Cu 12x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
-RES-R1-12;R1-08-a;R0-02-b;13.2;-34.33;plancher haut RDC / bas R+1;150x80;2 × Cu 14x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
-RES-R1-13;R1-01-b;R0-02-b;7.79;-35.89;plancher haut RDC / bas R+1;150x80;2 × Cu 16x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
-RES-R1-14;R1-01-a;R0-01-a;0.08;-42.0;plancher haut RDC / bas R+1;150x80;2 × Cu 16x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
+RES-R1-01;NR-ST2-a;NR-ST1-a;8.96;-10.59;plancher haut RDC / bas R+1;150x80;2 × Cu 12x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);OK
+RES-R1-02;NR-ST3-a;R0-02-b;8.96;-31.87;plancher haut RDC / bas R+1;150x80;2 × Cu 12x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
+RES-R1-03;R1-01-a;R0-01-a;0.13;-41.84;plancher haut RDC / bas R+1;150x80;2 × Cu 16x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
+RES-R1-04;R1-01-b;R0-02-b;7.81;-35.75;plancher haut RDC / bas R+1;150x80;2 × Cu 16x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
+RES-R1-05;R1-02-a;R0-02-a;0.13;-32.44;plancher haut RDC / bas R+1;150x80;2 × Cu 16x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
+RES-R1-06;R1-03-a;R0-03-a;0.79;-22.92;plancher haut RDC / bas R+1;150x80;2 × Cu 14x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
+RES-R1-07;R1-03-b;R0-03-b;8.04;-29.85;plancher haut RDC / bas R+1;150x80;2 × Cu 14x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
+RES-R1-08;R1-04-a;R0-05-a;0.78;-20.09;plancher haut RDC / bas R+1;150x80;2 × Cu 14x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
+RES-R1-09;R1-04-b;R0-08-a;8.03;-13.16;plancher haut RDC / bas R+1;150x80;2 × Cu 14x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);OK
+RES-R1-10;R1-05-a;R0-06-a;0.13;-9.36;plancher haut RDC / bas R+1;150x80;2 × Cu 16x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);OK
+RES-R1-11;R1-06-a;R0-07-a;0.13;-2.04;plancher haut RDC / bas R+1;150x80;2 × Cu 16x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
+RES-R1-12;R1-06-b;NR-ST1-a;7.63;-7.44;plancher haut RDC / bas R+1;150x80;2 × Cu 16x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
+RES-R1-13;R1-07-a;R0-10-a;14.83;-10.26;plancher haut RDC / bas R+1;150x80;2 × Cu 14x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);A_VALIDER (pas d'aplomb RDC)
+RES-R1-14;R1-08-a;R0-13-b;13.23;-34.1;plancher haut RDC / bas R+1;150x80;2 × Cu 14x1;coupe-feu au degré du plancher (à définir avec le bureau de contrôle);OK

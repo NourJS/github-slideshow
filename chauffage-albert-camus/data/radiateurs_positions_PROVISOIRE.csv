@@ -1,92 +1,95 @@
 id_radiateur;niveau;circuit;id_local;tuile;px;py;orientation;type_dessine;L_dispo_mm;statut;remarque
-R0-07-a;RDC;ELEM;R0-07;t1;175;415;V;V1500x750;750;OK;classe élém. 1, façade
-R0-07-b;RDC;ELEM;R0-07;t1;665;125;V;V1500x750;750;OK;classe élém. 1, cloison est
-R0-06-a;RDC;ELEM;R0-06;t1;175;590;V;V1500x750;750;OK;atelier élém. 1, façade
-NR-ST1-a;RDC;ELEM;NR-ST1;t1;697;700;V;V1500x750;750;A_CONFIRMER;stockage 1 (7,56 m²) absent du bilan émetteurs
-R0-05-a;RDC;ELEM;R0-05;t1;175;1025;V;V1500x750;750;OK;classe élém. 2, façade
-R0-05-b;RDC;ELEM;R0-05;t1;683;1200;V;V1500x750;750;OK;classe élém. 2, cloison est
-R0-08-a;RDC;ELEM;R0-08;t1;655;840;H;V1500x750;750;A_CONFIRMER;étiqueté 1500x750, angle porte classe 2 / circulation : affecté au hall + circulation élém.
-R0-03-a;RDC;ELEM;R0-03;t5;210;160;H;V1500x750;750;OK;wc élém. 2
-R0-03-b;RDC;ELEM;R0-03;t5;697;315;V;V1500x750;750;OK;wc élém. 2
-R0-02-a;RDC;ELEM;R0-02;t5;178;490;V;V1500x750;750;OK;classe élém. 3, façade
-R0-02-b;RDC;ELEM;R0-02;t5;680;730;V;V1500x750;750;OK;classe élém. 3, cloison est
-R0-01-a;RDC;ELEM;R0-01;t5;178;870;V;V1500x750;750;OK;classe élém. 4, façade
-R0-01-b;RDC;ELEM;R0-01;t5;680;1180;V;V1500x750;750;OK;classe élém. 4, cloison est
-R0-13-a;RDC;ELEM;R0-13;t5;912;355;V;V1500x750;750;A_CONFIRMER;zone SAS / wc prof élé / ménage 2
-R0-10-a;RDC;ELEM;R0-10;t1;912;940;V;V1500x750;750;OK;salle polyvalente
-R0-10-b;RDC;ELEM;R0-10;t1;1375;968;H;V1500x750;750;A_CONFIRMER;étiqueté 1500x750, limite salle / préau
-R0-11-a;RDC;ELEM;R0-11;t5;1380;325;H;V1500x750;750;A_CONFIRMER;étiqueté 1500x750, rangement 1
-R0-14-a;RDC;ELEM;R0-14;t5;1210;548;H;V1500x750;750;OK;laverie 1 élém.
-R0-09-a;RDC;PERI;R0-09;t1;935;545;H;V1500x750;750;OK;wc élém. 3
-R0-12-a;RDC;PERI;R0-12;t1;1265;545;H;V1500x750;750;OK;rangement 2
-R0-37-a;RDC;PERI;R0-37;t1;1372;435;V;V1500x750;750;OK;direction élém.
-R0-36-a;RDC;PERI;R0-36;t1;1440;575;H;V1500x750;750;OK;salle des enseignants
-R0-38-a;RDC;PERI;R0-38;t2;45;430;V;V1500x750;750;A_CONFIRMER;mur mitoyen psychologue / direction périsco
-R0-39-a;RDC;PERI;R0-39;t2;90;325;H;V1500x750;750;OK;direction périsco
-R0-35-a;RDC;PERI;R0-35;t1;1565;800;V;V1500x750;750;OK;salle des animateurs
-R0-35-b;RDC;PERI;R0-35;t2;222;600;V;V1500x750;750;A_CONFIRMER;dos à dos avec RASED
-R0-40-a;RDC;PERI;R0-40;t2;130;548;H;V1500x750;750;A_CONFIRMER;affecté à la circulation PÉRI (n°40)
-R0-34-a;RDC;PERI;R0-34;t2;240;600;V;V1500x750;750;A_CONFIRMER;salle RASED, dos à dos avec animateurs
-R0-33-a;RDC;PERI;R0-33;t2;598;635;V;V1500x750;750;A_CONFIRMER;hall périsco
-R0-41-a;RDC;PERI;R0-41;t2;990;325;H;V1500x750;750;OK;salle ATSEM
-R0-30-a;RDC;PERI;R0-30;t2;775;545;H;V1500x750;750;OK;bibliothèque
-R0-30-b;RDC;PERI;R0-30;t2;1225;568;H;V1500x750;750;OK;bibliothèque
-R0-31-a;RDC;PERI;R0-31;t2;740;850;V;V1500x750;750;A_CONFIRMER;cloison wc admin 2 / bibliothèque
-R0-15-a;RDC;PERI-RESTAU;R0-15;t5;1547;365;H;PLINTHE;3400;A_CONFIRMER;plinthe cantine / self
-R0-15-b;RDC;PERI-RESTAU;R0-15;t6;83;365;H;PLINTHE;3400;A_CONFIRMER;plinthe cantine / self
-R0-15-c;RDC;PERI-RESTAU;R0-15;t6;550;365;H;PLINTHE;3050;A_CONFIRMER;plinthe cantine / self
-R0-16-a;RDC;PERI-RESTAU;R0-16;t6;995;365;H;PLINTHE;3050;A_CONFIRMER;plinthe cantine E1 (nommée « cantine maternelle » sur CVPS_01)
-R0-16-b;RDC;PERI-RESTAU;R0-16;t6;1222;365;H;PLINTHE;2950;A_CONFIRMER;plinthe cantine E1
-R0-18-a;RDC;PERI-RESTAU;R0-18;t5;1445;905;V;V1500x750;750;A_CONFIRMER;salle de repos agents ; circuit à confirmer
-R0-42-a;RDC;MAT;R0-42;t2;1550;262;H;V1500x750;750;OK;direction mat
-R0-29-a;RDC;MAT;R0-29;t2;1350;655;V;V1500x750;750;OK;wc maternelle
-R0-29-b;RDC;MAT;R0-29;t3;135;548;H;V1500x750;750;OK;wc maternelle
-R0-27-a;RDC;MAT;R0-27;t2;1355;850;V;V1500x750;750;OK;motricité
-R0-27-b;RDC;MAT;R0-27;t3;110;770;H;V1500x750;750;OK;motricité
-R0-27-c;RDC;MAT;R0-27;t3;315;1160;V;V1500x750;750;A_CONFIRMER;motricité, dos à dos avec classe mat 3
-R0-45-a;RDC;MAT;R0-45;t3;985;110;H;V1500x750;750;OK;sieste 1
-R0-45-b;RDC;MAT;R0-45;t3;590;525;V;V1500x750;750;OK;sieste 1
-R0-46-a;RDC;MAT;R0-46;t3;1070;110;H;V1500x750;750;OK;classe mat 1
-R0-46-b;RDC;MAT;R0-46;t3;1160;578;H;V1500x750;750;OK;classe mat 1
-R0-55-a;RDC;MAT;R0-55;t3;385;732;H;V1500x750;750;OK;classe mat 3
-R0-55-b;RDC;MAT;R0-55;t3;348;1170;V;V1500x750;750;OK;classe mat 3
-R0-56-a;RDC;MAT;R0-56;t3;1300;600;H;V1500x750;750;A_CONFIRMER;circulation mat 1/3/4 + sieste 1
-R0-56-b;RDC;MAT;R0-56;t3;790;780;V;V1500x750;750;A_CONFIRMER;étiqueté 1500x750, cloison mat 3 / mat 4 côté circulation
-R0-54-a;RDC;MAT;R0-54;t3;1252;790;V;V1500x750;750;OK;classe mat 4
-R0-54-b;RDC;MAT;R0-54;t3;1252;1160;V;V1500x750;750;OK;classe mat 4
-R0-53-a;RDC;MAT;R0-53;t3;1275;850;V;V1500x750;750;OK;wc mat 3
-R0-47-a;RDC;MAT;R0-47;t4;430;110;H;V1500x750;750;OK;classe mat 2
-R0-47-b;RDC;MAT;R0-47;t4;490;578;H;V1500x750;750;OK;classe mat 2
-R0-48-a;RDC;MAT;R0-48;t4;885;110;H;V1500x750;750;OK;sieste 2
-R0-48-b;RDC;MAT;R0-48;t4;1288;525;V;V1500x750;750;OK;sieste 2
-R0-52-a;RDC;MAT;R0-52;t4;720;730;H;V1500x750;750;A_CONFIRMER;circulation mat 2/5/6 + sieste 2
-R0-51-a;RDC;MAT;R0-51;t4;532;790;V;V1500x750;750;A_CONFIRMER;cloison LT eau / wc mat 4
-R0-50-a;RDC;MAT;R0-50;t4;625;790;V;V1500x750;750;OK;classe mat 5
-R0-50-b;RDC;MAT;R0-50;t4;625;1170;V;V1500x750;750;OK;classe mat 5
-R0-49-a;RDC;MAT;R0-49;t4;1530;775;V;V1500x750;750;OK;classe mat 6
-R0-49-b;RDC;MAT;R0-49;t4;1530;1160;V;V1500x750;750;OK;classe mat 6
-R0-19-a;RDC;MAT;R0-19;t6;115;915;V;V1500x750;750;OK;office cuisine élé
-R0-19-b;RDC;MAT;R0-19;t6;1050;870;H;V1500x750;750;OK;office cuisine mat
-R0-20-a;RDC;MAT;R0-20;t6;1210;880;H;V1500x750;750;OK;laverie 2 mat
-R0-25-a;RDC;MAT;R0-25;t6;1450;630;H;V1500x750;750;OK;vestiaires 2
-R0-21-a;RDC;MAT;R0-21;t6;1462;985;V;V1500x750;750;OK;vestiaire 1
-R0-24-a;RDC;MAT;R0-24;t6;1355;410;V;V1500x750;750;A_CONFIRMER;ménage E10
-R0-26-a;RDC;MAT;R0-26;t7;88;525;H;V1500x750;750;OK;local stockage matériel d'animation
-R0-28-a;RDC;MAT;R0-28;t7;22;745;H;V1500x750;750;A_CONFIRMER;couloir le long de la salle de motricité
-R0-28-b;RDC;MAT;R0-28;t6;1615;730;H;V1500x750;750;A_CONFIRMER;couloir le long de la salle de motricité
-R0-22-a;RDC;MAT;R0-22;t6;1660;960;V;V1500x750;750;OK;buanderie
-R0-23-a;RDC;MAT;R0-23;t7;128;895;V;V1500x750;750;OK;wc maternelle 2
-R1-06-a;R+1;ELEM;R1-06;c1;110;228;V;NON_SPECIFIE;1000;OK;classe élém. 5, façade
-R1-06-b;R+1;ELEM;R1-06;c1;765;700;H;NON_SPECIFIE;1000;OK;classe élém. 5, côté porte
-R1-05-a;R+1;ELEM;R1-05;c1;110;860;V;NON_SPECIFIE;1000;OK;atelier élém. 2, façade
-NR-ST2-a;R+1;ELEM;NR-ST2;c1;875;970;V;NON_SPECIFIE;750;A_CONFIRMER;stockage 2 absent du bilan émetteurs
-R1-07-a;R+1;ELEM;R1-07;c1;1385;945;H;NON_SPECIFIE;750;OK;wc élém. 4
-R1-04-a;R+1;ELEM;R1-04;c1;170;1795;H;NON_SPECIFIE;1000;A_CONFIRMER;classe élém. 6 : mur escalier (CVPS_02) / façade (ARCH_03)
-R1-04-b;R+1;ELEM;R1-04;c1;797;1190;H;NON_SPECIFIE;1000;OK;classe élém. 6, côté porte
-R1-03-a;R+1;ELEM;R1-03;c2;170;200;H;NON_SPECIFIE;1000;A_CONFIRMER;classe élém. 7 : mur escalier (CVPS_02) / façade (ARCH_03)
-R1-03-b;R+1;ELEM;R1-03;c2;800;805;H;NON_SPECIFIE;1000;OK;classe élém. 7, côté porte
-R1-02-a;R+1;ELEM;R1-02;c2;110;1030;V;NON_SPECIFIE;1000;OK;atelier élém. 3, façade
-NR-ST3-a;R+1;ELEM;NR-ST3;c2;875;975;V;NON_SPECIFIE;750;A_CONFIRMER;stockage 3 absent du bilan émetteurs
-R1-08-a;R+1;ELEM;R1-08;c2;1248;1175;H;NON_SPECIFIE;750;OK;wc élém. 5
-R1-01-b;R+1;ELEM;R1-01;c2;780;1310;H;NON_SPECIFIE;1000;OK;classe élém. 8, côté porte
-R1-01-a;R+1;ELEM;R1-01;c2;112;1840;V;NON_SPECIFIE;1000;OK;classe élém. 8, façade
+NR-ST1-a;RDC;ELEM;NR-ST1;pdf0;1835.9;895.0;V;V1500x750;750;A_CONFIRMER;stockage 1 (7,56 m²) absent du bilan émetteurs
+R0-01-a;RDC;ELEM;R0-01;pdf0;1585.0;1639.3;V;V1500x750;750;OK;classe élém. 4, façade
+R0-01-b;RDC;ELEM;R0-01;pdf0;1824.4;1786.5;V;V1500x750;750;OK;classe élém. 4, cloison est
+R0-02-a;RDC;ELEM;R0-02;pdf0;1585.0;1455.9;V;V1500x750;750;OK;classe élém. 3, façade
+R0-02-b;RDC;ELEM;R0-02;pdf0;1825.8;1568.6;V;V1500x750;750;OK;classe élém. 3, cloison est
+R0-03-a;RDC;ELEM;R0-03;pdf0;1601.2;1299.1;H;V1500x750;750;OK;wc élém. 2
+R0-03-b;RDC;ELEM;R0-03;pdf0;1836.4;1371.3;V;V1500x750;750;OK;wc élém. 2
+R0-05-a;RDC;ELEM;R0-05;pdf0;1585.1;1052.1;V;V1500x750;750;OK;classe élém. 2, façade
+R0-05-b;RDC;ELEM;R0-05;pdf0;1826.9;1137.7;V;V1500x750;750;OK;classe élém. 2, cloison est
+R0-06-a;RDC;ELEM;R0-06;pdf0;1585.2;841.6;V;V1500x750;750;OK;atelier élém. 1, façade
+R0-07-a;RDC;ELEM;R0-07;pdf0;1585.1;759.8;V;V1500x750;750;OK;classe élém. 1, façade
+R0-07-b;RDC;ELEM;R0-07;pdf0;1818.6;618.9;V;V1500x750;750;OK;classe élém. 1, cloison est
+R0-08-a;RDC;ELEM;R0-08;pdf0;1814.5;964.1;H;V1500x750;750;A_CONFIRMER;étiqueté 1500x750, angle porte classe 2 / circulation : affecté au hall + circulation élém.
+R0-08-b;RDC;ELEM;R0-08;pdf0;1810.0;1290.6;H;V1500x750;750;A_CONFIRMER;palier escalier / circulation élém. (au-dessus du wc élém. 2) (ajouté rév. C, relevé vectoriel)
+R0-09-a;RDC;PERI;R0-09;pdf0;1949.5;821.1;H;V1500x750;750;OK;wc élém. 3
+R0-10-a;RDC;ELEM;R0-10;pdf0;1939.1;1010.5;V;V1500x750;750;OK;salle polyvalente
+R0-10-b;RDC;ELEM;R0-10;pdf0;2160.0;1024.5;H;V1500x750;750;A_CONFIRMER;étiqueté 1500x750, limite salle / préau
+R0-11-a;RDC;ELEM;R0-11;pdf0;2162.2;1375.2;H;V1500x750;750;A_CONFIRMER;étiqueté 1500x750, rangement 1
+R0-12-a;RDC;PERI;R0-12;pdf0;2107.1;821.1;H;V1500x750;750;OK;rangement 2
+R0-13-a;RDC;ELEM;R0-13;pdf0;1939.1;1391.9;V;V1500x750;750;A_CONFIRMER;zone SAS / wc prof élé / ménage 2
+R0-13-b;RDC;ELEM;R0-13;pdf0;1983.0;1561.7;H;V1500x750;750;A_CONFIRMER;mur bas zone wc prof élé / ménage 2 / SAS (ajouté rév. C, relevé vectoriel)
+R0-14-a;RDC;ELEM;R0-14;pdf0;2079.9;1483.4;H;V1500x750;750;OK;laverie 1 élém.
+R0-15-a;RDC;PERI-RESTAU;R0-15;pdf0;2237.6;1396.6;H;PLINTHE;3400;A_CONFIRMER;plinthe cantine / self
+R0-15-b;RDC;PERI-RESTAU;R0-15;pdf0;2346.6;1396.6;H;PLINTHE;3400;A_CONFIRMER;plinthe cantine / self
+R0-15-c;RDC;PERI-RESTAU;R0-15;pdf0;2563.1;1396.6;H;PLINTHE;3050;A_CONFIRMER;plinthe cantine / self
+R0-16-a;RDC;PERI-RESTAU;R0-16;pdf0;2778.1;1396.6;H;PLINTHE;3050;A_CONFIRMER;plinthe cantine E1 (nommée « cantine maternelle » sur CVPS_01)
+R0-16-b;RDC;PERI-RESTAU;R0-16;pdf0;2886.6;1396.6;H;PLINTHE;2950;A_CONFIRMER;plinthe cantine E1
+R0-18-a;RDC;PERI-RESTAU;R0-18;pdf0;2194.0;1654.6;V;V1500x750;750;A_CONFIRMER;salle de repos agents - circuit à confirmer
+R0-19-a;RDC;MAT;R0-19;pdf0;2355.2;1660.3;V;V1500x750;750;OK;office cuisine élé
+R0-19-b;RDC;MAT;R0-19;pdf0;2804.9;1639.2;H;V1500x750;750;OK;office cuisine mat
+R0-20-a;RDC;MAT;R0-20;pdf0;2881.3;1642.5;H;V1500x750;750;OK;laverie 2 mat
+R0-21-a;RDC;MAT;R0-21;pdf0;3002.9;1693.3;V;V1500x750;750;OK;vestiaire 1
+R0-21-b;RDC;MAT;R0-21;pdf0;3090.9;1680.1;V;V1500x750;750;A_CONFIRMER;dos à dos avec buanderie, côté vestiaire 1 (ajouté rév. C, relevé vectoriel)
+R0-22-a;RDC;MAT;R0-22;pdf0;3099.4;1679.9;V;V1500x750;750;OK;buanderie
+R0-23-a;RDC;MAT;R0-23;pdf0;3161.8;1650.5;V;V1500x750;750;OK;wc maternelle 2
+R0-24-a;RDC;MAT;R0-24;pdf0;2949.4;1418.0;V;V1500x750;750;A_CONFIRMER;ménage E10
+R0-25-a;RDC;MAT;R0-25;pdf0;2995.9;1522.4;H;V1500x750;750;OK;vestiaires 2
+R0-26-a;RDC;MAT;R0-26;pdf0;3142.1;1471.6;H;V1500x750;750;OK;local stockage matériel d'animation
+R0-27-a;RDC;MAT;R0-27;pdf0;2949.7;969.1;V;V1500x750;750;OK;motricité
+R0-27-b;RDC;MAT;R0-27;pdf0;3153.0;930.3;H;V1500x750;750;OK;motricité
+R0-27-c;RDC;MAT;R0-27;pdf0;3250.2;1114.9;V;V1500x750;750;A_CONFIRMER;motricité, dos à dos avec classe mat 3
+R0-28-a;RDC;MAT;R0-28;pdf0;3111.1;1577.4;H;V1500x750;750;A_CONFIRMER;couloir le long de la salle de motricité
+R0-28-b;RDC;MAT;R0-28;pdf0;3076.8;1568.8;H;V1500x750;750;A_CONFIRMER;couloir le long de la salle de motricité
+R0-29-a;RDC;MAT;R0-29;pdf0;2948.5;873.2;V;V1500x750;750;OK;wc maternelle
+R0-29-b;RDC;MAT;R0-29;pdf0;3165.7;822.0;H;V1500x750;750;OK;wc maternelle
+R0-30-a;RDC;PERI;R0-30;pdf0;2672.9;821.1;H;V1500x750;750;OK;bibliothèque
+R0-30-b;RDC;PERI;R0-30;pdf0;2887.6;833.5;H;V1500x750;750;OK;bibliothèque
+R0-31-a;RDC;PERI;R0-31;pdf0;2656.0;968.5;V;V1500x750;750;A_CONFIRMER;cloison wc admin 2 / bibliothèque
+R0-33-a;RDC;PERI;R0-33;pdf0;2586.4;864.5;V;V1500x750;750;A_CONFIRMER;hall périsco
+R0-34-a;RDC;PERI;R0-34;pdf0;2414.8;848.7;V;V1500x750;750;A_CONFIRMER;salle RASED, dos à dos avec animateurs
+R0-35-a;RDC;PERI;R0-35;pdf0;2251.9;943.6;V;V1500x750;750;OK;salle des animateurs
+R0-35-b;RDC;PERI;R0-35;pdf0;2406.2;848.7;V;V1500x750;750;A_CONFIRMER;dos à dos avec RASED
+R0-36-a;RDC;PERI;R0-36;pdf0;2189.7;836.5;H;V1500x750;750;OK;salle des enseignants
+R0-37-a;RDC;PERI;R0-37;pdf0;2157.2;769.5;V;V1500x750;750;OK;direction élém.
+R0-38-a;RDC;PERI;R0-38;pdf0;2320.2;769.3;V;V1500x750;750;A_CONFIRMER;mur mitoyen psychologue / direction périsco
+R0-39-a;RDC;PERI;R0-39;pdf0;2341.8;716.8;H;V1500x750;750;OK;direction périsco
+R0-40-a;RDC;PERI;R0-40;pdf0;2363.8;821.1;H;V1500x750;750;A_CONFIRMER;affecté à la circulation PÉRI (n°40)
+R0-41-a;RDC;PERI;R0-41;pdf0;2774.8;717.0;H;V1500x750;750;OK;salle ATSEM
+R0-42-a;RDC;MAT;R0-42;pdf0;3044.4;685.8;H;V1500x750;750;OK;direction mat
+R0-45-a;RDC;MAT;R0-45;pdf0;3573.7;613.5;H;V1500x750;750;OK;sieste 1
+R0-45-b;RDC;MAT;R0-45;pdf0;3384.3;811.9;V;V1500x750;750;OK;sieste 1
+R0-46-a;RDC;MAT;R0-46;pdf0;3614.1;613.6;H;V1500x750;750;OK;classe mat 1
+R0-46-b;RDC;MAT;R0-46;pdf0;3657.7;836.5;H;V1500x750;750;OK;classe mat 1
+R0-47-a;RDC;MAT;R0-47;pdf0;4105.9;613.6;H;V1500x750;750;OK;classe mat 2
+R0-47-b;RDC;MAT;R0-47;pdf0;4136.4;836.3;H;V1500x750;750;OK;classe mat 2
+R0-48-a;RDC;MAT;R0-48;pdf0;4325.4;613.6;H;V1500x750;750;OK;sieste 2
+R0-48-b;RDC;MAT;R0-48;pdf0;4517.9;812.3;V;V1500x750;750;OK;sieste 2
+R0-49-a;RDC;MAT;R0-49;pdf0;4634.8;936.6;V;V1500x750;750;OK;classe mat 6
+R0-49-b;RDC;MAT;R0-49;pdf0;4634.6;1118.2;V;V1500x750;750;OK;classe mat 6
+R0-50-a;RDC;MAT;R0-50;pdf0;4201.0;933.7;V;V1500x750;750;OK;classe mat 5
+R0-50-b;RDC;MAT;R0-50;pdf0;4200.9;1123.0;V;V1500x750;750;OK;classe mat 5
+R0-51-a;RDC;MAT;R0-51;pdf0;4156.0;939.1;V;V1500x750;750;A_CONFIRMER;cloison LT eau / wc mat 4
+R0-52-a;RDC;MAT;R0-52;pdf0;4246.2;910.2;H;V1500x750;750;A_CONFIRMER;circulation mat 2/5/6 + sieste 2
+R0-53-a;RDC;MAT;R0-53;pdf0;3712.8;967.8;V;V1500x750;750;OK;wc mat 3
+R0-54-a;RDC;MAT;R0-54;pdf0;3701.4;934.5;V;V1500x750;750;OK;classe mat 4
+R0-54-b;RDC;MAT;R0-54;pdf0;3701.4;1116.6;V;V1500x750;750;OK;classe mat 4
+R0-55-a;RDC;MAT;R0-55;pdf0;3285.0;910.2;H;V1500x750;750;OK;classe mat 3
+R0-55-b;RDC;MAT;R0-55;pdf0;3268.3;1123.0;V;V1500x750;750;OK;classe mat 3
+R0-56-a;RDC;MAT;R0-56;pdf0;3724.9;847.9;H;V1500x750;750;A_CONFIRMER;circulation mat 1/3/4 + sieste 1
+R0-56-b;RDC;MAT;R0-56;pdf0;3479.2;934.5;V;V1500x750;750;A_CONFIRMER;étiqueté 1500x750, cloison mat 3 / mat 4 côté circulation
+NR-ST2-a;R+1;ELEM;NR-ST2;pdf1;617.3;997.2;V;NON_SPECIFIE;750;A_CONFIRMER;stockage 2 absent du bilan émetteurs
+NR-ST3-a;R+1;ELEM;NR-ST3;pdf1;617.3;1600.4;V;NON_SPECIFIE;750;A_CONFIRMER;stockage 3 absent du bilan émetteurs
+R1-01-a;R+1;ELEM;R1-01;pdf1;367.0;1883.1;V;NON_SPECIFIE;1000;OK;classe élém. 8, façade
+R1-01-b;R+1;ELEM;R1-01;pdf1;584.9;1710.5;H;NON_SPECIFIE;1000;OK;classe élém. 8, côté porte
+R1-02-a;R+1;ELEM;R1-02;pdf1;367.0;1616.5;V;NON_SPECIFIE;1000;OK;atelier élém. 3, façade
+R1-03-a;R+1;ELEM;R1-03;pdf1;385.7;1346.7;H;NON_SPECIFIE;1000;A_CONFIRMER;classe élém. 7 : mur escalier (CVPS_02) / façade (ARCH_03)
+R1-03-b;R+1;ELEM;R1-03;pdf1;591.4;1543.1;H;NON_SPECIFIE;1000;OK;classe élém. 7, côté porte
+R1-04-a;R+1;ELEM;R1-04;pdf1;385.6;1266.4;H;NON_SPECIFIE;1000;A_CONFIRMER;classe élém. 6 : mur escalier (CVPS_02) / façade (ARCH_03)
+R1-04-b;R+1;ELEM;R1-04;pdf1;590.9;1070.1;H;NON_SPECIFIE;1000;OK;classe élém. 6, côté porte
+R1-05-a;R+1;ELEM;R1-05;pdf1;367.0;962.2;V;NON_SPECIFIE;1000;OK;atelier élém. 2, façade
+R1-06-a;R+1;ELEM;R1-06;pdf1;367.0;754.8;V;NON_SPECIFIE;1000;OK;classe élém. 5, façade
+R1-06-b;R+1;ELEM;R1-06;pdf1;579.8;908.0;H;NON_SPECIFIE;1000;OK;classe élém. 5, côté porte
+R1-07-a;R+1;ELEM;R1-07;pdf1;783.8;987.9;H;NON_SPECIFIE;750;OK;wc élém. 4
+R1-08-a;R+1;ELEM;R1-08;pdf1;738.5;1663.5;H;NON_SPECIFIE;750;OK;wc élém. 5

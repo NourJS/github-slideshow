@@ -6,12 +6,12 @@ R0-04;RDC;4;B32;Réserve info;8.42;19;38;231.9;puissance_a_installer_W;232;278;4
 R0-05;RDC;5;B21;Salle de classe élémentaire 2;62.07;19;990.5;2418.2;puissance_a_installer_W;2418;2902;1189;2;1451;OK
 R0-06;RDC;6;B22;Atelier élémentaire 1;31.88;19;677.7;1411.0;puissance_a_installer_W;1411;1693;813;1;1693;OK
 R0-07;RDC;7;B21;Salle de classe élémentaire 1;62.93;19;1914.8;3362.2;puissance_a_installer_W;3362;4035;2298;2;2017;OK
-R0-08;RDC;8;B11;Hall + circulation élémentaire;162.60;19;2944.2;6684.0;puissance_a_installer_W;6684;8021;3533;1;8021;OK
+R0-08;RDC;8;B11;Hall + circulation élémentaire;162.60;19;2944.2;6684.0;puissance_a_installer_W;6684;8021;3533;2;4010;OK
 R0-09;RDC;9;B25;WC élémentaire 3;14.90;19;68;410.3;puissance_a_installer_W;410;492;82;1;492;OK
 R0-10;RDC;10;B24;Salle polyvalente / activités périscolaires;124.30;19;2961.3;5820.2;puissance_a_installer_W;5820;6984;3554;2;3492;OK
 R0-11;RDC;11;B24;Rangement 1;6.60;19;51;203.0;puissance_a_installer_W;203;244;61;1;244;OK
 R0-12;RDC;12;B24;Rangement 2;13.02;19;79;378.9;puissance_a_installer_W;379;455;95;1;455;OK
-R0-13;RDC;13;B14+B33;WC prof élé + Ménage 2 + SAS;14.39;19;111.5;442.4;puissance_a_installer_W;442;531;134;1;531;OK
+R0-13;RDC;13;B14+B33;WC prof élé + Ménage 2 + SAS;14.39;19;111.5;442.4;puissance_a_installer_W;442;531;134;2;265;OK
 R0-14;RDC;14;E5;Laverie 1 élémentaire;19.60;19;151.8;602.6;puissance_a_installer_W;603;723;182;1;723;OK
 R0-15;RDC;15;E2;Cantine élémentaire / Zone de self;125.91;19;3437.3;6333.2;puissance_a_installer_W;6333;7600;4125;3;2533;OK
 R0-16;RDC;16;E1;Cantine élémentaire;93.55;19;2190.5;4342.2;puissance_a_installer_W;4342;5211;2629;2;2605;OK
@@ -19,7 +19,7 @@ R0-17;RDC;17;E9;Local poubelles;8.43;19;589.4;783.2;puissance_a_installer_W;783;
 R0-18;RDC;18;E8;Salle de repos agents;11.43;19;515.9;778.8;puissance_a_installer_W;779;935;619;1;935;OK
 R0-19;RDC;19;E4;Office cuisine 1 élé + office cuisine 2 mat;42.82;19;1525.6;2510.4;puissance_a_installer_W;2510;3012;1831;2;1506;OK
 R0-20;RDC;20;E4;Laverie 2 mat;12.53;19;504.9;793.1;puissance_a_installer_W;793;952;606;1;952;OK
-R0-21;RDC;21;E7;Vestiaire 1;9.20;20;1561.5;1773.1;puissance_a_installer_W;1773;2128;1874;1;2128;OK
+R0-21;RDC;21;E7;Vestiaire 1;9.20;20;1561.5;1773.1;puissance_a_installer_W;1773;2128;1874;2;1064;OK
 R0-22;RDC;22;A32;Buanderie;6.38;19;984.4;1131.2;puissance_a_installer_W;1131;1357;1181;1;1357;OK
 R0-23;RDC;23;A24;WC maternelle 2;5.53;19;908.3;1035.5;puissance_a_installer_W;1036;1243;1090;1;1243;OK
 R0-24;RDC;24;E10;Ménage;5.13;19;412.8;530.8;puissance_a_installer_W;531;637;495;1;637;OK

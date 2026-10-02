@@ -54,10 +54,12 @@
     "echelle_m_par_pt": 0.035278,
     "axe_y": "vers le haut de la feuille (nord non vérifié)",
     "recalage_R1_vers_RDC_pt": [
-      1217.2,
-      -100.5
+      1218.2,
+      -106.0
     ],
-    "precision_m": 0.3
+    "precision_m": 0.05
   },
-  "_repere_source": "Repère local commun RDC/R+1 : origine = nu intérieur de la façade ouest × mur nord de la classe élém. 1 (RDC). Échelle 1/100 vérifiée. Recalage R+1 fait sur la façade et les murs de refend. Les positions seront remplacées par les coordonnées DWG/RVT."
+  "_repere_source": "Repère local commun RDC/R+1 : origine = nu intérieur de la façade ouest × mur nord de la classe élém. 1 (RDC), en points PDF de CVPS_01. Positions = centres des symboles radiateur vectoriels (calque VIV02_CHA_EQT) de CVPS_01 et CVPS_02. Recalage R+1 → RDC par corrélation des calques architecte ESA_01_TRAME et ESA_02_GO (dx = 1218,2 ; dy = -106,0 pt). Échelle 1/100.",
+  "descente_radiateur_m": 2.5,
+  "_descente_source": "H-18 HYPOTHÈSE : longueur verticale ajoutée à chaque branche cuivre (descente du plafond ou remontée de la dalle jusqu'au robinet). Les longueurs relevées sur le PDF sont des longueurs en plan."
 }

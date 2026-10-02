@@ -31,7 +31,9 @@ T_NOM = (75.0, 65.0, 20.0)  # conditions normales NF EN 442-2
 # Rendus PDF ayant servi au relevé des positions : (x0_pt, y0_pt, dpi, plan)
 TUILES = {"t1": (1500, 560, 150, "RDC"), "t2": (2300, 560, 150, "RDC"), "t3": (3100, 560, 150, "RDC"),
           "t4": (3900, 560, 150, "RDC"), "t5": (1500, 1220, 150, "RDC"), "t6": (2300, 1220, 150, "RDC"),
-          "t7": (3100, 1220, 150, "RDC"), "c1": (330, 680, 220, "R+1"), "c2": (330, 1280, 220, "R+1")}
+          "t7": (3100, 1220, 150, "RDC"), "c1": (330, 680, 220, "R+1"), "c2": (330, 1280, 220, "R+1"),
+          # coordonnées vectorielles directes (points PDF) : CVPS_01 (RDC) et CVPS_02 (R+1)
+          "pdf0": (0, 0, 72, "RDC"), "pdf1": (0, 0, 72, "R+1")}
 
 
 def read_csv(path):
