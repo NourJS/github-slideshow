@@ -293,6 +293,26 @@ def fmt(p):
 
 
 # ---------------------------------------------------------------- tronçons -> moteur
+def branches_de_piquage(reseaux, positions):
+    """Un émetteur piqué sur un tube qui continue vers l'aval (ou plusieurs émetteurs au même nœud)
+    reçoit sa propre branche « B-<id> » : elle porte le raccordement (cuivre pour un radiateur) et son étiquette."""
+    for circ, (troncons, _, _) in reseaux.items():
+        fils = collections.Counter(t["amont_id"] for t in troncons)
+        nouveaux = []
+        for t in troncons:
+            nouveaux.append(t)
+            emetteurs = [x for x in t["radiateurs"] if x != MONTEE_CTA]
+            if not emetteurs or (fils[t["troncon_id"]] == 0 and len(emetteurs) == 1):
+                continue
+            noeud = t["pts"][-1]
+            for rid in emetteurs:
+                cible = positions.get(rid, noeud)
+                nouveaux.append({"troncon_id": "B-" + rid, "amont_id": t["troncon_id"], "pts": [noeud, cible],
+                                 "radiateurs": [rid], "longueur_m": max(0.5, math.dist(noeud, cible) * PT_M)})
+            t["radiateurs"] = [x for x in t["radiateurs"] if x == MONTEE_CTA]
+        troncons[:] = nouveaux
+
+
 def ecrire_troncons(h, reseaux, rads_eng, chemin):
     by_id = {r["id_radiateur"]: r for r in rads_eng}
     lignes = []
@@ -568,6 +588,9 @@ def main():
         for x in jr:
             print("   ", x)
     chemin = os.path.join(cc.DATA, "troncons_RDC_DCE.csv")
+    positions = {r["id_radiateur"]: r["pt"][:2] for r in rdc}
+    positions.update({c["id_cta"]: c["pt"] for c in ctas})
+    branches_de_piquage(reseaux, positions)
     ecrire_troncons(h, reseaux, rads, chemin)
     tous = cc.read_csv(chemin)
     res_tr, chemins, flags = cc.dimensionner(h, [t for t in tous if t["circuit"] != "CTA"], rads, dn_tab, cu_tab)

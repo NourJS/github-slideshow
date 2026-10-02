@@ -4,3 +4,4 @@ CTA-MAT-EST;RDC;pdf0;4433;889;4433;889;LT CTA 3,7 m² (extrémité est);A_CONFIR
 CTA-MAT-MOTRICITE;RDC;pdf0;3165;1688;3165;1688;local CTA 4,25 m² (au sud de la salle de motricité);A_CONFIRMER;affectation fiche ↔ local déduite de la position
 CTA-ELEM-NORD;R+1;pdf1;889.5;1711.5;868;1734;terrasse R+1 au-dessus de la chaufferie (bloc nord);A_CONFIRMER;bloc ELEMENT nord du plan CVPS_02 ; nord/sud supposés = haut/bas de la feuille
 CTA-ELEM-SUD;R+1;pdf1;889.5;1805;868;1782;terrasse R+1 au-dessus de la chaufferie (bloc sud);A_CONFIRMER;bloc ELEMENT sud du plan CVPS_02
+CTA-CUISINE;RDC;pdf0;2390;1668;2390;1630;faux-plafond de l'office cuisine élé (E4) - position supposée;A_CONFIRMER;CTA absente du plan DCE : position supposée, piquage sur le collecteur CTA de la circulation sud (y = 1614,7 pt)

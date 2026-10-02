@@ -1,6 +1,77 @@
 {
- "_source": "Fiches de sélection France Air POWERPLAY (logiciel v3.20 DB 4.38, édition 18/09/2026), transmises le 02/10/2026 : CTA_DF_PARTIE_NORD_ELEM, CTA_DF_PARTIE_SUD_ELEM, CTA_DF_MATERNELLE_PARTIE_OUEST, CTA_DF_MATERNELLE_PARTIE_EST, CTA_DF_MATERNELLE_MOTRICITE. Valeurs relues automatiquement (pdftotext) puis contrôlées. CTA cuisine : à recevoir.",
+ "_source": "Fiches de sélection France Air POWERPLAY (logiciel v3.20 DB 4.38, édition 18/09/2026), transmises le 02/10/2026 : CTA_DF__CUISINE (PLATEPLAY T2000), CTA_DF_PARTIE_NORD_ELEM, CTA_DF_PARTIE_SUD_ELEM, CTA_DF_MATERNELLE_PARTIE_OUEST, CTA_DF_MATERNELLE_PARTIE_EST, CTA_DF_MATERNELLE_MOTRICITE. Valeurs relues automatiquement (pdftotext) puis contrôlées.",
  "cta": [
+  {
+   "modele": "PLATEPLAY T2000 + batterie CO gaine Plate Play T2000",
+   "L_mm": 2060,
+   "l_mm": 1210,
+   "H_mm": 527,
+   "poids_kg": 305,
+   "piquages_mm": "355",
+   "soufflage_m3h": 1580,
+   "soufflage_pse_Pa": 250,
+   "soufflage_P_kW": 0.4,
+   "reprise_m3h": 1625,
+   "reprise_pse_Pa": 250,
+   "reprise_P_kW": 0.38,
+   "P_elec_kW": 2.1,
+   "I_A": 9.3,
+   "roue": {
+    "hiver_soufflage_entree": -5.0,
+    "hiver_soufflage_sortie": 15.8,
+    "ete_soufflage_entree": 35.0,
+    "ete_soufflage_sortie": 27.2,
+    "efficacite_hiver_ete_%": [
+     86.79,
+     86.79
+    ]
+   },
+   "interieur_hiver_ete_C": [
+    19.0,
+    26.0
+   ],
+   "exterieur_hiver_ete_C": [
+    -5.0,
+    35.0
+   ],
+   "batteries": [
+    {
+     "etage": "BATTERIE 1ER ÉTAGE",
+     "reference": "DHCW-355 CO",
+     "mode": "chauffage",
+     "air_entree_C": 15.8,
+     "eau_entree_C": 60.0,
+     "air_sortie_C": 34.9,
+     "eau_sortie_C": 40.0,
+     "dp_air_Pa": 55.6,
+     "dp_eau_kPa": 2.65,
+     "air_m3h": 1580,
+     "eau_L_s": 0.123,
+     "P_kW": 10.2
+    },
+    {
+     "etage": "BATTERIE 1ER ÉTAGE",
+     "reference": "DHCW-355 CO",
+     "mode": "refroidissement",
+     "air_entree_C": 27.2,
+     "eau_entree_C": 7.0,
+     "air_sortie_C": 23.6,
+     "eau_sortie_C": 12.0,
+     "dp_air_Pa": 151.89,
+     "dp_eau_kPa": 14.12,
+     "air_m3h": 1580,
+     "eau_L_s": 0.293,
+     "P_kW": 6.15
+    }
+   ],
+   "id": "CTA-CUISINE",
+   "fiche": "CTA_DF__CUISINE.pdf",
+   "fabricant": "France Air",
+   "gamme": "PLATEPLAY",
+   "installation": "faux-plafond",
+   "raccord_hydraulique_batterie": "1/2\"",
+   "batterie_type": "change-over (eau chaude / eau glacée), en gaine"
+  },
   {
    "modele": "T10000-V-CO-Y",
    "L_mm": 2055,

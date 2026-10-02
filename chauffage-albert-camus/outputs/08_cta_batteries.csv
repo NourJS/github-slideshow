@@ -1,4 +1,5 @@
 id_cta;modele;fiche;niveau;local;statut;soufflage_m3h;reprise_m3h;P_batterie_chaud_W;regime_chaud;Qv_chaud_m3h;dp_batterie_chaud_kPa;P_batterie_froid_W;regime_froid;Qv_froid_m3h;dp_batterie_froid_kPa;Qv_dim_m3h;cas_dimensionnant;besoin_chaud_neutre_W_estime;t_sortie_roue_hiver_C;x_m;y_m
+CTA-CUISINE;PLATEPLAY T2000 + batterie CO gaine Plate Play T2000;CTA_DF__CUISINE.pdf;RDC;faux-plafond de l'office cuisine élé (E4) - position supposée;A_CONFIRMER;1580;1625;10200;60/40;0.443;2.65;6150;7/12;1.055;14.12;1.055;froid;1695;15.8;28.52;-37.99
 CTA-ELEM-NORD;T10000-V-CO-Y;CTA_DF_PARTIE_NORD_ELEM.pdf;R+1;terrasse R+1 au-dessus de la chaufferie (bloc nord);A_CONFIRMER;9920;10190;95490;60/40;4.309;4.7;70280;7/12;14.191;51.4;14.191;froid;14304;14.7;18.56;-35.79
 CTA-ELEM-SUD;T10000-V-CO;CTA_DF_PARTIE_SUD_ELEM.pdf;R+1;terrasse R+1 au-dessus de la chaufferie (bloc sud);A_CONFIRMER;9075;9300;91650;60/40;4.14;4.4;99520;7/12;20.092;99.9;20.092;froid;15520;13.9;18.56;-39.09
 CTA-MAT-EST;T4000-M-CO;CTA_DF_MATERNELLE_PARTIE_EST.pdf;RDC;LT CTA 3,7 m² (extrémité est);A_CONFIRMER;3810;3840;38140;60/40;1.721;5.7;41250;7/12;8.33;128.5;8.33;froid;6644;13.8;100.59;-10.51
