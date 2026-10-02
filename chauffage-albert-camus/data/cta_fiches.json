@@ -1,0 +1,350 @@
+{
+ "_source": "Fiches de sélection France Air POWERPLAY (logiciel v3.20 DB 4.38, édition 18/09/2026), transmises le 02/10/2026 : CTA_DF_PARTIE_NORD_ELEM, CTA_DF_PARTIE_SUD_ELEM, CTA_DF_MATERNELLE_PARTIE_OUEST, CTA_DF_MATERNELLE_PARTIE_EST, CTA_DF_MATERNELLE_MOTRICITE. Valeurs relues automatiquement (pdftotext) puis contrôlées. CTA cuisine : à recevoir.",
+ "cta": [
+  {
+   "modele": "T10000-V-CO-Y",
+   "L_mm": 2055,
+   "l_mm": 1840,
+   "H_mm": 2000,
+   "poids_kg": 875,
+   "piquages_mm": "1400 x 700",
+   "soufflage_m3h": 9920,
+   "soufflage_pse_Pa": 400,
+   "soufflage_P_kW": 3.77,
+   "reprise_m3h": 10190,
+   "reprise_pse_Pa": 400,
+   "reprise_P_kW": 3.51,
+   "P_elec_kW": 9.06,
+   "I_A": 14.1,
+   "roue": {
+    "hiver_soufflage_entree": -5.0,
+    "hiver_soufflage_sortie": 14.7,
+    "ete_soufflage_entree": 35.0,
+    "ete_soufflage_sortie": 27.8,
+    "efficacite_hiver_ete_%": [
+     82.69,
+     80.0
+    ]
+   },
+   "interieur_hiver_ete_C": [
+    19.0,
+    26.0
+   ],
+   "exterieur_hiver_ete_C": [
+    -5.0,
+    35.0
+   ],
+   "batteries": [
+    {
+     "etage": "BATTERIE 1ER ÉTAGE",
+     "reference": "W 3S3 G 04 33 1525 195 046 1 H L CO",
+     "mode": "chauffage",
+     "air_entree_C": 14.7,
+     "eau_entree_C": 60.0,
+     "air_sortie_C": 44.1,
+     "eau_sortie_C": 40.0,
+     "dp_air_Pa": 77.7,
+     "dp_eau_kPa": 4.7,
+     "air_m3h": 9920,
+     "eau_L_s": 1.197,
+     "P_kW": 95.49
+    },
+    {
+     "etage": "BATTERIE 1ER ÉTAGE",
+     "reference": "W 3S3 G 04 33 1525 195 046 1 H L CO",
+     "mode": "refroidissement",
+     "air_entree_C": 27.8,
+     "eau_entree_C": 7.0,
+     "air_sortie_C": 14.4,
+     "eau_sortie_C": 12.0,
+     "dp_air_Pa": 119.3,
+     "dp_eau_kPa": 51.4,
+     "air_m3h": 9920,
+     "eau_L_s": 3.942,
+     "P_kW": 70.28
+    }
+   ],
+   "id": "CTA-ELEM-NORD",
+   "fiche": "CTA_DF_PARTIE_NORD_ELEM.pdf",
+   "fabricant": "France Air",
+   "gamme": "POWERPLAY",
+   "batterie_type": "change-over (eau chaude / eau glacée)"
+  },
+  {
+   "modele": "T10000-V-CO",
+   "L_mm": 2055,
+   "l_mm": 1840,
+   "H_mm": 2000,
+   "poids_kg": 875,
+   "piquages_mm": "1400 x 700",
+   "soufflage_m3h": 9075,
+   "soufflage_pse_Pa": 400,
+   "soufflage_P_kW": 2.93,
+   "reprise_m3h": 9300,
+   "reprise_pse_Pa": 400,
+   "reprise_P_kW": 2.74,
+   "P_elec_kW": 9.06,
+   "I_A": 14.1,
+   "roue": {
+    "hiver_soufflage_entree": -5.0,
+    "hiver_soufflage_sortie": 13.9,
+    "ete_soufflage_entree": 35.0,
+    "ete_soufflage_sortie": 27.9,
+    "efficacite_hiver_ete_%": [
+     78.69,
+     78.34
+    ]
+   },
+   "interieur_hiver_ete_C": [
+    19.0,
+    26.0
+   ],
+   "exterieur_hiver_ete_C": [
+    -5.0,
+    35.0
+   ],
+   "batteries": [
+    {
+     "etage": "BATTERIE 1ER ÉTAGE",
+     "reference": "W 3S3 G 04 33 1525 195 046 1 H L CO",
+     "mode": "chauffage",
+     "air_entree_C": 13.9,
+     "eau_entree_C": 60.0,
+     "air_sortie_C": 44.8,
+     "eau_sortie_C": 40.0,
+     "dp_air_Pa": 67.4,
+     "dp_eau_kPa": 4.4,
+     "air_m3h": 9075,
+     "eau_L_s": 1.15,
+     "P_kW": 91.65
+    },
+    {
+     "etage": "BATTERIE 1ER ÉTAGE",
+     "reference": "W 3S3 G 04 33 1525 195 046 1 H L CO",
+     "mode": "refroidissement",
+     "air_entree_C": 27.9,
+     "eau_entree_C": 7.0,
+     "air_sortie_C": 15.1,
+     "eau_sortie_C": 12.0,
+     "dp_air_Pa": 122.9,
+     "dp_eau_kPa": 99.9,
+     "air_m3h": 9075,
+     "eau_L_s": 5.581,
+     "P_kW": 99.52
+    }
+   ],
+   "id": "CTA-ELEM-SUD",
+   "fiche": "CTA_DF_PARTIE_SUD_ELEM.pdf",
+   "fabricant": "France Air",
+   "gamme": "POWERPLAY",
+   "batterie_type": "change-over (eau chaude / eau glacée)"
+  },
+  {
+   "modele": "T4000-M-CO",
+   "L_mm": 1885,
+   "l_mm": 1350,
+   "H_mm": 1480,
+   "poids_kg": 481,
+   "piquages_mm": "400 x 400",
+   "soufflage_m3h": 3810,
+   "soufflage_pse_Pa": 300,
+   "soufflage_P_kW": 1.25,
+   "reprise_m3h": 3840,
+   "reprise_pse_Pa": 300,
+   "reprise_P_kW": 1.07,
+   "P_elec_kW": 3.85,
+   "I_A": 6.5,
+   "roue": {
+    "hiver_soufflage_entree": -5.0,
+    "hiver_soufflage_sortie": 13.8,
+    "ete_soufflage_entree": 35.0,
+    "ete_soufflage_sortie": 28.0,
+    "efficacite_hiver_ete_%": [
+     78.37,
+     78.02
+    ]
+   },
+   "interieur_hiver_ete_C": [
+    19.0,
+    26.0
+   ],
+   "exterieur_hiver_ete_C": [
+    -5.0,
+    35.0
+   ],
+   "batteries": [
+    {
+     "etage": "BATTERIE 1ER ÉTAGE",
+     "reference": "W 3S3 G 04 22 0995 212 017 1 H L CO",
+     "mode": "chauffage",
+     "air_entree_C": 13.8,
+     "eau_entree_C": 60.0,
+     "air_sortie_C": 44.4,
+     "eau_sortie_C": 40.0,
+     "dp_air_Pa": 59.0,
+     "dp_eau_kPa": 5.7,
+     "air_m3h": 3810,
+     "eau_L_s": 0.478,
+     "P_kW": 38.14
+    },
+    {
+     "etage": "BATTERIE 1ER ÉTAGE",
+     "reference": "W 3S3 G 04 22 0995 212 017 1 H L CO",
+     "mode": "refroidissement",
+     "air_entree_C": 28.0,
+     "eau_entree_C": 7.0,
+     "air_sortie_C": 15.2,
+     "eau_sortie_C": 12.0,
+     "dp_air_Pa": 100.3,
+     "dp_eau_kPa": 128.5,
+     "air_m3h": 3810,
+     "eau_L_s": 2.314,
+     "P_kW": 41.25
+    }
+   ],
+   "id": "CTA-MAT-EST",
+   "fiche": "CTA_DF_MATERNELLE_PARTIE_EST.pdf",
+   "fabricant": "France Air",
+   "gamme": "POWERPLAY",
+   "batterie_type": "change-over (eau chaude / eau glacée)"
+  },
+  {
+   "modele": "T2500-M + module CO (caisson externe)",
+   "L_mm": 1728,
+   "l_mm": 1020,
+   "H_mm": 1385,
+   "poids_kg": 296,
+   "piquages_mm": "355",
+   "soufflage_m3h": 2500,
+   "soufflage_pse_Pa": 300,
+   "soufflage_P_kW": 0.88,
+   "reprise_m3h": 2500,
+   "reprise_pse_Pa": 300,
+   "reprise_P_kW": 0.7,
+   "P_elec_kW": 1.93,
+   "I_A": 3.4,
+   "roue": {
+    "hiver_soufflage_entree": -5.0,
+    "hiver_soufflage_sortie": 13.6,
+    "ete_soufflage_entree": 35.0,
+    "ete_soufflage_sortie": 28.0,
+    "efficacite_hiver_ete_%": [
+     77.62,
+     77.27
+    ]
+   },
+   "interieur_hiver_ete_C": [
+    19.0,
+    26.0
+   ],
+   "exterieur_hiver_ete_C": [
+    -5.0,
+    35.0
+   ],
+   "batteries": [
+    {
+     "etage": "BATTERIE 1ER ÉTAGE",
+     "reference": "W 3S3 G 04 20 0735 212 014 1 H L CO",
+     "mode": "chauffage",
+     "air_entree_C": 13.6,
+     "eau_entree_C": 60.0,
+     "air_sortie_C": 43.7,
+     "eau_sortie_C": 40.0,
+     "dp_air_Pa": 113.8,
+     "dp_eau_kPa": 2.8,
+     "air_m3h": 2500,
+     "eau_L_s": 0.308,
+     "P_kW": 24.62
+    },
+    {
+     "etage": "BATTERIE 1ER ÉTAGE",
+     "reference": "W 3S3 G 04 20 0735 212 014 1 H L CO",
+     "mode": "refroidissement",
+     "air_entree_C": 28.0,
+     "eau_entree_C": 7.0,
+     "air_sortie_C": 15.5,
+     "eau_sortie_C": 12.0,
+     "dp_air_Pa": 193.4,
+     "dp_eau_kPa": 62.5,
+     "air_m3h": 2500,
+     "eau_L_s": 1.486,
+     "P_kW": 26.49
+    }
+   ],
+   "id": "CTA-MAT-MOTRICITE",
+   "fiche": "CTA_DF_MATERNELLE_MOTRICITE.pdf",
+   "fabricant": "France Air",
+   "gamme": "POWERPLAY",
+   "batterie_type": "change-over (eau chaude / eau glacée)"
+  },
+  {
+   "modele": "T4000-M-CO",
+   "L_mm": 1885,
+   "l_mm": 1350,
+   "H_mm": 1480,
+   "poids_kg": 481,
+   "piquages_mm": "400 x 400",
+   "soufflage_m3h": 4015,
+   "soufflage_pse_Pa": 300,
+   "soufflage_P_kW": 1.4,
+   "reprise_m3h": 4145,
+   "reprise_pse_Pa": 300,
+   "reprise_P_kW": 1.28,
+   "P_elec_kW": 3.85,
+   "I_A": 6.5,
+   "roue": {
+    "hiver_soufflage_entree": -5.0,
+    "hiver_soufflage_sortie": 13.9,
+    "ete_soufflage_entree": 35.0,
+    "ete_soufflage_sortie": 28.0,
+    "efficacite_hiver_ete_%": [
+     78.59,
+     78.24
+    ]
+   },
+   "interieur_hiver_ete_C": [
+    19.0,
+    26.0
+   ],
+   "exterieur_hiver_ete_C": [
+    -5.0,
+    35.0
+   ],
+   "batteries": [
+    {
+     "etage": "BATTERIE 1ER ÉTAGE",
+     "reference": "W 3S3 G 04 22 0995 212 017 1 H L CO",
+     "mode": "chauffage",
+     "air_entree_C": 13.9,
+     "eau_entree_C": 60.0,
+     "air_sortie_C": 44.0,
+     "eau_sortie_C": 40.0,
+     "dp_air_Pa": 64.2,
+     "dp_eau_kPa": 6.1,
+     "air_m3h": 4015,
+     "eau_L_s": 0.494,
+     "P_kW": 39.48
+    },
+    {
+     "etage": "BATTERIE 1ER ÉTAGE",
+     "reference": "W 3S3 G 04 22 0995 212 017 1 H L CO",
+     "mode": "refroidissement",
+     "air_entree_C": 28.0,
+     "eau_entree_C": 7.0,
+     "air_sortie_C": 15.5,
+     "eau_sortie_C": 12.0,
+     "dp_air_Pa": 109.1,
+     "dp_eau_kPa": 137.0,
+     "air_m3h": 4015,
+     "eau_L_s": 2.394,
+     "P_kW": 42.68
+    }
+   ],
+   "id": "CTA-MAT-OUEST",
+   "fiche": "CTA_DF_MATERNELLE_PARTIE_OUEST.pdf",
+   "fabricant": "France Air",
+   "gamme": "POWERPLAY",
+   "batterie_type": "change-over (eau chaude / eau glacée)"
+  }
+ ]
+}

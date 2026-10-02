@@ -402,8 +402,8 @@
         "CH-CTA-A",
         "CH-CTA-R"
       ],
-      "trace_RDC": "Depuis la nourrice vers l'est le long de la circulation sud, puis vers le nord le long de la cour maternelle jusqu'aux locaux CTA (CTA 5,0 m², LT CTA 3,7 m², CTA 4,25 m²) ; une antenne vers la CTA en terrasse.",
-      "statut_trace": "DCE CVPS_01 ; puissances des batteries chaudes inconnues (D-17)"
+      "trace_RDC": "Depuis la nourrice vers l'est le long de la circulation sud, puis vers le nord le long de la cour maternelle jusqu'aux locaux CTA (CTA 5,0 m², LT CTA 3,7 m², CTA 4,25 m²) ; une colonne montante depuis la chaufferie vers les 2 CTA élémentaire en terrasse R+1.",
+      "statut_trace": "DCE CVPS_01 au RDC + colonne vers la terrasse R+1 (CVPS_02). 5 fiches CTA intégrées (cta[]), CTA cuisine en attente. Réseau change-over : eau chaude 60/40 °C et eau glacée 7/12 °C (H-19)"
     },
     {
       "id": "MAT",

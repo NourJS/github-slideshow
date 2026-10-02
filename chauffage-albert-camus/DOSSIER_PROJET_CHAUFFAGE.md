@@ -1,7 +1,7 @@
 # Dossier de démarrage : chauffage à eau chaude du groupe scolaire Albert Camus (Talence)
 
 **Réhabilitation et extension du groupe scolaire Albert Camus, 28 rue Lavoisier, 33400 Talence**
-Lot CVC-PLB. Passage DCE vers EXE. Dossier mis à jour le 02/10/2026 (révision C).
+Lot CVC-PLB. Passage DCE vers EXE. Dossier mis à jour le 02/10/2026 (révision D).
 
 > **Objet.** Tout ce qu'il faut pour reprendre le projet dans Claude Code ou Codex :
 > - les données extraites des 6 pièces fournies et les règles d'ingénierie ;
@@ -10,6 +10,11 @@ Lot CVC-PLB. Passage DCE vers EXE. Dossier mis à jour le 02/10/2026 (révision 
 > - les résultats de calcul ;
 > - le **modèle JSON prêt à dessiner** (`model/modele_chauffage_albert_camus.json`) ;
 > - un **prompt prêt à coller** (§ 8).
+>
+> **Changements de la révision D**
+> - **5 fiches CTA France Air POWERPLAY** intégrées (`data/cta_fiches.json`) : batteries **change-over** (eau chaude 60/40 °C, eau glacée 7/12 °C). La CTA cuisine est attendue.
+> - Réseau CTA relu sur CVPS_01 et CVPS_02 (colonne vers la terrasse R+1) et dimensionné **en chaud et en froid** : le DN retenu est le plus grand des deux cas (H-19).
+> - Plan RDC annoté complété : étiquettes CTA et diamètres du réseau CTA.
 >
 > **Changements de la révision C**
 > - Positions des radiateurs relues sur les **symboles vectoriels** des PDF CVC (précision ≈ 0,05 m) ; **3 radiateurs RDC ajoutés** (R0-08-b, R0-13-b, R0-21-b), soit **94 radiateurs**. Recalage R+1 / RDC par corrélation des calques architecte.
@@ -58,7 +63,8 @@ pip install pymupdf && python3 tools/plan_rdc_annote.py --pdf <CVPS_01.pdf>   # 
 | Majoration +20 % | appliquée sur la colonne **« Puissance à installer »** (règle 1 lue à la lettre). Total 169,0 kW, dont 154,7 kW portés par des radiateurs. Sur les seules déperditions, ce serait 95,2 kW : **à confirmer** (D-02) |
 | Puissance au régime et équivalent NF EN 442 | régime 55/45 °C **supposé** (H-02), θi du bilan (19 °C, 20 °C pour les vestiaires) : facteur 0,533 |
 | R+1 | 14 radiateurs, **14 réservations** de dalle. **4 radiateurs** ont un radiateur RDC à l'aplomb (≤ 1,0 m) sur les plans DCE. Les 10 autres sont **signalés** (D-28) |
-| Départs (provisoire) | **ÉLÉM** 53,4 kW → DN50 (R+1 compris, 20,4 kW) · **MAT** 70,7 kW → **DN65** · **PÉRI** 30,6 kW (dont restauration 13,8 kW) → DN40 · **CTA** : charge inconnue (D-17) |
+| Départs (provisoire) | **ÉLÉM** 53,4 kW → DN50 (R+1 compris, 20,4 kW) · **MAT** 70,7 kW → **DN65** · **PÉRI** 30,6 kW (dont restauration 13,8 kW) → DN40 · **CTA** (5 CTA sur 6) : 56,6 m³/h en eau glacée → **DN125** (13,1 m³/h en eau chaude, soit DN80 si le réseau ne transportait que de l'eau chaude) |
+| CTA | 5 fiches France Air (2 × T10000 en terrasse R+1 pour l'élémentaire, 2 × T4000 et 1 × T2500 au RDC pour la maternelle). Puissance max des batteries 289 kW à 60/40 °C, mais **besoin réel estimé ≈ 48 kW** (soufflage à 19 °C). HMT du circuit CTA : 3,4 mCE en chaud, **16,1 mCE en froid** (batteries à 128–137 kPa) |
 | Choix des modèles | en attente du catalogue fabricant (D-18). P50 requise : 2,5 à 4,9 kW pour un radiateur de classe, **7,5 kW** pour chacun des 2 radiateurs du hall + circulation élém. et **8,2 kW** pour la circulation mat 2/5/6 (D-27) |
 | Réseau RDC | relu sur le PDF vectoriel : 159 tronçons (356 m d'acier, 459 m de cuivre en aller, longueurs en plan + descentes H-18). Radiateurs critiques : ÉLÉM **R1-06-a** (2,03 mCE), MAT **R0-49-b** (2,91 mCE), PÉRI **R0-30-b** (2,17 mCE), restauration R0-16-a (1,71 mCE), hors chaufferie |
 | Plan annoté | `outputs/CVPS_01_RDC_radiateurs_diametres.pdf` |
@@ -78,6 +84,7 @@ pip install pymupdf && python3 tools/plan_rdc_annote.py --pdf <CVPS_01.pdf>   # 
 | **F3b** | `…BILAN_THERMIQUE_Résultats_Emetteurs_Surpuissance…-129-137.pdf` | **Puissances par local** (p. 129 à 137) : surface, θi, déperditions par transmission et par ventilation, puissance à installer |
 | F4 | `ARCH_03_-_Plan_detage.pdf` | Plan architecte de l'étage, ind. A, 1/100 |
 | F5 | Photo de la note « Dimensionnement réseau hydraulique » | Tableau DN / Øint / V / Qv / P, autorité principale |
+| F6 | 5 fiches CTA `CTA_DF_*.pdf` (France Air POWERPLAY, édition 18/09/2026) | Débits d'air, batteries change-over chaud 60/40 °C et froid 7/12 °C : puissance, débit d'eau, pertes de charge eau et air, dimensions, poids. **Fiche cuisine à venir** |
 | D1 | Décision du 02/10/2026 | Tracé DCE au RDC seulement ; R+1 raccordé radiateur par radiateur depuis le RDC avec une réservation par radiateur ; couleurs DCE ; acier pour la distribution principale, cuivre pour les raccordements apparents |
 
 ### 2.2 Bilan thermique
@@ -117,6 +124,20 @@ pip install pymupdf && python3 tools/plan_rdc_annote.py --pdf <CVPS_01.pdf>   # 
 - 1 mCE = 10 kPa.
 
 Pour le **cuivre**, la vitesse limite est transposée par diamètre intérieur (H-15).
+
+### 2.5 Centrales de traitement d'air (F6)
+
+| CTA | Modèle | Local (déduit) | Soufflage m³/h | Chaud 60/40 : P max kW / Qv m³/h / ΔP kPa | Froid 7/12 : Qv m³/h / ΔP kPa | Besoin chaud estimé kW |
+|---|---|---|---|---|---|---|
+| CTA-ELEM-NORD | T10000-V-CO-Y | terrasse R+1 au-dessus de la chaufferie (bloc nord) | 9920 | 95.5 / 4.309 / 4.7 | 14.191 / 51.4 | 14.3 |
+| CTA-ELEM-SUD | T10000-V-CO | terrasse R+1 au-dessus de la chaufferie (bloc sud) | 9075 | 91.7 / 4.14 / 4.4 | 20.092 / 99.9 | 15.5 |
+| CTA-MAT-EST | T4000-M-CO | LT CTA 3,7 m² (extrémité est) | 3810 | 38.1 / 1.721 / 5.7 | 8.33 / 128.5 | 6.6 |
+| CTA-MAT-MOTRICITE | T2500-M + module CO (caisson externe) | local CTA 4,25 m² (au sud de la salle de motricité) | 2500 | 24.6 / 1.109 / 2.8 | 5.35 / 62.5 | 4.5 |
+| CTA-MAT-OUEST | T4000-M-CO | local CTA 5,0 m² (près du hall maternelle) | 4015 | 39.5 / 1.778 / 6.1 | 8.618 / 137.0 | 6.9 |
+
+- Les puissances « chauffage » des fiches correspondent à la batterie à pleine ouverture : elles portent l'air de la sortie de la roue (≈ 14 °C) à **44 °C**. Le **besoin réel** est estimé pour un soufflage neutre à 19 °C : Qv_air × 1,2 × 1,006 × (19 − T sortie roue), soit 48 kW pour les 5 CTA. C'est une estimation, à confirmer par la consigne de soufflage du CCTP.
+- Recoupement : F3 (génération) − F3b (émetteurs) = 53,4 kW. Cet écart correspond vraisemblablement au besoin de ventilation (5 CTA ≈ 48 kW, plus la CTA cuisine).
+- **Hypothèse H-19** : les batteries étant change-over, le réseau « CTA » transporte aussi l'eau glacée. Il est donc dimensionné au débit maximal des deux cas.
 
 ---
 
@@ -160,6 +181,9 @@ Pour le **cuivre**, la vitesse limite est transposée par diamètre intérieur (
 | H-14 | Cuivre : rugosité | 0,0015 mm | Tube étiré NF EN 1057 |
 | H-15 | Cuivre : V_max | interpolée sur Øint dans F5, palier à 0,32 m/s sous Ø16,6 | La note ne vise que l'acier |
 | H-16 | Réservation par radiateur R+1 | 150 × 80 mm, 2 tubes cuivre sous fourreau, calfeutrement coupe-feu | **À valider** avec le lot GO et le BC (plancher d'ERP) |
+| H-19 | Réseau CTA change-over | DN = max(débit chaud, débit froid) des fiches | Batteries « CO » des fiches France Air. Basculer `cta_base_debit` sur `chaud` si l'eau glacée a son propre réseau |
+| H-20 | ΔP vanne de régulation CTA | 10 kPa | À remplacer par le Kv retenu |
+| H-21 | Matériau du réseau CTA | acier | La règle « cuivre apparent » vise les radiateurs |
 | H-17 | Positions | relevé PDF à ±0,3 m, repère commun RDC/R+1 (recalage sur la façade et les refends) | À remplacer par les DWG/RVT |
 
 Facteur P_régime / P50 (n = 1,3) : 55/45 avec θi 19 °C = **0,533** ; θi 20 °C = 0,511 ; 50/40 avec θi 19 °C = 0,422 ; 60/50 avec θi 19 °C = 0,650.
@@ -184,7 +208,7 @@ Chaque ligne indique l'hypothèse retenue pour avancer.
 | D-14 | Info | 1 mCE = 10 kPa (exact : 9,81) | Convention de la note |
 | D-15 | Mineur | PÉRI retour en violet sur le plan, rouge dans la légende ; CTA de teintes différentes | Couleurs de la légende (règle 6). Les deux valeurs RGB sont dans le JSON |
 | D-16 | Majeur | Aucun DWG, RVT ou IFC ; hauteurs d'étage inconnues | Relevé PDF à l'échelle 1/100 et H-11. Le JSON prévoit `import_dwg` |
-| D-17 | Majeur | Puissances des batteries chaudes des CTA inconnues | Départ CTA non dimensionné |
+| D-17 | ~~Majeur~~ **LEVÉ en partie** | Puissances des batteries CTA inconnues | 5 fiches reçues (F6). **CTA cuisine en attente** : son débit s'ajoutera au départ CTA |
 | D-18 | Majeur | Pas de catalogue de radiateurs | Calcul de la P50 requise. Sélection automatique dès réception du catalogue |
 | D-19 | Info | Codes B21, A21… non uniques | Identifiants R0-nn / R1-nn = n° du bilan |
 | D-22 | Info | Matériau précisé par la décision D1 : acier pour la distribution, cuivre pour les raccordements | Nuances à confirmer au CCTP (soudé ou fileté, brasé ou serti) |
@@ -196,6 +220,11 @@ Chaque ligne indique l'hypothèse retenue pour avancer.
 | D-29 | Moyen | R0-02-b (classe élém. 3) porterait 3 radiateurs R+1 et R0-08-a (hall) 1. La branche cuivre du hall atteint Cu 28 | Conséquence de D-28 : à revoir après décision |
 | D-33 | Moyen | 3 symboles radiateurs du DCE manquaient au relevé visuel de la rév. B : R0-08-b (palier escalier élém.), R0-13-b (zone wc prof élé / SAS), R0-21-b (vestiaire 1, dos à dos avec la buanderie) | Ajoutés, statut `A_CONFIRMER` |
 | D-34 | Moyen | Réseau relu sur le PDF : 2 liaisons supposées de 3,2 m sur le réseau restauration (tube masqué derrière les plinthes) ; 5 jonctions ambiguës ignorées pour supprimer des boucles (nourrice et classe mat 3 / 4) | Arbre retenu affiché sur le plan annoté et listé dans son cartouche. À confirmer sur le DWG |
+| D-36 | **Majeur** | Les batteries CTA sont sélectionnées à **60/40 °C**, alors que les radiateurs sont calculés à 55/45 °C (H-02). La PAC doit donc produire 60 °C au départ | Le régime commun de la nourrice est à confirmer (fiche AERMEC WRL 300). Pour les radiateurs, 60/40 °C donnerait un facteur de 0,515 (θi 19 °C), proche du 55/45 actuel (0,533), et des débits divisés par 2 |
+| D-37 | **Majeur** | Batteries **change-over** : le « réseau eau de chauffage CTA » du DCE transporte aussi l'eau glacée 7/12 °C l'été. Le débit froid (56,6 m³/h) est 4,3 fois le débit chaud (13,1 m³/h) | Réseau CTA dimensionné au débit froid (H-19) : DN125 au départ. Isolation anticondensation obligatoire. Confirmer la production de froid (PAC réversible / géocooling) et son raccordement à la nourrice |
+| D-38 | **Majeur** | Batteries chaudes surdimensionnées : 289 kW à pleine ouverture (soufflage à 44 °C), pour un besoin estimé à 48 kW | Le débit chaud des fiches est conservé pour les tuyauteries (cas défavorable). Demander au fabricant une sélection au point de consigne réel et prévoir un réglage du débit (vanne d'équilibrage) |
+| D-39 | Moyen | ΔP eau glacée des batteries : 137 kPa (Mat ouest) et 128 kPa (Mat est), contre 51 à 100 kPa pour les autres. La HMT du circuit CTA passe à **16,1 mCE** en froid, contre 3,4 mCE en chaud | Circulateur à sélectionner sur le cas froid, ou batteries à resélectionner (ΔP ≤ 50 kPa recommandé : valeur d'usage, à confirmer) |
+| D-40 | Moyen | Affectation fiche ↔ local CTA déduite des positions : Mat ouest = CTA 5,0 m², Mat est = LT CTA 3,7 m², Motricité = CTA 4,25 m², Élém nord / sud = blocs de la terrasse R+1 (nord = haut de la feuille, supposé) | Statut `A_CONFIRMER` dans `data/cta_positions.csv` |
 | D-35 | Info | Les départs PÉRI et restauration partagent le départ Admin/Péri : le tronçon commun nourrice → V2V n'est pas lisible | Dimensionné au DN du départ total (DN40, 30,6 kW) |
 | D-30 | Mineur | Noms et surfaces F3b / plans : E1 « cantine élémentaire » (plan : « cantine maternelle ») ; atelier 1 = 31,88 m² (plan 30,19) ; laverie 1 = 19,60 m² (plan 5,60) ; classe 2 / classe 4 : 62,07 / 62,03 m² (plan 62,03 / 62,14) | Rapprochement par nom et position. Valeurs du bilan retenues |
 | D-31 | Info | θi du bilan = 19 °C (20 °C pour les vestiaires), différente de la référence 20 °C | θi du bilan utilisée pour la conversion NF EN 442 (H-03) |
@@ -481,15 +510,16 @@ Automatique depuis `bilan_emetteurs_EN12831.csv`. Résultats dans `outputs/01_lo
 
 ### 7.3 Synthèse par départ : `outputs/04_synthese_circuits.csv`
 
-| Circuit | Nb rad. | Sans puissance | P kW | Qv m³/h | DN départ | Désignation |
+| Circuit | Nb émetteurs | Sans puissance | P kW | Qv m³/h | DN départ | Désignation |
 |---|---|---|---|---|---|---|
 | ELEM | 34 | 3 | 53.39 | 4.59 | 50 | 50/60 |
 | MAT | 39 | 0 | 70.66 | 6.08 | 65 | 66/76 |
 | PERI | 15 | 0 | 16.88 | 1.45 | 32 | 33/42 |
 | PERI-RESTAU | 6 | 0 | 13.75 | 1.18 | 32 | 33/42 |
 | PERI (départ total) | 21 | 0 | 30.63 | 2.63 | 40 | 40/49 |
+| CTA | 5 | 0 | 289.38 | 56.58 | 125 | 125/133 |
 
-> Les radiateurs R+1 sont comptés dans le circuit de leur radiateur RDC parent (tous sur ÉLÉM). Le départ CTA est absent (D-17). « Sans puissance » désigne les stockages absents du bilan (D-26).
+> Les radiateurs R+1 sont comptés dans le circuit de leur radiateur RDC parent (tous sur ÉLÉM). Ligne CTA : P = puissance max des batteries (fiches, 60/40 °C), Qv = débit de dimensionnement max(chaud, froid) ; CTA cuisine en attente. « Sans puissance » désigne les stockages absents du bilan (D-26).
 
 ### 7.4 Réservations de dalle R+1 : `outputs/07_reservations_dalle_R1.csv`
 
@@ -554,6 +584,28 @@ Automatique depuis `bilan_emetteurs_EN12831.csv`. Résultats dans `outputs/01_lo
 
 **Plan annoté** : `outputs/CVPS_01_RDC_radiateurs_diametres.pdf`. Chaque radiateur porte son identifiant, sa puissance et les radiateurs R+1 qu'il alimente. Chaque tube porte son diamètre au départ et à chaque changement de section (DN acier avec la puissance transitée, ou Cu). Le cartouche reprend les hypothèses et les points de relecture.
 
+### 7.7 Réseau CTA (`outputs/08_cta_batteries.csv`, `09_troncons_CTA.csv`, `10_chemins_CTA.csv`)
+
+| Tronçon | Amont | L m | Dessert | Qv chaud m³/h | DN chaud | Qv froid m³/h | DN froid | **DN retenu** |
+|---|---|---|---|---|---|---|---|---|
+| CT001 | SOURCE | 0.39 |  | 13.057 | 80 | 56.581 | 125 | **125** (125/133) |
+| CT002 | CT001 | 39.25 |  | 4.608 | 50 | 22.298 | 100 | **100** (102/114) |
+| CT003 | CT002 | 30.17 |  | 3.499 | 50 | 16.948 | 80 | **80** (80/89) |
+| CT004 | CT003 | 40.26 | CTA-MAT-EST | 1.721 | 32 | 8.33 | 65 | **65** (66/76) |
+| CT005 | CT003 | 5.89 | CTA-MAT-OUEST | 1.778 | 32 | 8.618 | 65 | **65** (66/76) |
+| CT006 | CT002 | 2.57 | CTA-MAT-MOTRICITE | 1.109 | 32 | 5.35 | 50 | **50** (50/60) |
+| CT007 | CT001 | 0.23 |  | 8.449 | 65 | 34.283 | 100 | **100** (102/114) |
+| CT-R1-MONTEE | CT007 | 4.45 |  | 8.449 | 65 | 34.283 | 100 | **100** (102/114) |
+| CT-R1-NORD | CT-R1-MONTEE | 1.2 | CTA-ELEM-NORD | 4.309 | 50 | 14.191 | 80 | **80** (80/89) |
+| CT-R1-SUD | CT-R1-MONTEE | 0.49 | CTA-ELEM-SUD | 4.14 | 50 | 20.092 | 100 | **100** (102/114) |
+
+| Cas | CTA critique | Longueur aller | ΔP chemin | HMT (hors chaufferie) |
+|---|---|---|---|---|
+| chaud | CTA-MAT-EST | 110.1 m | 33.6 kPa | 3.36 mCE |
+| froid | CTA-MAT-OUEST | 75.7 m | 161.4 kPa | 16.14 mCE |
+
+> La colonne vers la terrasse R+1 est reconstituée d'après CVPS_02 : hauteur d'étage (H-11), puis 0,95 m, 1,2 m et 0,5 m en terrasse. Les ΔP terminaux = ΔP batterie (fiche) + vanne (H-20).
+
 ---
 
 ## 8. PROMPT POUR L'AGENT DE CODAGE (à coller tel quel, avec les fichiers)
@@ -573,7 +625,7 @@ PERI (Admin/Péri + restauration par V2V), ELEM, CTA, MAT.
 ENTRÉES
 - PDF : F1 CVPS_01 (RDC), F2 CVPS_02 (R+1), F3 et F3b bilans EN 12831 (F3b = puissances par local),
   F4 ARCH_03 (étage), F5 note de dimensionnement.
-- data/ : bilan_emetteurs_EN12831.csv (65 locaux) ; radiateurs_positions_PROVISOIRE.csv (94) ; troncons_RDC_DCE.csv (réseau RDC relu) ;
+- data/ : bilan_emetteurs_EN12831.csv (65 locaux) ; cta_fiches.json + cta_positions.csv (5 CTA, batteries change-over) ; radiateurs_positions_PROVISOIRE.csv (94) ; troncons_RDC_DCE.csv (réseau RDC relu) ;
   hypotheses.json ; table_dimensionnement_methode.csv (acier, note F5) ; table_cuivre_NF_EN_1057.csv ;
   modele_base.json ; catalogue_radiateurs.csv (s'il existe) ; troncons_*.csv (export Revit).
 - Si tu reçois des DWG, RVT, coupes, CCTP, catalogue ou tableau des CTA : ils REMPLACENT l'hypothèse
@@ -665,7 +717,9 @@ chauffage-albert-camus/
 │   ├── hypotheses.json                     ← H-xx modifiables
 │   ├── bilan_emetteurs_EN12831.csv         ← F3b retranscrit (65 locaux)
 │   ├── radiateurs_positions_PROVISOIRE.csv ← 94 radiateurs (symboles vectoriels des PDF)
-│   ├── troncons_RDC_DCE.csv                ← réseau RDC relu sur CVPS_01 (159 tronçons)
+│   ├── troncons_RDC_DCE.csv                ← réseau RDC relu sur CVPS_01 (radiateurs + CTA)
+│   ├── cta_fiches.json                     ← 5 fiches CTA France Air (F6)
+│   ├── cta_positions.csv                   ← position et piquage de chaque CTA
 │   ├── modele_base.json                    ← partie fixe du JSON (systèmes, couleurs, départs…)
 │   ├── table_dimensionnement_methode.csv   ← note F5 (acier)
 │   ├── table_cuivre_NF_EN_1057.csv
@@ -677,7 +731,7 @@ chauffage-albert-camus/
 │   └── plan_rdc_annote.py                  ← relecture du réseau PDF + plan annoté (PyMuPDF)
 ├── revit/
 │   └── export_projet_revit.py              ← export Revit en lecture seule (pyRevit)
-└── outputs/                                ← CSV 01 à 07 + plan RDC annoté (PDF)
+└── outputs/                                ← CSV 01 à 10 + plan RDC annoté (PDF)
 ```
 
 > Les PDF sources ne sont pas versionnés (documents du client) : il faut les joindre à la session de l'agent.

@@ -1,0 +1,6 @@
+id_cta;niveau;tuile;px;py;piquage_px;piquage_py;local;statut;remarque
+CTA-MAT-OUEST;RDC;pdf0;3297;724;3297;724;local CTA 5,0 m² (près du hall maternelle);A_CONFIRMER;affectation fiche ↔ local déduite de la position (partie ouest de l'aile maternelle)
+CTA-MAT-EST;RDC;pdf0;4433;889;4433;889;LT CTA 3,7 m² (extrémité est);A_CONFIRMER;affectation fiche ↔ local déduite de la position
+CTA-MAT-MOTRICITE;RDC;pdf0;3165;1688;3165;1688;local CTA 4,25 m² (au sud de la salle de motricité);A_CONFIRMER;affectation fiche ↔ local déduite de la position
+CTA-ELEM-NORD;R+1;pdf1;889.5;1711.5;868;1734;terrasse R+1 au-dessus de la chaufferie (bloc nord);A_CONFIRMER;bloc ELEMENT nord du plan CVPS_02 ; nord/sud supposés = haut/bas de la feuille
+CTA-ELEM-SUD;R+1;pdf1;889.5;1805;868;1782;terrasse R+1 au-dessus de la chaufferie (bloc sud);A_CONFIRMER;bloc ELEMENT sud du plan CVPS_02

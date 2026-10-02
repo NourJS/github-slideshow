@@ -61,5 +61,11 @@
   },
   "_repere_source": "Repère local commun RDC/R+1 : origine = nu intérieur de la façade ouest × mur nord de la classe élém. 1 (RDC), en points PDF de CVPS_01. Positions = centres des symboles radiateur vectoriels (calque VIV02_CHA_EQT) de CVPS_01 et CVPS_02. Recalage R+1 → RDC par corrélation des calques architecte ESA_01_TRAME et ESA_02_GO (dx = 1218,2 ; dy = -106,0 pt). Échelle 1/100.",
   "descente_radiateur_m": 2.5,
-  "_descente_source": "H-18 HYPOTHÈSE : longueur verticale ajoutée à chaque branche cuivre (descente du plafond ou remontée de la dalle jusqu'au robinet). Les longueurs relevées sur le PDF sont des longueurs en plan."
+  "_descente_source": "H-18 HYPOTHÈSE : longueur verticale ajoutée à chaque branche cuivre (descente du plafond ou remontée de la dalle jusqu'au robinet). Les longueurs relevées sur le PDF sont des longueurs en plan.",
+  "cta_base_debit": "max_chaud_froid",
+  "_cta_base_debit_source": "H-19 HYPOTHÈSE : batteries change-over (fiches France Air) : le réseau CTA transporte l'eau chaude 60/40 °C l'hiver et l'eau glacée 7/12 °C l'été. Débit de dimensionnement = max(débit chaud, débit froid) des fiches. Valeurs : 'max_chaud_froid' ou 'chaud' (si un réseau eau glacée séparé est prévu).",
+  "dp_vanne_cta_kPa": 10.0,
+  "_dp_vanne_cta_source": "H-20 HYPOTHÈSE : perte de charge de la vanne de régulation 2 ou 3 voies de chaque batterie CTA (à remplacer par le Kv retenu). La perte de charge de la batterie vient de la fiche fabricant.",
+  "cta_raccordement_materiau": "acier",
+  "_cta_raccordement_source": "H-21 HYPOTHÈSE : réseau CTA entièrement en acier (la règle « raccordement apparent cuivre » vise les radiateurs)."
 }

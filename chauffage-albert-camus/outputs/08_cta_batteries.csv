@@ -1,0 +1,6 @@
+id_cta;modele;fiche;niveau;local;statut;soufflage_m3h;reprise_m3h;P_batterie_chaud_W;regime_chaud;Qv_chaud_m3h;dp_batterie_chaud_kPa;P_batterie_froid_W;regime_froid;Qv_froid_m3h;dp_batterie_froid_kPa;Qv_dim_m3h;cas_dimensionnant;besoin_chaud_neutre_W_estime;t_sortie_roue_hiver_C;x_m;y_m
+CTA-ELEM-NORD;T10000-V-CO-Y;CTA_DF_PARTIE_NORD_ELEM.pdf;R+1;terrasse R+1 au-dessus de la chaufferie (bloc nord);A_CONFIRMER;9920;10190;95490;60/40;4.309;4.7;70280;7/12;14.191;51.4;14.191;froid;14304;14.7;18.56;-35.79
+CTA-ELEM-SUD;T10000-V-CO;CTA_DF_PARTIE_SUD_ELEM.pdf;R+1;terrasse R+1 au-dessus de la chaufferie (bloc sud);A_CONFIRMER;9075;9300;91650;60/40;4.14;4.4;99520;7/12;20.092;99.9;20.092;froid;15520;13.9;18.56;-39.09
+CTA-MAT-EST;T4000-M-CO;CTA_DF_MATERNELLE_PARTIE_EST.pdf;RDC;LT CTA 3,7 m² (extrémité est);A_CONFIRMER;3810;3840;38140;60/40;1.721;5.7;41250;7/12;8.33;128.5;8.33;froid;6644;13.8;100.59;-10.51
+CTA-MAT-MOTRICITE;T2500-M + module CO (caisson externe);CTA_DF_MATERNELLE_MOTRICITE.pdf;RDC;local CTA 4,25 m² (au sud de la salle de motricité);A_CONFIRMER;2500;2500;24620;60/40;1.109;2.8;26490;7/12;5.35;62.5;5.35;froid;4527;13.6;55.86;-38.7
+CTA-MAT-OUEST;T4000-M-CO;CTA_DF_MATERNELLE_PARTIE_OUEST.pdf;RDC;local CTA 5,0 m² (près du hall maternelle);A_CONFIRMER;4015;4145;39480;60/40;1.778;6.1;42680;7/12;8.618;137.0;8.618;froid;6866;13.9;60.52;-4.69

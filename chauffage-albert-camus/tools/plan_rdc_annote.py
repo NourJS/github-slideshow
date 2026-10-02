@@ -29,7 +29,8 @@ import calc_chauffage as cc  # noqa: E402
 PT_M = 0.035278  # 1 pt PDF à l'échelle 1/100, en m
 COULEURS = {"MAT": (255, 0, 0), "ELEM": (205, 105, 40), "PERI": (153, 27, 30), "RESTAU": (242, 113, 114),
             "CTA": (19, 103, 52), "PRIM": (255, 0, 63)}
-CIRCUIT_ENGINE = {"ELEM": "ELEM", "MAT": "MAT", "PERI": "PERI", "RESTAU": "PERI-RESTAU"}
+CIRCUIT_ENGINE = {"ELEM": "ELEM", "MAT": "MAT", "PERI": "PERI", "RESTAU": "PERI-RESTAU", "CTA": "CTA"}
+MONTEE_CTA = "MONTEE-CTA-R1"  # pied de la colonne CTA vers la terrasse R+1 (CVPS_02 : (895 ; 1768) pt)
 COLLECTEUR = (2105, 1640)  # nourrice 4 départs (coordonnées affichées CVPS_01)
 G_MERGE, T_JOIN, TOL_C = 40, 22, 2.0
 
@@ -311,6 +312,9 @@ def ecrire_troncons(h, reseaux, rads_eng, chemin):
             if t["amont_id"] == "SOURCE":
                 compte(t["troncon_id"])
         for t in troncons:
+            if circ == "CTA":
+                ecrire_cta(h, t, lignes)
+                continue
             cuivre = aval[t["troncon_id"]] == 1 and not fils[t["troncon_id"]]
             L = t["longueur_m"] + (h.get("descente_radiateur_m", 0) if cuivre else 0)
             lignes.append({"circuit": CIRCUIT_ENGINE[circ], "troncon_id": t["troncon_id"], "amont_id": t["amont_id"],
@@ -328,6 +332,27 @@ def ecrire_troncons(h, reseaux, rads_eng, chemin):
         w.writeheader()
         w.writerows(lignes)
     return lignes
+
+
+def ecrire_cta(h, t, lignes):
+    """Réseau CTA : acier (H-21). La colonne montante vers la terrasse R+1 est reconstituée
+    d'après CVPS_02 : hauteur d'étage + 0,95 m en terrasse, puis 1,2 m (CTA nord) et 0,5 m (CTA sud)."""
+    t["materiau"] = h.get("cta_raccordement_materiau", "acier")
+    rads = [x for x in t["radiateurs"] if x != MONTEE_CTA]
+    lignes.append({"circuit": "CTA", "troncon_id": t["troncon_id"], "amont_id": t["amont_id"],
+                   "longueur_m": round(t["longueur_m"], 2), "zeta_total": "", "radiateurs": ",".join(rads),
+                   "dn_impose": "", "materiau": t["materiau"]})
+    if MONTEE_CTA in t["radiateurs"]:
+        lignes += [
+            {"circuit": "CTA", "troncon_id": "CT-R1-MONTEE", "amont_id": t["troncon_id"],
+             "longueur_m": round(h["hauteur_etage_m"] + 27 * PT_M, 2), "zeta_total": "", "radiateurs": "",
+             "dn_impose": "", "materiau": t["materiau"]},
+            {"circuit": "CTA", "troncon_id": "CT-R1-NORD", "amont_id": "CT-R1-MONTEE",
+             "longueur_m": round(34 * PT_M, 2), "zeta_total": "", "radiateurs": "CTA-ELEM-NORD", "dn_impose": "",
+             "materiau": t["materiau"]},
+            {"circuit": "CTA", "troncon_id": "CT-R1-SUD", "amont_id": "CT-R1-MONTEE",
+             "longueur_m": round(14 * PT_M, 2), "zeta_total": "", "radiateurs": "CTA-ELEM-SUD", "dn_impose": "",
+             "materiau": t["materiau"]}]
 
 
 # ---------------------------------------------------------------- annotation
@@ -362,7 +387,7 @@ def rgb(c):
     return tuple(v / 255 for v in c)
 
 
-def annoter(src_pdf, out_pdf, reseaux, res_tr, rads_eng, rads_pt, synth, journal, h, chemins):
+def annoter(src_pdf, out_pdf, reseaux, res_tr, rads_eng, rads_pt, synth, journal, h, chemins, ctas=()):
     out = pymupdf.open(src_pdf)
     sp = out[0]
     # On dessine sur la page d'origine. Les coordonnées de travail sont celles de la page AFFICHÉE
@@ -421,14 +446,35 @@ def annoter(src_pdf, out_pdf, reseaux, res_tr, rads_eng, rads_pt, synth, journal
                     a, b = p, q
                     break
             ax, ay = a[0] + 0.35 * (b[0] - a[0]), a[1] + 0.35 * (b[1] - a[1])
-            txt = lab + ("" if r["materiau"] == "cuivre" else f"  {r['P_cumul_kW']:.1f} kW")
+            if circ == "CTA":
+                txt = f"{lab}  {r['Qv_m3h']:.1f} m3/h ({r['cas_dimensionnant']})"
+            else:
+                txt = lab + ("" if r["materiau"] == "cuivre" else f"  {r['P_cumul_kW']:.1f} kW")
             w = pymupdf.get_text_length(txt, fontname="hebo", fontsize=fs) + 2.4
             rect = pl.poser(ax, ay, w, fs + 2, dist=3)
             page.draw_line(pymupdf.Point(ax, ay), pymupdf.Point(rect.x0 + rect.width / 2, rect.y0 + rect.height / 2),
                            color=rgb(col), width=0.25)
             page.draw_circle(pymupdf.Point(ax, ay), 0.9, color=rgb(col), fill=rgb(col))
             boite(rect, [txt], col, couleur_txt=rgb(col), gras=True)
-    # 2) radiateurs
+    # 2) CTA (fiches France Air)
+    for c in ctas:
+        if "pt" not in c:
+            continue
+        x, y = c["pt"]
+        lignes = [f"{c['id_cta']} - {c['modele']}",
+                  f"Soufflage {c['soufflage_m3h']} m3/h - {c['local']}",
+                  f"Chaud {c['regime_chaud']} : {c['P_batterie_chaud_W'] / 1000:.1f} kW max, {c['Qv_chaud_m3h']:.2f} m3/h,"
+                  f" dP {c['dp_batterie_chaud_kPa']:.1f} kPa",
+                  f"Froid {c['regime_froid']} : {c['Qv_froid_m3h']:.2f} m3/h, dP {c['dp_batterie_froid_kPa']:.1f} kPa",
+                  f"Besoin chaud estimé (soufflage à 19 °C) : {c['besoin_chaud_neutre_W_estime'] / 1000:.1f} kW"]
+        w = max(pymupdf.get_text_length(s_, fontname="hebo", fontsize=fs) for s_ in lignes) + 2.6
+        hh = len(lignes) * (fs + 0.8) + 1.6
+        rect = pl.poser(x, y, w, hh, dist=12)
+        page.draw_line(pymupdf.Point(x, y), pymupdf.Point(rect.x0 + rect.width / 2, rect.y0 + rect.height / 2),
+                       color=rgb(COULEURS["CTA"]), width=0.35)
+        page.draw_circle(pymupdf.Point(x, y), 2.2, color=rgb(COULEURS["CTA"]), width=0.6)
+        boite(rect, lignes, COULEURS["CTA"], fond=(0.93, 1, 0.93))
+    # 3) radiateurs
     for rid, (x, y, o) in rads_pt.items():
         r = by_rad[rid]
         circ = {"ELEM": "ELEM", "MAT": "MAT", "PERI": "PERI", "PERI-RESTAU": "RESTAU"}[r["circuit"]]
@@ -444,12 +490,12 @@ def annoter(src_pdf, out_pdf, reseaux, res_tr, rads_eng, rads_pt, synth, journal
                        color=(0, 0, 0), width=0.25)
         flag = r["statut"] != "OK" or not p
         boite(rect, lignes, COULEURS[circ], fond=(1, 1, 0.85) if flag else (1, 1, 1))
-    # 3) cartouche de légende (police de base : ni Δ ni flèche)
+    # 4) cartouche de légende (police de base : ni Δ ni flèche)
     lx, ly = 1180, 120
     crit = {}
     for c in chemins:
         if c["critique"] == "OUI":
-            crit[c["circuit"]] = c
+            crit[c["circuit"] + (f" ({c['cas']})" if c.get("cas") else "")] = c
     lignes = [
         "PLAN RDC - RADIATEURS ET DIAMÈTRES (PROVISOIRE, rév. C du 02/10/2026)",
         "Fond : CVPS_01 DCE ind. 0. Réseau ALLER relu sur le calque VIV02_CHA_RES_ECH_A ; le retour a la même section.",
@@ -464,6 +510,8 @@ def annoter(src_pdf, out_pdf, reseaux, res_tr, rads_eng, rads_pt, synth, journal
     for s_ in synth:
         lignes.append(f"Départ {s_['circuit']} : {s_['P_kW']} kW, {s_['Qv_m3h']} m3/h, DN {s_['DN_depart_mini']} mini")
     lignes.append("  PERI et restauration partent du même départ Admin/Péri : tronçon commun nourrice - V2V au DN du départ total.")
+    lignes.append("CTA : batteries change-over (fiches France Air) : eau chaude 60/40 °C l'hiver, eau glacée 7/12 °C l'été dans le"
+                  " même réseau ; DN = max des deux cas (H-19). La puissance « max » des fiches porte l'air à 44 °C : le besoin réel est bien plus faible.")
     for c, k in sorted(crit.items()):
         lignes.append(f"Radiateur critique {c} : {k['id_radiateur']}, {k['longueur_aller_m']} m aller,"
                       f" dP = {k['dP_chemin_Pa'] / 1000:.1f} kPa, soit {k['HMT_circuit_mCE']} mCE (hors chaufferie)")
@@ -499,8 +547,20 @@ def main():
     page = pymupdf.open(a.pdf)[0]
     tirets = lire_tirets(page)
     reseaux, journal = {}, []
-    for circ in ("ELEM", "MAT", "PERI", "RESTAU"):
-        rr = [r for r in rdc if CIRCUIT_ENGINE[circ] == r["circuit"]]
+    ctas = cc.charger_cta(h)
+    pos_cta = {p["id_cta"]: p for p in cc.read_csv(os.path.join(cc.DATA, "cta_positions.csv"))}
+    dx, dy = h["repere"]["recalage_R1_vers_RDC_pt"]
+    term_cta = []
+    for c in ctas:
+        p = pos_cta[c["id_cta"]]
+        off = (0, 0) if p["tuile"] == "pdf0" else (dx, dy)
+        c["pt"] = (float(p["px"]) + off[0], float(p["py"]) + off[1])
+        if p["niveau"] == "RDC":
+            term_cta.append({"id_radiateur": c["id_cta"], "L_dispo_mm": "300",
+                             "pt": (float(p["piquage_px"]), float(p["piquage_py"]), "H")})
+    term_cta.append({"id_radiateur": MONTEE_CTA, "L_dispo_mm": "300", "pt": (895 + dx, 1768 + dy, "H")})
+    for circ in ("ELEM", "MAT", "PERI", "RESTAU", "CTA"):
+        rr = term_cta if circ == "CTA" else [r for r in rdc if CIRCUIT_ENGINE[circ] == r["circuit"]]
         tr, jr, racine = reseau(circ, tirets, rr)
         reseaux[circ] = (tr, jr, racine)
         journal += [f"{circ} : {x}" for x in jr if not x.startswith("jonction")]
@@ -509,14 +569,18 @@ def main():
             print("   ", x)
     chemin = os.path.join(cc.DATA, "troncons_RDC_DCE.csv")
     ecrire_troncons(h, reseaux, rads, chemin)
-    res_tr, chemins, flags = cc.dimensionner(h, cc.read_csv(chemin), rads, dn_tab, cu_tab)
+    tous = cc.read_csv(chemin)
+    res_tr, chemins, flags = cc.dimensionner(h, [t for t in tous if t["circuit"] != "CTA"], rads, dn_tab, cu_tab)
+    t_cta, ch_cta, fl_cta = cc.dimensionner_cta(h, [t for t in tous if t["circuit"] == "CTA"], dn_tab, cu_tab, ctas)
+    res_tr, chemins, flags = res_tr + t_cta, chemins + ch_cta, flags + fl_cta
     for f_ in flags:
         print("FLAG", f_)
-    synth = [s for s in cc.synthese_circuits(h, rads, dn_tab) if s["circuit"] != "PERI-RESTAU"]
-    annoter(a.pdf, a.out, reseaux, res_tr, rads, {r["id_radiateur"]: r["pt"] for r in rdc}, synth, journal, h, chemins)
+    synth = [s for s in cc.synthese_circuits(h, rads, dn_tab, ctas) if s["circuit"] != "PERI-RESTAU"]
+    annoter(a.pdf, a.out, reseaux, res_tr, rads, {r["id_radiateur"]: r["pt"] for r in rdc}, synth, journal, h, chemins,
+            ctas)
     for c in chemins:
         if c["critique"] == "OUI":
-            print("Critique", c["circuit"], c["id_radiateur"], c["longueur_aller_m"], "m", c["dP_chemin_Pa"], "Pa", c["HMT_circuit_mCE"], "mCE")
+            print("Critique", c["circuit"], c.get("cas", ""), c["id_radiateur"], c["longueur_aller_m"], "m", c["dP_chemin_Pa"], "Pa", c["HMT_circuit_mCE"], "mCE")
     print("Tronçons :", chemin)
     print("Plan annoté :", a.out)
 

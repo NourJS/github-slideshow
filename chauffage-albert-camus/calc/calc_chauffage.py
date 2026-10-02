@@ -73,7 +73,7 @@ def facteur_regime(h, n, t_air=None):
 
 def water_props(t):
     """ρ [kg/m³] et ν [m²/s] de l'eau, interpolation linéaire (tables usuelles)."""
-    tab = [(20, 998.2, 1.004e-6), (30, 995.7, 0.801e-6), (40, 992.2, 0.658e-6),
+    tab = [(5, 1000.0, 1.519e-6), (10, 999.7, 1.307e-6), (20, 998.2, 1.004e-6), (30, 995.7, 0.801e-6), (40, 992.2, 0.658e-6),
            (50, 988.0, 0.553e-6), (60, 983.2, 0.474e-6), (70, 977.8, 0.413e-6),
            (80, 971.8, 0.365e-6)]
     t = min(max(t, tab[0][0]), tab[-1][0])
@@ -154,6 +154,52 @@ def position_m(h, rad):
     ox, oy = h["repere"]["origine_pdf_pt"]
     s = h["repere"]["echelle_m_par_pt"]
     return round((x - ox) * s, 2), round((oy - y) * s, 2)
+
+
+# ---------------------------------------------------------------- CTA (fiches fabricant)
+def charger_cta(h, fiches=None, positions=None):
+    """Terminaux CTA : débits d'eau et pertes de charge des batteries lus sur les fiches fabricant."""
+    fiches = fiches or os.path.join(DATA, "cta_fiches.json")
+    positions = positions or os.path.join(DATA, "cta_positions.csv")
+    if not os.path.exists(fiches):
+        return []
+    pos = {p["id_cta"]: p for p in read_csv(positions)} if os.path.exists(positions) else {}
+    out = []
+    for c in json.load(open(fiches, encoding="utf-8"))["cta"]:
+        ch = next((b for b in c["batteries"] if b["mode"] == "chauffage"), None)
+        fr = next((b for b in c["batteries"] if b["mode"] == "refroidissement"), None)
+        q_ch = ch["eau_L_s"] * 3.6 if ch else 0.0
+        q_fr = fr["eau_L_s"] * 3.6 if fr else 0.0
+        froid = h.get("cta_base_debit", "max_chaud_froid") == "max_chaud_froid" and q_fr > q_ch
+        # besoin réel estimé : air de la sortie roue jusqu'à la consigne de soufflage neutre (= θi hiver)
+        t_roue = c["roue"]["hiver_soufflage_sortie"]
+        besoin = c["soufflage_m3h"] * 1.2 * 1006 / 3600 * max(0.0, c["interieur_hiver_ete_C"][0] - t_roue)
+        p = pos.get(c["id"], {})
+        r = {"id_cta": c["id"], "modele": c["modele"], "fiche": c["fiche"], "niveau": p.get("niveau", ""),
+             "local": p.get("local", ""), "statut": p.get("statut", "A_CONFIRMER"),
+             "soufflage_m3h": c["soufflage_m3h"], "reprise_m3h": c["reprise_m3h"],
+             "P_batterie_chaud_W": round(ch["P_kW"] * 1000) if ch else 0,
+             "regime_chaud": f"{ch['eau_entree_C']:.0f}/{ch['eau_sortie_C']:.0f}" if ch else "",
+             "Qv_chaud_m3h": round(q_ch, 3), "dp_batterie_chaud_kPa": ch["dp_eau_kPa"] if ch else 0,
+             "P_batterie_froid_W": round(fr["P_kW"] * 1000) if fr else 0,
+             "regime_froid": f"{fr['eau_entree_C']:.0f}/{fr['eau_sortie_C']:.0f}" if fr else "",
+             "Qv_froid_m3h": round(q_fr, 3), "dp_batterie_froid_kPa": fr["dp_eau_kPa"] if fr else 0,
+             "Qv_dim_m3h": round(q_fr if froid else q_ch, 3), "cas_dimensionnant": "froid" if froid else "chaud",
+             "besoin_chaud_neutre_W_estime": round(besoin), "t_sortie_roue_hiver_C": t_roue}
+        if p:
+            r["x_m"], r["y_m"] = position_m(h, p)
+        out.append(r)
+    return out
+
+
+def terminaux_cta(h, cta, cas):
+    """{id: {P_W, Qv_m3h, dp_Pa}} pour le cas 'chaud' ou 'froid'."""
+    v = h.get("dp_vanne_cta_kPa", 0) * 1000
+    if cas == "chaud":
+        return {c["id_cta"]: {"P_W": c["P_batterie_chaud_W"], "Qv_m3h": c["Qv_chaud_m3h"],
+                              "dp_Pa": c["dp_batterie_chaud_kPa"] * 1000 + v} for c in cta}
+    return {c["id_cta"]: {"P_W": c["P_batterie_froid_W"], "Qv_m3h": c["Qv_froid_m3h"],
+                          "dp_Pa": c["dp_batterie_froid_kPa"] * 1000 + v} for c in cta}
 
 
 # ---------------------------------------------------------------- étapes 1-2
@@ -284,7 +330,7 @@ def reservations(h, rads):
 
 
 # ---------------------------------------------------------------- étape 5 : départs et réseau détaillé
-def synthese_circuits(h, rads, dn_tab):
+def synthese_circuits(h, rads, dn_tab, cta=None):
     by_id = {r["id_radiateur"]: r for r in rads}
     tot = defaultdict(lambda: [0.0, 0, 0])
     for r in rads:
@@ -309,13 +355,24 @@ def synthese_circuits(h, rads, dn_tab):
         rows.append({"circuit": "PERI (départ total)", "nb_radiateurs": sum(x["nb_radiateurs"] for x in peri),
                      "nb_sans_puissance": sum(x["nb_sans_puissance"] for x in peri), "P_kW": round(p / 1000, 2),
                      "Qv_m3h": round(qv_m3h(h, p), 2), "DN_depart_mini": d["dn"], "designation": d["designation"]})
+    if cta:
+        q = sum(c["Qv_dim_m3h"] for c in cta)
+        d = choisir(dn_tab, q)
+        rows.append({"circuit": "CTA", "nb_radiateurs": len(cta), "nb_sans_puissance": 0,
+                     "P_kW": round(sum(c["P_batterie_chaud_W"] for c in cta) / 1000, 2), "Qv_m3h": round(q, 2),
+                     "DN_depart_mini": d["dn"] if d else "hors tableau", "designation": d["designation"] if d else "",
+                     "note": "P = puissance max des batteries (fiches, 60/40 °C) ; Qv = max(chaud, froid) par CTA (H-19)"})
     return rows
 
 
-def dimensionner(h, troncons, rads, dn_tab, cu_tab):
-    """Tronçons exportés de Revit : circuit;troncon_id;amont_id;longueur_m;zeta_total;radiateurs;dn_impose;materiau"""
-    rho, nu = water_props((h["t_aller_C"] + h["t_retour_C"]) / 2)
+def dimensionner(h, troncons, rads, dn_tab, cu_tab, terminaux=None, t_moy=None):
+    """Tronçons exportés de Revit : circuit;troncon_id;amont_id;longueur_m;zeta_total;radiateurs;dn_impose;materiau
+    terminaux : {id: {P_W, Qv_m3h, dp_Pa}} pour les équipements à débit imposé (batteries CTA, fiches fabricant)."""
+    rho, nu = water_props(t_moy if t_moy is not None else (h["t_aller_C"] + h["t_retour_C"]) / 2)
+    terminaux = terminaux or {}
     p_rad = {r["id_radiateur"]: (r["P_part_W"] or 0) for r in rads}
+    q_term = {k: v["Qv_m3h"] for k, v in terminaux.items()}
+    p_rad.update({k: v["P_W"] for k, v in terminaux.items()})
     by_id = {t["troncon_id"]: t for t in troncons}
     enfants = defaultdict(list)
     for t in troncons:
@@ -327,15 +384,17 @@ def dimensionner(h, troncons, rads, dn_tab, cu_tab):
             raise ValueError(f"boucle détectée au tronçon {tid}")
         vus.add(tid)
         t = by_id[tid]
-        p = 0.0
+        p = q = 0.0
         for rid in [x.strip() for x in t.get("radiateurs", "").split(",") if x.strip()]:
             if rid not in p_rad:
                 flags.append(f"Tronçon {tid} : radiateur {rid} absent de l'inventaire")
             p += p_rad.get(rid, 0)
+            q += q_term[rid] if rid in q_term else qv_m3h(h, p_rad.get(rid, 0))
         for c in enfants[tid]:
-            p += cumul(c, vus)
-        t["P_cumul_W"] = p
-        return p
+            pc, qc = cumul(c, vus)
+            p, q = p + pc, q + qc
+        t["P_cumul_W"], t["Qv_cumul_m3h"] = p, q
+        return p, q
 
     for t in troncons:
         if t["amont_id"] == "SOURCE":
@@ -349,7 +408,7 @@ def dimensionner(h, troncons, rads, dn_tab, cu_tab):
     for t in troncons:
         cuivre = t.get("materiau", "acier").strip().lower() == "cuivre"
         tab = cu_tab if cuivre else dn_tab
-        qv = qv_m3h(h, t["P_cumul_W"])
+        qv = t["Qv_cumul_m3h"]
         impose = fnum(t.get("dn_impose"))
         d = next((x for x in tab if x["dn"] == int(impose)), None) if impose else \
             choisir(tab, qv, 0 if cuivre else h["dn_min_raccordement"])
@@ -383,7 +442,8 @@ def dimensionner(h, troncons, rads, dn_tab, cu_tab):
                 path.append(cur)
                 cur = by_id[cur]["amont_id"]
             path.reverse()
-            dp = sum(by_id[x].get("dP_AR_Pa", 0) for x in path) + h["dp_terminal_kPa"] * 1000
+            dp_term = terminaux[rid]["dp_Pa"] if rid in terminaux else h["dp_terminal_kPa"] * 1000
+            dp = sum(by_id[x].get("dP_AR_Pa", 0) for x in path) + dp_term
             L = sum(fnum(by_id[x]["longueur_m"]) or 0 for x in path)
             chemins.append({"circuit": t["circuit"], "id_radiateur": rid, "troncons": " > ".join(path),
                             "longueur_aller_m": round(L, 1), "dP_chemin_Pa": round(dp)})
@@ -399,8 +459,39 @@ def dimensionner(h, troncons, rads, dn_tab, cu_tab):
     return troncons, chemins, flags
 
 
+def dimensionner_cta(h, troncons, dn_tab, cu_tab, cta):
+    """Réseau CTA change-over : calcul en eau chaude (fiches, 60/40) et en eau glacée (7/12).
+    Le DN retenu est le plus grand des deux cas si cta_base_debit = max_chaud_froid (H-19)."""
+    import copy
+    res = {}
+    t_ch = 50.0
+    for cas, t_moy in (("chaud", t_ch), ("froid", 9.5)):
+        if cas == "froid" and h.get("cta_base_debit", "max_chaud_froid") != "max_chaud_froid":
+            continue
+        tr, ch, fl = dimensionner(h, copy.deepcopy(troncons), [], dn_tab, cu_tab, terminaux_cta(h, cta, cas), t_moy)
+        res[cas] = (tr, ch, fl)
+    tr_ch = {t["troncon_id"]: t for t in res["chaud"][0]}
+    tr_fr = {t["troncon_id"]: t for t in res["froid"][0]} if "froid" in res else {}
+    out = []
+    for tid, t in tr_ch.items():
+        f = tr_fr.get(tid)
+        retenu = f if f and f["DN"] > t["DN"] else t
+        out.append({"circuit": t["circuit"], "troncon_id": tid, "amont_id": t["amont_id"], "materiau": t["materiau"],
+                    "longueur_m": t["longueur_m"], "radiateurs": t["radiateurs"],
+                    "P_chaud_kW": t["P_cumul_kW"], "Qv_chaud_m3h": t["Qv_m3h"], "DN_chaud": t["DN"],
+                    "V_chaud_ms": t["V_ms"], "dP_AR_chaud_Pa": t["dP_AR_Pa"],
+                    "Qv_froid_m3h": f["Qv_m3h"] if f else "", "DN_froid": f["DN"] if f else "",
+                    "V_froid_ms": f["V_ms"] if f else "", "dP_AR_froid_Pa": f["dP_AR_Pa"] if f else "",
+                    "DN": retenu["DN"], "designation": retenu["designation"], "cas_dimensionnant":
+                    ("froid" if retenu is f else "chaud"), "P_cumul_kW": t["P_cumul_kW"], "Qv_m3h": retenu["Qv_m3h"]})
+    chemins = [dict(c, cas="chaud") for c in res["chaud"][1]] + \
+              ([dict(c, cas="froid") for c in res["froid"][1]] if "froid" in res else [])
+    flags = res["chaud"][2] + (res["froid"][2] if "froid" in res else [])
+    return out, chemins, flags
+
+
 # ---------------------------------------------------------------- modèle JSON
-def export_modele(h, locaux, rads, resa, synth, dn_tab, cu_tab, troncons, chemins):
+def export_modele(h, locaux, rads, resa, synth, dn_tab, cu_tab, troncons, chemins, cta=None):
     base = json.load(open(os.path.join(DATA, "modele_base.json"), encoding="utf-8"))
     base["meta"]["genere_le"] = date.today().isoformat()
     base["hypotheses"] = {k: v for k, v in h.items() if not k.startswith("_")}
@@ -429,6 +520,7 @@ def export_modele(h, locaux, rads, resa, synth, dn_tab, cu_tab, troncons, chemin
                          "enfants_R1": r["enfants_R1"], "statut_aplomb": r["statut_aplomb"] or None},
         "statut": r["statut"], "remarque": r["remarque"]} for r in rads]
     base["reservations_dalle"] = resa
+    base["cta"] = cta or []
     for d in base["departs"]:
         tot = [x for x in synth if x["circuit"] in (d["id"], d["id"] + " (départ total)")]
         d["calcul"] = tot[-1] if tot else None  # PERI : départ total (PERI + restauration)
@@ -457,7 +549,8 @@ def main():
     cu_tab = table_cuivre(h, dn_tab)
     rads = raccordements(h, couplage_R1(h, rads), cu_tab)
     resa = reservations(h, rads)
-    synth = synthese_circuits(h, rads, dn_tab)
+    cta = charger_cta(h)
+    synth = synthese_circuits(h, rads, dn_tab, cta)
 
     write_csv(os.path.join(OUT, "01_locaux_puissances.csv"), locaux,
               ["id_local", "niveau", "n_rapport", "code", "designation", "surface_m2", "ti_C", "deperd_total_W",
@@ -476,10 +569,22 @@ def main():
     write_csv(os.path.join(OUT, "04_synthese_circuits.csv"), synth,
               ["circuit", "nb_radiateurs", "nb_sans_puissance", "P_kW", "Qv_m3h", "DN_depart_mini", "designation"])
     write_csv(os.path.join(OUT, "07_reservations_dalle_R1.csv"), resa, list(resa[0].keys()) if resa else ["id"])
+    if cta:
+        write_csv(os.path.join(OUT, "08_cta_batteries.csv"), cta, list(cta[0].keys()))
 
     troncons, chemins = [], []
     if a.troncons:
-        troncons, chemins, flags = dimensionner(h, read_csv(a.troncons), rads, dn_tab, cu_tab)
+        tous = read_csv(a.troncons)
+        tr_cta = [t for t in tous if t["circuit"] == "CTA"]
+        troncons, chemins, flags = dimensionner(h, [t for t in tous if t["circuit"] != "CTA"], rads, dn_tab, cu_tab)
+        if tr_cta and cta:
+            t_cta, ch_cta, fl_cta = dimensionner_cta(h, tr_cta, dn_tab, cu_tab, cta)
+            flags += fl_cta
+            write_csv(os.path.join(OUT, "09_troncons_CTA.csv"), t_cta, list(t_cta[0].keys()))
+            write_csv(os.path.join(OUT, "10_chemins_CTA.csv"), ch_cta,
+                      ["circuit", "cas", "id_radiateur", "critique", "longueur_aller_m", "dP_chemin_Pa",
+                       "exces_a_laminer_Pa", "HMT_circuit_mCE", "troncons"])
+            troncons, chemins = troncons + t_cta, chemins + ch_cta
         write_csv(os.path.join(OUT, "05_troncons_dimensionnement.csv"), troncons,
                   ["circuit", "troncon_id", "amont_id", "materiau", "longueur_m", "radiateurs", "P_cumul_kW", "Qv_m3h",
                    "DN", "designation", "V_ms", "V_max_ms", "Re", "J_Pa_m", "dP_lin_Pa", "dP_sing_Pa", "dP_AR_Pa",
@@ -489,7 +594,7 @@ def main():
                    "HMT_circuit_mCE", "troncons"])
         for f in flags:
             print("FLAG:", f)
-    export_modele(h, locaux, rads, resa, synth, dn_tab, cu_tab, troncons, chemins)
+    export_modele(h, locaux, rads, resa, synth, dn_tab, cu_tab, troncons, chemins, cta)
     print("Facteur régime (n=%.2f, θi=%.0f °C) : %.3f" % (h["exposant_n_defaut"], h["t_ambiante_C"],
                                                           facteur_regime(h, h["exposant_n_defaut"])))
     print("Sorties :", OUT, "| Modèle :", MODEL)
