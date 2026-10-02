@@ -1,15 +1,13 @@
 {
-  "_lisezmoi": "Toutes les valeurs marquées H-xx sont des HYPOTHÈSES ajustables. Modifier ici puis relancer calc/calc_chauffage.py. Aucune autre modification nécessaire.",
-  "majoration_securite": 1.20,
+  "_lisezmoi": "Toutes les valeurs H-xx sont des HYPOTHÈSES modifiables. Après modification, relancer calc/calc_chauffage.py : les CSV de outputs/ et le modèle JSON sont régénérés.",
+  "majoration_securite": 1.2,
   "_majoration_source": "Règle projet n°1 (maître d'ouvrage / utilisateur) : +20 % sur la puissance du local avant sélection.",
-  "ratio_provisoire_W_m2": 49.65,
-  "_ratio_source": "H-01 PROVISOIRE : 132 765 W / 2 673,97 m² (totalisation bilan EN 12831 ind-A, p.3). À remplacer par les puissances par local dès réception du rapport détaillé.",
   "t_aller_C": 55.0,
   "t_retour_C": 45.0,
   "_regime_source": "H-02 HYPOTHÈSE : régime 55/45 °C (ΔT = 10 K, cohérent avec la colonne ΔT=10 °C ajoutée à la main sur la note de méthode). Générateur = PAC eau/eau AERMEC WRL 300 : vérifier la température de départ max sur la fiche technique AERMEC.",
   "t_ambiante_C": 20.0,
   "_t_ambiante_source": "H-03 HYPOTHÈSE : 20 °C (température de référence NF EN 442-2). Remplacer par θint du rapport EN 12831 local par local si différente (ex. 19 °C).",
-  "exposant_n_defaut": 1.30,
+  "exposant_n_defaut": 1.3,
   "_n_source": "H-04 HYPOTHÈSE : exposant n de l'équation caractéristique NF EN 442-2 ; valeur réelle = fiche fabricant du modèle retenu (typiquement 1,25 à 1,35 pour radiateurs acier).",
   "coef_puissance_kWh_m3K": 1.163,
   "_coef_source": "Note de méthode : P[kW] = 1,163 × Qv[m³/h] × ΔT[K] (vérifié sur le tableau : 0,87 kW = 1,163 × 0,249 × 3).",
@@ -26,5 +24,40 @@
   "J_alerte_Pa_m": 200,
   "_J_alerte_source": "H-10 HYPOTHÈSE : seuil d'alerte sur les pertes de charge linéaires (valeur d'usage, non normative). Le critère principal reste la vitesse/Qv max du tableau de la méthode.",
   "mCE_kPa": 10.0,
-  "_mCE_source": "Note de méthode : 1 mCE = 10 kPa (valeur exacte 9,81 kPa : l'arrondi de la méthode est conservé, écart < 2 %)."
+  "_mCE_source": "Note de méthode : 1 mCE = 10 kPa (valeur exacte 9,81 kPa : l'arrondi de la méthode est conservé, écart < 2 %).",
+  "base_puissance_rapport": "puissance_a_installer_W",
+  "_base_source": "Règle projet n°1 : « puissance requise du rapport » × 1,20. Valeurs possibles : 'puissance_a_installer_W' (colonne « Puissance à installer » = D + 23 W/m² × S, relance incluse ; appliquée à la lettre) ou 'deperd_total_W' (déperditions seules). Voir D-02 : écart de +77 %, à confirmer.",
+  "_regime_note": "H-02 maintenu : le rapport émetteurs ne donne pas le régime d'eau.",
+  "hauteur_etage_m": 3.5,
+  "_hauteur_etage_source": "H-11 HYPOTHÈSE : hauteur plancher à plancher RDC → R+1, absente des pièces fournies. À lire sur les coupes architecte.",
+  "hauteur_bas_radiateur_mm": 150,
+  "_hauteur_bas_radiateur_source": "H-12 HYPOTHÈSE : bas du radiateur à 150 mm du sol fini (valeur d'usage, à caler sur la notice du fabricant).",
+  "tolerance_aplomb_m": 1.0,
+  "_tolerance_aplomb_source": "H-13 HYPOTHÈSE : un radiateur RDC est considéré « à l'aplomb » d'un radiateur R+1 si l'écart horizontal entre axes est ≤ 1,0 m (règle R+1 du 02/10/2026).",
+  "rugosite_cuivre_mm": 0.0015,
+  "_rugosite_cuivre_source": "H-14 HYPOTHÈSE : rugosité du tube cuivre étiré NF EN 1057 (valeur usuelle des tables hydrauliques).",
+  "vmax_cuivre": "interpolation sur Øint dans le tableau de la note de méthode (V_max de DN15 en dessous de 16,6 mm)",
+  "_vmax_cuivre_source": "H-15 HYPOTHÈSE : la note de méthode ne vise que l'acier ; la vitesse limite est transposée au cuivre par diamètre intérieur.",
+  "reservation_dalle": {
+    "forme": "rectangulaire",
+    "largeur_mm": 150,
+    "profondeur_mm": 80,
+    "tubes": "2 × cuivre (aller + retour) sous fourreau",
+    "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)"
+  },
+  "_reservation_source": "H-16 HYPOTHÈSE : 1 réservation par radiateur R+1, dimensionnée pour 2 tubes ≤ Cu 22 avec fourreau et isolant. À valider avec le lot GO et le BC (plancher d'ERP).",
+  "repere": {
+    "origine_pdf_pt": [
+      1581.6,
+      591.0
+    ],
+    "echelle_m_par_pt": 0.035278,
+    "axe_y": "vers le haut de la feuille (nord non vérifié)",
+    "recalage_R1_vers_RDC_pt": [
+      1217.2,
+      -100.5
+    ],
+    "precision_m": 0.3
+  },
+  "_repere_source": "Repère local commun RDC/R+1 : origine = nu intérieur de la façade ouest × mur nord de la classe élém. 1 (RDC). Échelle 1/100 vérifiée. Recalage R+1 fait sur la façade et les murs de refend. Les positions seront remplacées par les coordonnées DWG/RVT."
 }

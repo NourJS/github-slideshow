@@ -1,0 +1,6000 @@
+{
+  "meta": {
+    "projet": "Réhabilitation et extension du groupe scolaire Albert Camus",
+    "adresse": "28 rue Lavoisier, 33400 Talence",
+    "lot": "CVC-PLB : chauffage à eau chaude par radiateurs",
+    "objet": "Modèle descriptif pour le dessin Revit (radiateurs, réseaux, réservations) et le recalcul",
+    "version_schema": "1.0",
+    "genere_le": "2026-10-02",
+    "genere_par": "calc/calc_chauffage.py (ne pas éditer à la main : modifier data/ puis relancer)",
+    "sources": {
+      "F1": "CVPS_01 Plan de réseau de chauffage RDC, DCE ind. 0 du 27/03/2026 (BE Vivien)",
+      "F2": "CVPS_02 Plan de réseau de chauffage R+1, DCE ind. 0 (tracé R+1 ABANDONNÉ, voir regles_trace.R+1)",
+      "F3": "Bilan thermique EN 12831 ind-A, résultats génération (totalisation)",
+      "F3b": "Bilan thermique EN 12831 ind-A, résultats émetteurs, p. 129 à 137 (puissances par local)",
+      "F4": "ARCH_03 Plan de l'étage, DCE ind. A, mars 2026",
+      "F5": "Note « Dimensionnement réseau hydraulique » (tableau DN / V / Qv / P)",
+      "D1": "Décision du 02/10/2026 : tracé DCE au RDC uniquement ; R+1 raccordé radiateur par radiateur depuis le radiateur RDC à l'aplomb, avec une réservation par radiateur ; couleurs DCE ; distribution principale en acier, raccordements apparents en cuivre"
+    },
+    "unites": {
+      "longueur": "m",
+      "position": "m (repère local)",
+      "diametre": "mm",
+      "puissance": "W",
+      "debit": "m3/h",
+      "vitesse": "m/s",
+      "pression": "Pa",
+      "temperature": "°C"
+    }
+  },
+  "conventions": {
+    "identifiants": {
+      "local": "R0-nn / R1-nn = n° du local dans le bilan émetteurs (RDC / R+1). NR-xxx = local dessiné absent du bilan",
+      "radiateur": "<id_local>-a, -b, -c… (un suffixe par radiateur du local)",
+      "reservation": "RES-R1-nn",
+      "systeme": "CH-<CIRCUIT>-A (aller) / CH-<CIRCUIT>-R (retour)"
+    },
+    "repere": "Repère local RDC = R+1 : origine au nu intérieur de la façade ouest de l'aile élémentaire, sur le mur nord de la classe élém. 1 ; x vers la droite de la feuille, y vers le haut de la feuille. Précision ±0,3 m (relevé PDF). À recaler sur les coordonnées DWG/RVT (transformation à 2 points : façade ouest et mur nord classe élém. 1)."
+  },
+  "regles": [
+    {
+      "id": 1,
+      "texte": "Puissance requise du local (bilan émetteurs) × 1,20 avant toute sélection"
+    },
+    {
+      "id": 2,
+      "texte": "Plusieurs radiateurs dans un local : répartition à parts égales, chaque radiateur est sélectionné pour sa part"
+    },
+    {
+      "id": 3,
+      "texte": "Position et taille selon l'architecte ; un radiateur qui ne rentre pas est signalé (FLAG) avec une alternative, jamais déplacé en silence"
+    },
+    {
+      "id": 4,
+      "texte": "Tracé : DCE au RDC ; R+1 raccordé radiateur par radiateur depuis le radiateur RDC à l'aplomb (décision D1). Tracé et calcul découplés"
+    },
+    {
+      "id": 5,
+      "texte": "Dimensionnement du radiateur le plus éloigné vers la source, selon la note F5"
+    },
+    {
+      "id": 6,
+      "texte": "Couleurs des systèmes = légende DCE ; distribution principale en acier ; raccordements apparents en cuivre"
+    }
+  ],
+  "niveaux": [
+    {
+      "id": "RDC",
+      "elevation_m": 0.0,
+      "source": "référence"
+    },
+    {
+      "id": "R+1",
+      "elevation_m": 3.5,
+      "source": "HYPOTHÈSE H-11 (à lire sur les coupes architecte)"
+    }
+  ],
+  "materiaux": {
+    "distribution_principale": {
+      "materiau": "acier noir",
+      "norme": "NF EN 10255 (≤ DN100) ; NF EN 10216 / 10217 au-delà",
+      "revit_type_canalisation": "CH_Acier_EN10255",
+      "assemblage": "soudé ou fileté, au choix de l'entreprise (CCTP)",
+      "perimetre": "nourrice de chaufferie → collecteurs et antennes de circulation jusqu'aux tés de piquage des radiateurs (RDC)",
+      "diametres": [
+        {
+          "materiau": "acier",
+          "dn": 15,
+          "designation": "15/21",
+          "d_int_mm": 16.6,
+          "v_max": 0.32,
+          "qv_max_m3h": 0.249,
+          "p_max_kW_projet": 2.9,
+          "p_dt10_manuscrit": "2.9",
+          "remarque": "Qv corrigé à la main 0,25 -> 0,3"
+        },
+        {
+          "materiau": "acier",
+          "dn": 20,
+          "designation": "20/27",
+          "d_int_mm": 22.2,
+          "v_max": 0.4,
+          "qv_max_m3h": 0.557,
+          "p_max_kW_projet": 6.48,
+          "p_dt10_manuscrit": "6.5",
+          "remarque": ""
+        },
+        {
+          "materiau": "acier",
+          "dn": 25,
+          "designation": "26/34",
+          "d_int_mm": 27.9,
+          "v_max": 0.45,
+          "qv_max_m3h": 0.99,
+          "p_max_kW_projet": 11.52,
+          "p_dt10_manuscrit": "11.6",
+          "remarque": ""
+        },
+        {
+          "materiau": "acier",
+          "dn": 32,
+          "designation": "33/42",
+          "d_int_mm": 36.6,
+          "v_max": 0.55,
+          "qv_max_m3h": 2.083,
+          "p_max_kW_projet": 24.23,
+          "p_dt10_manuscrit": "24.36",
+          "remarque": ""
+        },
+        {
+          "materiau": "acier",
+          "dn": 40,
+          "designation": "40/49",
+          "d_int_mm": 42.5,
+          "v_max": 0.6,
+          "qv_max_m3h": 3.064,
+          "p_max_kW_projet": 35.64,
+          "p_dt10_manuscrit": "35.96",
+          "remarque": ""
+        },
+        {
+          "materiau": "acier",
+          "dn": 50,
+          "designation": "50/60",
+          "d_int_mm": 53.8,
+          "v_max": 0.7,
+          "qv_max_m3h": 5.729,
+          "p_max_kW_projet": 66.62,
+          "p_dt10_manuscrit": "66.12",
+          "remarque": ""
+        },
+        {
+          "materiau": "acier",
+          "dn": 65,
+          "designation": "66/76",
+          "d_int_mm": 68.8,
+          "v_max": 0.85,
+          "qv_max_m3h": 11.376,
+          "p_max_kW_projet": 132.3,
+          "p_dt10_manuscrit": "132.44",
+          "remarque": "DN corrigé à la main en 65"
+        },
+        {
+          "materiau": "acier",
+          "dn": 80,
+          "designation": "80/89",
+          "d_int_mm": 82.5,
+          "v_max": 1.0,
+          "qv_max_m3h": 19.244,
+          "p_max_kW_projet": 223.81,
+          "p_dt10_manuscrit": "222",
+          "remarque": ""
+        },
+        {
+          "materiau": "acier",
+          "dn": 100,
+          "designation": "102/114",
+          "d_int_mm": 107.1,
+          "v_max": 1.6,
+          "qv_max_m3h": 51.891,
+          "p_max_kW_projet": 603.49,
+          "p_dt10_manuscrit": "602",
+          "remarque": ""
+        },
+        {
+          "materiau": "acier",
+          "dn": 125,
+          "designation": "125/133",
+          "d_int_mm": 125.0,
+          "v_max": 1.8,
+          "qv_max_m3h": 79.522,
+          "p_max_kW_projet": 924.84,
+          "p_dt10_manuscrit": "922",
+          "remarque": ""
+        },
+        {
+          "materiau": "acier",
+          "dn": 150,
+          "designation": "159/4,5",
+          "d_int_mm": 159.3,
+          "v_max": 2.0,
+          "qv_max_m3h": 143.501,
+          "p_max_kW_projet": 1668.91,
+          "p_dt10_manuscrit": "1663.44",
+          "remarque": "ATTENTION d_int imprimé 159.3 = incohérent (159 - 2x4,5 = 150 mm) -> voir D-12"
+        },
+        {
+          "materiau": "acier",
+          "dn": 175,
+          "designation": "193/5,4",
+          "d_int_mm": 182.5,
+          "v_max": 2.25,
+          "qv_max_m3h": 211.885,
+          "p_max_kW_projet": 2464.22,
+          "p_dt10_manuscrit": "2456",
+          "remarque": ""
+        },
+        {
+          "materiau": "acier",
+          "dn": 200,
+          "designation": "219/5,6",
+          "d_int_mm": 206.5,
+          "v_max": 2.5,
+          "qv_max_m3h": 301.42,
+          "p_max_kW_projet": 3505.52,
+          "p_dt10_manuscrit": "3496",
+          "remarque": ""
+        },
+        {
+          "materiau": "acier",
+          "dn": 250,
+          "designation": "273/6,6",
+          "d_int_mm": 260.4,
+          "v_max": 2.9,
+          "qv_max_m3h": 555.997,
+          "p_max_kW_projet": 6466.24,
+          "p_dt10_manuscrit": "6446",
+          "remarque": ""
+        }
+      ]
+    },
+    "raccordements_apparents": {
+      "materiau": "cuivre",
+      "norme": "NF EN 1057",
+      "revit_type_canalisation": "CH_Cuivre_EN1057",
+      "assemblage": "brasure ou sertissage (CCTP)",
+      "perimetre": "té de piquage sur l'acier → robinet du radiateur RDC, et liens verticaux R+1 depuis le radiateur RDC à travers la dalle",
+      "diametres": [
+        {
+          "materiau": "cuivre",
+          "dn": 12,
+          "designation": "Cu 12x1",
+          "d_int_mm": 10.0,
+          "v_max": 0.32,
+          "qv_max_m3h": 0.09,
+          "p_max_kW_projet": 1.05
+        },
+        {
+          "materiau": "cuivre",
+          "dn": 14,
+          "designation": "Cu 14x1",
+          "d_int_mm": 12.0,
+          "v_max": 0.32,
+          "qv_max_m3h": 0.13,
+          "p_max_kW_projet": 1.52
+        },
+        {
+          "materiau": "cuivre",
+          "dn": 16,
+          "designation": "Cu 16x1",
+          "d_int_mm": 14.0,
+          "v_max": 0.32,
+          "qv_max_m3h": 0.177,
+          "p_max_kW_projet": 2.06
+        },
+        {
+          "materiau": "cuivre",
+          "dn": 18,
+          "designation": "Cu 18x1",
+          "d_int_mm": 16.0,
+          "v_max": 0.32,
+          "qv_max_m3h": 0.232,
+          "p_max_kW_projet": 2.69
+        },
+        {
+          "materiau": "cuivre",
+          "dn": 22,
+          "designation": "Cu 22x1",
+          "d_int_mm": 20.0,
+          "v_max": 0.369,
+          "qv_max_m3h": 0.417,
+          "p_max_kW_projet": 4.85
+        },
+        {
+          "materiau": "cuivre",
+          "dn": 28,
+          "designation": "Cu 28x1",
+          "d_int_mm": 26.0,
+          "v_max": 0.433,
+          "qv_max_m3h": 0.828,
+          "p_max_kW_projet": 9.63
+        },
+        {
+          "materiau": "cuivre",
+          "dn": 35,
+          "designation": "Cu 35x1,5",
+          "d_int_mm": 32.0,
+          "v_max": 0.497,
+          "qv_max_m3h": 1.439,
+          "p_max_kW_projet": 16.74
+        },
+        {
+          "materiau": "cuivre",
+          "dn": 42,
+          "designation": "Cu 42x1,5",
+          "d_int_mm": 39.0,
+          "v_max": 0.57,
+          "qv_max_m3h": 2.453,
+          "p_max_kW_projet": 28.53
+        }
+      ]
+    },
+    "regle_transition": "Changement de matériau au té de piquage : raccord acier/cuivre isolant (manchon diélectrique) côté cuivre. Le diamètre cuivre est choisi pour le débit transité (radiateur RDC + radiateur(s) R+1 raccordé(s))."
+  },
+  "systemes": [
+    {
+      "id": "CH-MAT-A",
+      "circuit": "MAT",
+      "sens": "aller",
+      "classification_revit": "Hydronic Supply",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE MAT ALLER",
+      "rgb_legende": [
+        255,
+        0,
+        0
+      ],
+      "rgb_plan": [
+        255,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "CH-MAT-R",
+      "circuit": "MAT",
+      "sens": "retour",
+      "classification_revit": "Hydronic Return",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE MAT RETOUR",
+      "rgb_legende": [
+        255,
+        0,
+        255
+      ],
+      "rgb_plan": [
+        255,
+        0,
+        255
+      ]
+    },
+    {
+      "id": "CH-ELEM-A",
+      "circuit": "ELEM",
+      "sens": "aller",
+      "classification_revit": "Hydronic Supply",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE ELEM ALLER",
+      "rgb_legende": [
+        205,
+        105,
+        40
+      ],
+      "rgb_plan": [
+        205,
+        105,
+        40
+      ]
+    },
+    {
+      "id": "CH-ELEM-R",
+      "circuit": "ELEM",
+      "sens": "retour",
+      "classification_revit": "Hydronic Return",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE ELEM RETOUR",
+      "rgb_legende": [
+        242,
+        103,
+        34
+      ],
+      "rgb_plan": [
+        242,
+        103,
+        34
+      ]
+    },
+    {
+      "id": "CH-PERI-A",
+      "circuit": "PERI",
+      "sens": "aller",
+      "classification_revit": "Hydronic Supply",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE PERI ALLER",
+      "rgb_legende": [
+        153,
+        27,
+        30
+      ],
+      "rgb_plan": [
+        153,
+        27,
+        30
+      ]
+    },
+    {
+      "id": "CH-PERI-R",
+      "circuit": "PERI",
+      "sens": "retour",
+      "classification_revit": "Hydronic Return",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE PERI RETOUR",
+      "rgb_legende": [
+        205,
+        32,
+        39
+      ],
+      "rgb_plan": [
+        147,
+        39,
+        143
+      ],
+      "ecart": "D-15 : violet sur le plan, rouge dans la légende. Couleur légende retenue (règle 6)"
+    },
+    {
+      "id": "CH-CTA-A",
+      "circuit": "CTA",
+      "sens": "aller",
+      "classification_revit": "Hydronic Supply",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE CTA ALLER",
+      "rgb_legende": [
+        0,
+        38,
+        0
+      ],
+      "rgb_plan": [
+        19,
+        103,
+        52
+      ]
+    },
+    {
+      "id": "CH-CTA-R",
+      "circuit": "CTA",
+      "sens": "retour",
+      "classification_revit": "Hydronic Return",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE CTA RETOUR",
+      "rgb_legende": [
+        0,
+        165,
+        41
+      ],
+      "rgb_plan": [
+        19,
+        155,
+        72
+      ]
+    },
+    {
+      "id": "CH-PRIM-A",
+      "circuit": "PRIMAIRE",
+      "sens": "aller",
+      "classification_revit": "Hydronic Supply",
+      "nom_dce": "(non légendé) PAC → ballons → bouteille → nourrice",
+      "rgb_legende": null,
+      "rgb_plan": [
+        237,
+        28,
+        36
+      ],
+      "ecart": "Couleur hors légende, à définir"
+    },
+    {
+      "id": "CH-PRIM-R",
+      "circuit": "PRIMAIRE",
+      "sens": "retour",
+      "classification_revit": "Hydronic Return",
+      "nom_dce": "(non légendé)",
+      "rgb_legende": null,
+      "rgb_plan": null,
+      "ecart": "Couleur hors légende, à définir"
+    }
+  ],
+  "sous_reseaux": [
+    {
+      "id": "PERI-RESTAU",
+      "systemes": [
+        "CH-PERI-A",
+        "CH-PERI-R"
+      ],
+      "description": "Restauration (cantines, salle de repos agents) sur le départ Admin/Péri, isolée par des V2V motorisées « réseaux restauration ». Couleurs du plan (242,113,114) / (169,83,160) hors légende : dessin avec les couleurs PÉRI de la légende + paramètre CVC_Sous_Reseau = RESTAU",
+      "statut": "A_CONFIRMER (D-06)"
+    }
+  ],
+  "modes_pose": {
+    "source": "Légende DCE : 3 représentations par système",
+    "valeurs": {
+      "plinthe": "trait fin",
+      "dalle_enterre": "trait fin",
+      "plafond": "trait épais"
+    },
+    "parametre_revit": "CVC_Mode_Pose",
+    "note": "La distinction entre plinthe et dalle n'est pas lisible sur le PDF : à relire sur les calques DWG"
+  },
+  "filtres_vues": [
+    {
+      "nom": "CH - MAT",
+      "regle": "Type de système commence par CH-MAT",
+      "couleurs": "rgb_legende des systèmes"
+    },
+    {
+      "nom": "CH - ELEM",
+      "regle": "Type de système commence par CH-ELEM",
+      "couleurs": "rgb_legende"
+    },
+    {
+      "nom": "CH - PERI",
+      "regle": "Type de système commence par CH-PERI",
+      "couleurs": "rgb_legende"
+    },
+    {
+      "nom": "CH - CTA",
+      "regle": "Type de système commence par CH-CTA",
+      "couleurs": "rgb_legende"
+    },
+    {
+      "nom": "CH - Acier",
+      "regle": "Type de canalisation = CH_Acier_EN10255",
+      "graphisme": "trait épais"
+    },
+    {
+      "nom": "CH - Cuivre apparent",
+      "regle": "Type de canalisation = CH_Cuivre_EN1057",
+      "graphisme": "trait fin"
+    },
+    {
+      "nom": "CH - FLAG",
+      "regle": "CVC_Statut contient FLAG",
+      "graphisme": "remplissage rouge"
+    },
+    {
+      "nom": "CH - Critique",
+      "regle": "CVC_Critique = OUI",
+      "graphisme": "trait très épais"
+    },
+    {
+      "nom": "CH - Réservations",
+      "regle": "Catégorie Ouvertures / modèles génériques RES-R1-*",
+      "graphisme": "hachure"
+    }
+  ],
+  "production": {
+    "local": "Chaufferie RDC (sous-station, près de la restauration)",
+    "equipements": [
+      {
+        "id": "PAC-01",
+        "type": "PAC eau/eau géothermique",
+        "marque": "AERMEC",
+        "modele": "WRL 300",
+        "dimensions_mm": "1320x845x1380",
+        "poids_vide_kg": 381
+      },
+      {
+        "id": "BT-01",
+        "type": "Ballon tampon PAC",
+        "volume_L": 500,
+        "reference": "Atlantic Corprimo 1950 × Ø650"
+      },
+      {
+        "id": "BT-02",
+        "type": "Ballon tampon PAC",
+        "volume_L": 750,
+        "reference": "Atlantic Corklim 2000 × Ø900"
+      },
+      {
+        "id": "BM-01",
+        "type": "Bouteille de mélange"
+      },
+      {
+        "id": "FM-01",
+        "type": "Filtre magnétique"
+      },
+      {
+        "id": "VE-01",
+        "type": "Vase(s) d'expansion"
+      },
+      {
+        "id": "NOU-01",
+        "type": "Nourrice de distribution 4 départs avec circulateurs"
+      },
+      {
+        "id": "GEO",
+        "type": "Sondes géothermiques 200 m, regard et nourrices",
+        "perimetre": "lot forage (limite de prestation)"
+      }
+    ]
+  },
+  "departs": [
+    {
+      "id": "PERI",
+      "ordre_nourrice": 1,
+      "libelle_dce": "Départ Admin / Péri",
+      "systemes": [
+        "CH-PERI-A",
+        "CH-PERI-R"
+      ],
+      "trace_RDC": "Depuis la nourrice vers l'ouest, puis vers le nord dans la circulation verticale de l'aile élémentaire (en parallèle de l'ÉLÉM) jusqu'à la circulation nord ; ensuite vers l'est le long de la circulation nord jusqu'à la salle ATSEM / bibliothèque. Piquages : wc élém. 3, rangement 2, direction élém., salle des enseignants, psychologue, direction périsco, animateurs, RASED, hall périsco, bibliothèque, wc admin 2, ATSEM. Sous-réseau restauration (V2V) vers les cantines E1/E2 et la salle de repos agents.",
+      "statut_trace": "DCE CVPS_01 à suivre",
+      "calcul": {
+        "circuit": "PERI (départ total)",
+        "nb_radiateurs": 21,
+        "nb_sans_puissance": 0,
+        "P_kW": 30.63,
+        "Qv_m3h": 2.63,
+        "DN_depart_mini": 40,
+        "designation": "40/49"
+      }
+    },
+    {
+      "id": "ELEM",
+      "ordre_nourrice": 2,
+      "libelle_dce": "Départ Élémentaire",
+      "systemes": [
+        "CH-ELEM-A",
+        "CH-ELEM-R"
+      ],
+      "trace_RDC": "Depuis la nourrice vers l'ouest, puis vers le nord dans la circulation longeant les classes élémentaires ; antennes vers l'ouest (classes 4, 3, 2, 1, wc élém. 2, ateliers, stockage 1), boucle vers la salle polyvalente et antenne vers la zone SAS / rangement 1 / laverie 1.",
+      "trace_R1": "AUCUNE distribution au R+1 : chaque radiateur R+1 est raccordé en cuivre sur le radiateur RDC à l'aplomb (voir radiateurs[].raccordement et reservations_dalle)",
+      "statut_trace": "DCE CVPS_01 à suivre au RDC ; CVPS_02 abandonné",
+      "calcul": {
+        "circuit": "ELEM",
+        "nb_radiateurs": 32,
+        "nb_sans_puissance": 3,
+        "P_kW": 53.39,
+        "Qv_m3h": 4.59,
+        "DN_depart_mini": 50,
+        "designation": "50/60"
+      }
+    },
+    {
+      "id": "CTA",
+      "ordre_nourrice": 3,
+      "libelle_dce": "Départ CTA",
+      "systemes": [
+        "CH-CTA-A",
+        "CH-CTA-R"
+      ],
+      "trace_RDC": "Depuis la nourrice vers l'est le long de la circulation sud, puis vers le nord le long de la cour maternelle jusqu'aux locaux CTA (CTA 5,0 m², LT CTA 3,7 m², CTA 4,25 m²) ; une antenne vers la CTA en terrasse.",
+      "statut_trace": "DCE CVPS_01 ; puissances des batteries chaudes inconnues (D-17)",
+      "calcul": null
+    },
+    {
+      "id": "MAT",
+      "ordre_nourrice": 4,
+      "libelle_dce": "Départ Maternelle",
+      "systemes": [
+        "CH-MAT-A",
+        "CH-MAT-R"
+      ],
+      "trace_RDC": "Depuis la nourrice vers l'est le long de la circulation sud (piquages office, laverie 2, vestiaires, ménage E10, buanderie, wc mat 2, local stockage, couloir motricité), puis vers le nord le long de la cour maternelle jusqu'à la circulation centrale ; antennes nord (sieste 1, classes mat 1 et 2, sieste 2) et sud (classes mat 3 à 6, wc mat 3 et 4) ; antenne ouest vers wc maternelle, motricité et direction maternelle.",
+      "statut_trace": "DCE CVPS_01 à suivre",
+      "calcul": {
+        "circuit": "MAT",
+        "nb_radiateurs": 38,
+        "nb_sans_puissance": 0,
+        "P_kW": 70.66,
+        "Qv_m3h": 6.08,
+        "DN_depart_mini": 65,
+        "designation": "66/76"
+      }
+    }
+  ],
+  "regles_trace": {
+    "RDC": "Suivre le tracé DCE CVPS_01 (distribution acier, mode de pose selon la légende). Chaque radiateur est piqué par un té sur l'acier puis raccordé en cuivre apparent.",
+    "R+1": "Ne pas dessiner le réseau CVPS_02. Pour chaque radiateur R+1 : 2 tubes cuivre apparents (aller/retour) partant du radiateur RDC à l'aplomb (piquage en amont de son robinet), montant dans une réservation de la dalle (RES-R1-nn) jusqu'au robinet du radiateur R+1.",
+    "recalcul": "Toute modification de tracé passe par l'export des tronçons Revit → data/troncons_*.csv → calc_chauffage.py --troncons → réinjection. Ne pas éditer ce JSON à la main."
+  },
+  "import_dwg": {
+    "statut": "À remplir à réception des DWG CVPS_01 / ARCH",
+    "correspondance_calques": {
+      "<calque DWG réseau MAT aller>": "CH-MAT-A",
+      "<calque DWG réseau MAT retour>": "CH-MAT-R",
+      "<calque ELEM aller>": "CH-ELEM-A",
+      "<calque ELEM retour>": "CH-ELEM-R",
+      "<calque PERI aller>": "CH-PERI-A",
+      "<calque PERI retour>": "CH-PERI-R",
+      "<calque CTA aller>": "CH-CTA-A",
+      "<calque CTA retour>": "CH-CTA-R"
+    },
+    "bloc_radiateur": "<nom du bloc « RADIATEUR A EAU »> → extraction X, Y, rotation, longueur (AutoCAD EXTRACTDONNEES) → remplace position_m",
+    "regle": "Au RDC, polylignes des calques → canalisations acier du système correspondant, à la hauteur du mode de pose (plafond / dalle / plinthe). Les polylignes du R+1 (CVPS_02) ne sont PAS importées."
+  },
+  "procedure_dessin_revit": [
+    "1. Charger le gabarit et créer les niveaux de niveaux[] ; lier le modèle architecte (DWG/RVT) et recaler le repère (conventions.repere)",
+    "2. Créer les types de canalisation de materiaux[] avec les diamètres listés ; créer les 10 types de systèmes de systemes[] (classification, abréviation, couleur rgb_legende)",
+    "3. Créer les filtres de filtres_vues[] et les gabarits de vue (tous circuits, puis un par circuit)",
+    "4. Créer les espaces MEP de locaux[] (Number = id_local) et renseigner les paramètres CVC_*",
+    "5. Placer les radiateurs de radiateurs[] (position_m, z_bas_mm, orientation, famille selon type_dessine et selection) sans aucun déplacement ; poser CVC_Statut",
+    "6. Tracer la distribution acier RDC par départ (import_dwg : polylignes des calques DCE → canalisations), selon departs[].trace_RDC ; piquer chaque radiateur RDC en cuivre (raccordement.diametre)",
+    "7. Pour chaque radiateur R+1 : placer la réservation de reservations_dalle[] dans la dalle et tracer les 2 tubes cuivre depuis le radiateur RDC parent (raccordement.parent_RDC)",
+    "8. Exporter les tronçons (export_network.py) → recalcul → apply_results.py (diamètres acier et cuivre, paramètres CVC_*, CVC_Critique)",
+    "9. Contrôles : systèmes sans élément non connecté, rapport de pertes de pression Revit comparé au moteur (écart ≤ 15 %), détection de conflits, nomenclatures"
+  ],
+  "hypotheses": {
+    "majoration_securite": 1.2,
+    "t_aller_C": 55.0,
+    "t_retour_C": 45.0,
+    "t_ambiante_C": 20.0,
+    "exposant_n_defaut": 1.3,
+    "coef_puissance_kWh_m3K": 1.163,
+    "rugosite_mm": 0.045,
+    "forfait_singularites_pct": 30,
+    "dp_terminal_kPa": 10.0,
+    "coef_aller_retour": 2.0,
+    "dn_min_raccordement": 15,
+    "J_alerte_Pa_m": 200,
+    "mCE_kPa": 10.0,
+    "base_puissance_rapport": "puissance_a_installer_W",
+    "hauteur_etage_m": 3.5,
+    "hauteur_bas_radiateur_mm": 150,
+    "tolerance_aplomb_m": 1.0,
+    "rugosite_cuivre_mm": 0.0015,
+    "vmax_cuivre": "interpolation sur Øint dans le tableau de la note de méthode (V_max de DN15 en dessous de 16,6 mm)",
+    "reservation_dalle": {
+      "forme": "rectangulaire",
+      "largeur_mm": 150,
+      "profondeur_mm": 80,
+      "tubes": "2 × cuivre (aller + retour) sous fourreau",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)"
+    },
+    "repere": {
+      "origine_pdf_pt": [
+        1581.6,
+        591.0
+      ],
+      "echelle_m_par_pt": 0.035278,
+      "axe_y": "vers le haut de la feuille (nord non vérifié)",
+      "recalage_R1_vers_RDC_pt": [
+        1217.2,
+        -100.5
+      ],
+      "precision_m": 0.3
+    }
+  },
+  "locaux": [
+    {
+      "id_local": "R0-01",
+      "niveau": "RDC",
+      "n_rapport": "1",
+      "code": "B21",
+      "designation": "Salle de classe élémentaire 4",
+      "surface_m2": "62.03",
+      "ti_C": "19",
+      "deperd_total_W": "1638.1",
+      "puissance_a_installer_W": "3064.8",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 3065,
+      "P_majoree_W": 3678,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 1839,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-01-a",
+        "R0-01-b"
+      ]
+    },
+    {
+      "id_local": "R0-02",
+      "niveau": "RDC",
+      "n_rapport": "2",
+      "code": "B21",
+      "designation": "Salle de classe élémentaire 3",
+      "surface_m2": "60.06",
+      "ti_C": "19",
+      "deperd_total_W": "866.4",
+      "puissance_a_installer_W": "2247.8",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 2248,
+      "P_majoree_W": 2697,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 1349,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-02-a",
+        "R0-02-b"
+      ]
+    },
+    {
+      "id_local": "R0-03",
+      "niveau": "RDC",
+      "n_rapport": "3",
+      "code": "B25",
+      "designation": "WC élémentaire 2",
+      "surface_m2": "31.53",
+      "ti_C": "19",
+      "deperd_total_W": "475.7",
+      "puissance_a_installer_W": "1200.9",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1201,
+      "P_majoree_W": 1441,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 721,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-03-a",
+        "R0-03-b"
+      ]
+    },
+    {
+      "id_local": "R0-04",
+      "niveau": "RDC",
+      "n_rapport": "4",
+      "code": "B32",
+      "designation": "Réserve info",
+      "surface_m2": "8.42",
+      "ti_C": "19",
+      "deperd_total_W": "38",
+      "puissance_a_installer_W": "231.9",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 232,
+      "P_majoree_W": 278,
+      "nb_rad": 0,
+      "P_par_radiateur_W": "",
+      "statut": "FLAG local du bilan sans radiateur dessiné",
+      "radiateurs": []
+    },
+    {
+      "id_local": "R0-05",
+      "niveau": "RDC",
+      "n_rapport": "5",
+      "code": "B21",
+      "designation": "Salle de classe élémentaire 2",
+      "surface_m2": "62.07",
+      "ti_C": "19",
+      "deperd_total_W": "990.5",
+      "puissance_a_installer_W": "2418.2",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 2418,
+      "P_majoree_W": 2902,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 1451,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-05-a",
+        "R0-05-b"
+      ]
+    },
+    {
+      "id_local": "R0-06",
+      "niveau": "RDC",
+      "n_rapport": "6",
+      "code": "B22",
+      "designation": "Atelier élémentaire 1",
+      "surface_m2": "31.88",
+      "ti_C": "19",
+      "deperd_total_W": "677.7",
+      "puissance_a_installer_W": "1411.0",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1411,
+      "P_majoree_W": 1693,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1693,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-06-a"
+      ]
+    },
+    {
+      "id_local": "R0-07",
+      "niveau": "RDC",
+      "n_rapport": "7",
+      "code": "B21",
+      "designation": "Salle de classe élémentaire 1",
+      "surface_m2": "62.93",
+      "ti_C": "19",
+      "deperd_total_W": "1914.8",
+      "puissance_a_installer_W": "3362.2",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 3362,
+      "P_majoree_W": 4035,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 2017,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-07-a",
+        "R0-07-b"
+      ]
+    },
+    {
+      "id_local": "R0-08",
+      "niveau": "RDC",
+      "n_rapport": "8",
+      "code": "B11",
+      "designation": "Hall + circulation élémentaire",
+      "surface_m2": "162.60",
+      "ti_C": "19",
+      "deperd_total_W": "2944.2",
+      "puissance_a_installer_W": "6684.0",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 6684,
+      "P_majoree_W": 8021,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 8021,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-08-a"
+      ]
+    },
+    {
+      "id_local": "R0-09",
+      "niveau": "RDC",
+      "n_rapport": "9",
+      "code": "B25",
+      "designation": "WC élémentaire 3",
+      "surface_m2": "14.90",
+      "ti_C": "19",
+      "deperd_total_W": "68",
+      "puissance_a_installer_W": "410.3",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 410,
+      "P_majoree_W": 492,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 492,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-09-a"
+      ]
+    },
+    {
+      "id_local": "R0-10",
+      "niveau": "RDC",
+      "n_rapport": "10",
+      "code": "B24",
+      "designation": "Salle polyvalente / activités périscolaires",
+      "surface_m2": "124.30",
+      "ti_C": "19",
+      "deperd_total_W": "2961.3",
+      "puissance_a_installer_W": "5820.2",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 5820,
+      "P_majoree_W": 6984,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 3492,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-10-a",
+        "R0-10-b"
+      ]
+    },
+    {
+      "id_local": "R0-11",
+      "niveau": "RDC",
+      "n_rapport": "11",
+      "code": "B24",
+      "designation": "Rangement 1",
+      "surface_m2": "6.60",
+      "ti_C": "19",
+      "deperd_total_W": "51",
+      "puissance_a_installer_W": "203.0",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 203,
+      "P_majoree_W": 244,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 244,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-11-a"
+      ]
+    },
+    {
+      "id_local": "R0-12",
+      "niveau": "RDC",
+      "n_rapport": "12",
+      "code": "B24",
+      "designation": "Rangement 2",
+      "surface_m2": "13.02",
+      "ti_C": "19",
+      "deperd_total_W": "79",
+      "puissance_a_installer_W": "378.9",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 379,
+      "P_majoree_W": 455,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 455,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-12-a"
+      ]
+    },
+    {
+      "id_local": "R0-13",
+      "niveau": "RDC",
+      "n_rapport": "13",
+      "code": "B14+B33",
+      "designation": "WC prof élé + Ménage 2 + SAS",
+      "surface_m2": "14.39",
+      "ti_C": "19",
+      "deperd_total_W": "111.5",
+      "puissance_a_installer_W": "442.4",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 442,
+      "P_majoree_W": 531,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 531,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-13-a"
+      ]
+    },
+    {
+      "id_local": "R0-14",
+      "niveau": "RDC",
+      "n_rapport": "14",
+      "code": "E5",
+      "designation": "Laverie 1 élémentaire",
+      "surface_m2": "19.60",
+      "ti_C": "19",
+      "deperd_total_W": "151.8",
+      "puissance_a_installer_W": "602.6",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 603,
+      "P_majoree_W": 723,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 723,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-14-a"
+      ]
+    },
+    {
+      "id_local": "R0-15",
+      "niveau": "RDC",
+      "n_rapport": "15",
+      "code": "E2",
+      "designation": "Cantine élémentaire / Zone de self",
+      "surface_m2": "125.91",
+      "ti_C": "19",
+      "deperd_total_W": "3437.3",
+      "puissance_a_installer_W": "6333.2",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 6333,
+      "P_majoree_W": 7600,
+      "nb_rad": 3,
+      "P_par_radiateur_W": 2533,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-15-a",
+        "R0-15-b",
+        "R0-15-c"
+      ]
+    },
+    {
+      "id_local": "R0-16",
+      "niveau": "RDC",
+      "n_rapport": "16",
+      "code": "E1",
+      "designation": "Cantine élémentaire",
+      "surface_m2": "93.55",
+      "ti_C": "19",
+      "deperd_total_W": "2190.5",
+      "puissance_a_installer_W": "4342.2",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 4342,
+      "P_majoree_W": 5211,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 2605,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-16-a",
+        "R0-16-b"
+      ]
+    },
+    {
+      "id_local": "R0-17",
+      "niveau": "RDC",
+      "n_rapport": "17",
+      "code": "E9",
+      "designation": "Local poubelles",
+      "surface_m2": "8.43",
+      "ti_C": "19",
+      "deperd_total_W": "589.4",
+      "puissance_a_installer_W": "783.2",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 783,
+      "P_majoree_W": 940,
+      "nb_rad": 0,
+      "P_par_radiateur_W": "",
+      "statut": "FLAG local du bilan sans radiateur dessiné",
+      "radiateurs": []
+    },
+    {
+      "id_local": "R0-18",
+      "niveau": "RDC",
+      "n_rapport": "18",
+      "code": "E8",
+      "designation": "Salle de repos agents",
+      "surface_m2": "11.43",
+      "ti_C": "19",
+      "deperd_total_W": "515.9",
+      "puissance_a_installer_W": "778.8",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 779,
+      "P_majoree_W": 935,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 935,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-18-a"
+      ]
+    },
+    {
+      "id_local": "R0-19",
+      "niveau": "RDC",
+      "n_rapport": "19",
+      "code": "E4",
+      "designation": "Office cuisine 1 élé + office cuisine 2 mat",
+      "surface_m2": "42.82",
+      "ti_C": "19",
+      "deperd_total_W": "1525.6",
+      "puissance_a_installer_W": "2510.4",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 2510,
+      "P_majoree_W": 3012,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 1506,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-19-a",
+        "R0-19-b"
+      ]
+    },
+    {
+      "id_local": "R0-20",
+      "niveau": "RDC",
+      "n_rapport": "20",
+      "code": "E4",
+      "designation": "Laverie 2 mat",
+      "surface_m2": "12.53",
+      "ti_C": "19",
+      "deperd_total_W": "504.9",
+      "puissance_a_installer_W": "793.1",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 793,
+      "P_majoree_W": 952,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 952,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-20-a"
+      ]
+    },
+    {
+      "id_local": "R0-21",
+      "niveau": "RDC",
+      "n_rapport": "21",
+      "code": "E7",
+      "designation": "Vestiaire 1",
+      "surface_m2": "9.20",
+      "ti_C": "20",
+      "deperd_total_W": "1561.5",
+      "puissance_a_installer_W": "1773.1",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1773,
+      "P_majoree_W": 2128,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 2128,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-21-a"
+      ]
+    },
+    {
+      "id_local": "R0-22",
+      "niveau": "RDC",
+      "n_rapport": "22",
+      "code": "A32",
+      "designation": "Buanderie",
+      "surface_m2": "6.38",
+      "ti_C": "19",
+      "deperd_total_W": "984.4",
+      "puissance_a_installer_W": "1131.2",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1131,
+      "P_majoree_W": 1357,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1357,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-22-a"
+      ]
+    },
+    {
+      "id_local": "R0-23",
+      "niveau": "RDC",
+      "n_rapport": "23",
+      "code": "A24",
+      "designation": "WC maternelle 2",
+      "surface_m2": "5.53",
+      "ti_C": "19",
+      "deperd_total_W": "908.3",
+      "puissance_a_installer_W": "1035.5",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1036,
+      "P_majoree_W": 1243,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1243,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-23-a"
+      ]
+    },
+    {
+      "id_local": "R0-24",
+      "niveau": "RDC",
+      "n_rapport": "24",
+      "code": "E10",
+      "designation": "Ménage",
+      "surface_m2": "5.13",
+      "ti_C": "19",
+      "deperd_total_W": "412.8",
+      "puissance_a_installer_W": "530.8",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 531,
+      "P_majoree_W": 637,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 637,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-24-a"
+      ]
+    },
+    {
+      "id_local": "R0-25",
+      "niveau": "RDC",
+      "n_rapport": "25",
+      "code": "E7",
+      "designation": "Vestiaires 2",
+      "surface_m2": "10.86",
+      "ti_C": "20",
+      "deperd_total_W": "1292.0",
+      "puissance_a_installer_W": "1541.7",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1542,
+      "P_majoree_W": 1850,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1850,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-25-a"
+      ]
+    },
+    {
+      "id_local": "R0-26",
+      "niveau": "RDC",
+      "n_rapport": "26",
+      "code": "D9",
+      "designation": "Local stockage matériel d'animation",
+      "surface_m2": "10.73",
+      "ti_C": "19",
+      "deperd_total_W": "340.1",
+      "puissance_a_installer_W": "586.9",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 587,
+      "P_majoree_W": 704,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 704,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-26-a"
+      ]
+    },
+    {
+      "id_local": "R0-27",
+      "niveau": "RDC",
+      "n_rapport": "27",
+      "code": "A23",
+      "designation": "Salle de motricité / activités périscolaires maternelles",
+      "surface_m2": "172.59",
+      "ti_C": "19",
+      "deperd_total_W": "3587.0",
+      "puissance_a_installer_W": "7556.6",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 7557,
+      "P_majoree_W": 9068,
+      "nb_rad": 3,
+      "P_par_radiateur_W": 3023,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-27-a",
+        "R0-27-b",
+        "R0-27-c"
+      ]
+    },
+    {
+      "id_local": "R0-28",
+      "niveau": "RDC",
+      "n_rapport": "28",
+      "code": "-",
+      "designation": "Couloir le long salle de motricité A23 - Zone maternelle",
+      "surface_m2": "46.27",
+      "ti_C": "19",
+      "deperd_total_W": "2530.1",
+      "puissance_a_installer_W": "3594.3",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 3594,
+      "P_majoree_W": 4313,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 2157,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-28-a",
+        "R0-28-b"
+      ]
+    },
+    {
+      "id_local": "R0-29",
+      "niveau": "RDC",
+      "n_rapport": "29",
+      "code": "A24",
+      "designation": "WC maternelle",
+      "surface_m2": "27.12",
+      "ti_C": "19",
+      "deperd_total_W": "285.9",
+      "puissance_a_installer_W": "909.7",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 910,
+      "P_majoree_W": 1092,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 546,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-29-a",
+        "R0-29-b"
+      ]
+    },
+    {
+      "id_local": "R0-30",
+      "niveau": "RDC",
+      "n_rapport": "30",
+      "code": "C1",
+      "designation": "Bibliothèque",
+      "surface_m2": "60.70",
+      "ti_C": "19",
+      "deperd_total_W": "1548.2",
+      "puissance_a_installer_W": "2944.3",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 2944,
+      "P_majoree_W": 3533,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 1767,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-30-a",
+        "R0-30-b"
+      ]
+    },
+    {
+      "id_local": "R0-31",
+      "niveau": "RDC",
+      "n_rapport": "31",
+      "code": "C4",
+      "designation": "WC admin 2",
+      "surface_m2": "5.27",
+      "ti_C": "19",
+      "deperd_total_W": "297.8",
+      "puissance_a_installer_W": "419.0",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 419,
+      "P_majoree_W": 503,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 503,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-31-a"
+      ]
+    },
+    {
+      "id_local": "R0-32",
+      "niveau": "RDC",
+      "n_rapport": "32",
+      "code": "C4",
+      "designation": "WC admin 1",
+      "surface_m2": "5.54",
+      "ti_C": "19",
+      "deperd_total_W": "43",
+      "puissance_a_installer_W": "170.4",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 170,
+      "P_majoree_W": 204,
+      "nb_rad": 0,
+      "P_par_radiateur_W": "",
+      "statut": "FLAG local du bilan sans radiateur dessiné",
+      "radiateurs": []
+    },
+    {
+      "id_local": "R0-33",
+      "niveau": "RDC",
+      "n_rapport": "33",
+      "code": "D2",
+      "designation": "Hall périsco",
+      "surface_m2": "21.15",
+      "ti_C": "19",
+      "deperd_total_W": "1148.8",
+      "puissance_a_installer_W": "1635.2",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1635,
+      "P_majoree_W": 1962,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1962,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-33-a"
+      ]
+    },
+    {
+      "id_local": "R0-34",
+      "niveau": "RDC",
+      "n_rapport": "34",
+      "code": "C3",
+      "designation": "Salle RASED",
+      "surface_m2": "24.47",
+      "ti_C": "19",
+      "deperd_total_W": "627.2",
+      "puissance_a_installer_W": "1190.0",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1190,
+      "P_majoree_W": 1428,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1428,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-34-a"
+      ]
+    },
+    {
+      "id_local": "R0-35",
+      "niveau": "RDC",
+      "n_rapport": "35",
+      "code": "D4",
+      "designation": "Salle des animateurs",
+      "surface_m2": "26.69",
+      "ti_C": "19",
+      "deperd_total_W": "781.3",
+      "puissance_a_installer_W": "1395.2",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1395,
+      "P_majoree_W": 1674,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 837,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-35-a",
+        "R0-35-b"
+      ]
+    },
+    {
+      "id_local": "R0-36",
+      "niveau": "RDC",
+      "n_rapport": "36",
+      "code": "B13",
+      "designation": "Salle des enseignants",
+      "surface_m2": "24.43",
+      "ti_C": "19",
+      "deperd_total_W": "522.4",
+      "puissance_a_installer_W": "1084.2",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1084,
+      "P_majoree_W": 1301,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1301,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-36-a"
+      ]
+    },
+    {
+      "id_local": "R0-37",
+      "niveau": "RDC",
+      "n_rapport": "37",
+      "code": "B12",
+      "designation": "Direction élémentaire",
+      "surface_m2": "12.70",
+      "ti_C": "19",
+      "deperd_total_W": "503.7",
+      "puissance_a_installer_W": "795.8",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 796,
+      "P_majoree_W": 955,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 955,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-37-a"
+      ]
+    },
+    {
+      "id_local": "R0-38",
+      "niveau": "RDC",
+      "n_rapport": "38",
+      "code": "C2",
+      "designation": "Psychologue",
+      "surface_m2": "12.80",
+      "ti_C": "19",
+      "deperd_total_W": "492.1",
+      "puissance_a_installer_W": "786.5",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 786,
+      "P_majoree_W": 944,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 944,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-38-a"
+      ]
+    },
+    {
+      "id_local": "R0-39",
+      "niveau": "RDC",
+      "n_rapport": "39",
+      "code": "D3",
+      "designation": "Direction périsco",
+      "surface_m2": "15.00",
+      "ti_C": "19",
+      "deperd_total_W": "494.5",
+      "puissance_a_installer_W": "839.5",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 840,
+      "P_majoree_W": 1007,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1007,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-39-a"
+      ]
+    },
+    {
+      "id_local": "R0-40",
+      "niveau": "RDC",
+      "n_rapport": "40",
+      "code": "-",
+      "designation": "Circulation autour B12/B33/C2/D3/B13/C3/D4",
+      "surface_m2": "18.29",
+      "ti_C": "19",
+      "deperd_total_W": "171.9",
+      "puissance_a_installer_W": "592.6",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 593,
+      "P_majoree_W": 711,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 711,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-40-a"
+      ]
+    },
+    {
+      "id_local": "R0-41",
+      "niveau": "RDC",
+      "n_rapport": "41",
+      "code": "A13",
+      "designation": "Salle de service des ATSEM et enseignants",
+      "surface_m2": "28.40",
+      "ti_C": "19",
+      "deperd_total_W": "939.6",
+      "puissance_a_installer_W": "1592.8",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1593,
+      "P_majoree_W": 1911,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1911,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-41-a"
+      ]
+    },
+    {
+      "id_local": "R0-42",
+      "niveau": "RDC",
+      "n_rapport": "42",
+      "code": "A12",
+      "designation": "Direction maternelle",
+      "surface_m2": "12.70",
+      "ti_C": "19",
+      "deperd_total_W": "514.9",
+      "puissance_a_installer_W": "807.0",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 807,
+      "P_majoree_W": 968,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 968,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-42-a"
+      ]
+    },
+    {
+      "id_local": "R0-43",
+      "niveau": "RDC",
+      "n_rapport": "43",
+      "code": "-",
+      "designation": "Circulation autour A13/A33/A12/A24/C1/C4",
+      "surface_m2": "18.29",
+      "ti_C": "19",
+      "deperd_total_W": "171.9",
+      "puissance_a_installer_W": "592.6",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 593,
+      "P_majoree_W": 711,
+      "nb_rad": 0,
+      "P_par_radiateur_W": "",
+      "statut": "FLAG local du bilan sans radiateur dessiné",
+      "radiateurs": []
+    },
+    {
+      "id_local": "R0-44",
+      "niveau": "RDC",
+      "n_rapport": "44",
+      "code": "A11",
+      "designation": "Hall maternelle",
+      "surface_m2": "35.00",
+      "ti_C": "19",
+      "deperd_total_W": "1547.3",
+      "puissance_a_installer_W": "2352.3",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 2352,
+      "P_majoree_W": 2823,
+      "nb_rad": 0,
+      "P_par_radiateur_W": "",
+      "statut": "FLAG local du bilan sans radiateur dessiné",
+      "radiateurs": []
+    },
+    {
+      "id_local": "R0-45",
+      "niveau": "RDC",
+      "n_rapport": "45",
+      "code": "A22",
+      "designation": "Salle de sieste 1",
+      "surface_m2": "60.26",
+      "ti_C": "19",
+      "deperd_total_W": "1638.8",
+      "puissance_a_installer_W": "3024.8",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 3025,
+      "P_majoree_W": 3630,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 1815,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-45-a",
+        "R0-45-b"
+      ]
+    },
+    {
+      "id_local": "R0-46",
+      "niveau": "RDC",
+      "n_rapport": "46",
+      "code": "A21",
+      "designation": "Salle de classe maternelle 1",
+      "surface_m2": "59.88",
+      "ti_C": "19",
+      "deperd_total_W": "2008.9",
+      "puissance_a_installer_W": "3386.1",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 3386,
+      "P_majoree_W": 4063,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 2032,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-46-a",
+        "R0-46-b"
+      ]
+    },
+    {
+      "id_local": "R0-47",
+      "niveau": "RDC",
+      "n_rapport": "47",
+      "code": "A21",
+      "designation": "Salle de classe maternelle 2",
+      "surface_m2": "59.80",
+      "ti_C": "19",
+      "deperd_total_W": "2009.1",
+      "puissance_a_installer_W": "3384.5",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 3384,
+      "P_majoree_W": 4061,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 2031,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-47-a",
+        "R0-47-b"
+      ]
+    },
+    {
+      "id_local": "R0-48",
+      "niveau": "RDC",
+      "n_rapport": "48",
+      "code": "A22",
+      "designation": "Salle de sieste 2",
+      "surface_m2": "60.06",
+      "ti_C": "19",
+      "deperd_total_W": "1579.6",
+      "puissance_a_installer_W": "2961.0",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 2961,
+      "P_majoree_W": 3553,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 1777,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-48-a",
+        "R0-48-b"
+      ]
+    },
+    {
+      "id_local": "R0-49",
+      "niveau": "RDC",
+      "n_rapport": "49",
+      "code": "A21",
+      "designation": "Salle de classe maternelle 6",
+      "surface_m2": "59.17",
+      "ti_C": "19",
+      "deperd_total_W": "2977.2",
+      "puissance_a_installer_W": "4338.1",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 4338,
+      "P_majoree_W": 5206,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 2603,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-49-a",
+        "R0-49-b"
+      ]
+    },
+    {
+      "id_local": "R0-50",
+      "niveau": "RDC",
+      "n_rapport": "50",
+      "code": "A21",
+      "designation": "Salle de classe maternelle 5",
+      "surface_m2": "60.49",
+      "ti_C": "19",
+      "deperd_total_W": "2174.7",
+      "puissance_a_installer_W": "3566.0",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 3566,
+      "P_majoree_W": 4279,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 2140,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-50-a",
+        "R0-50-b"
+      ]
+    },
+    {
+      "id_local": "R0-51",
+      "niveau": "RDC",
+      "n_rapport": "51",
+      "code": "A24",
+      "designation": "WC maternelle 4",
+      "surface_m2": "24.41",
+      "ti_C": "19",
+      "deperd_total_W": "1902.0",
+      "puissance_a_installer_W": "2463.4",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 2463,
+      "P_majoree_W": 2956,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 2956,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-51-a"
+      ]
+    },
+    {
+      "id_local": "R0-52",
+      "niveau": "RDC",
+      "n_rapport": "52",
+      "code": "-",
+      "designation": "Circulation autour classes matern 2/5/6 + sieste 2",
+      "surface_m2": "57.17",
+      "ti_C": "19",
+      "deperd_total_W": "2343.1",
+      "puissance_a_installer_W": "3658.1",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 3658,
+      "P_majoree_W": 4390,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 4390,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-52-a"
+      ]
+    },
+    {
+      "id_local": "R0-53",
+      "niveau": "RDC",
+      "n_rapport": "53",
+      "code": "A24",
+      "designation": "WC maternelle 3",
+      "surface_m2": "8.94",
+      "ti_C": "19",
+      "deperd_total_W": "184.1",
+      "puissance_a_installer_W": "389.7",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 390,
+      "P_majoree_W": 468,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 468,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-53-a"
+      ]
+    },
+    {
+      "id_local": "R0-54",
+      "niveau": "RDC",
+      "n_rapport": "54",
+      "code": "A21",
+      "designation": "Salle de classe maternelle 4",
+      "surface_m2": "60.49",
+      "ti_C": "19",
+      "deperd_total_W": "2266.1",
+      "puissance_a_installer_W": "3657.3",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 3657,
+      "P_majoree_W": 4389,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 2194,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-54-a",
+        "R0-54-b"
+      ]
+    },
+    {
+      "id_local": "R0-55",
+      "niveau": "RDC",
+      "n_rapport": "55",
+      "code": "A21",
+      "designation": "Salle de classe maternelle 3",
+      "surface_m2": "60.49",
+      "ti_C": "19",
+      "deperd_total_W": "2174.7",
+      "puissance_a_installer_W": "3566.0",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 3566,
+      "P_majoree_W": 4279,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 2140,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-55-a",
+        "R0-55-b"
+      ]
+    },
+    {
+      "id_local": "R0-56",
+      "niveau": "RDC",
+      "n_rapport": "56",
+      "code": "-",
+      "designation": "Circulation autour classes matern 1/3/4 + sieste 1",
+      "surface_m2": "57.17",
+      "ti_C": "19",
+      "deperd_total_W": "400.1",
+      "puissance_a_installer_W": "1715.0",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1715,
+      "P_majoree_W": 2058,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 1029,
+      "statut": "OK",
+      "radiateurs": [
+        "R0-56-a",
+        "R0-56-b"
+      ]
+    },
+    {
+      "id_local": "R1-01",
+      "niveau": "R+1",
+      "n_rapport": "1",
+      "code": "B21",
+      "designation": "Salle de classe élémentaire 8",
+      "surface_m2": "62.29",
+      "ti_C": "19",
+      "deperd_total_W": "1852.8",
+      "puissance_a_installer_W": "3285.5",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 3286,
+      "P_majoree_W": 3943,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 1971,
+      "statut": "OK",
+      "radiateurs": [
+        "R1-01-b",
+        "R1-01-a"
+      ]
+    },
+    {
+      "id_local": "R1-02",
+      "niveau": "R+1",
+      "n_rapport": "2",
+      "code": "B22",
+      "designation": "Atelier élémentaire 3",
+      "surface_m2": "31.89",
+      "ti_C": "19",
+      "deperd_total_W": "819.1",
+      "puissance_a_installer_W": "1552.6",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1553,
+      "P_majoree_W": 1863,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1863,
+      "statut": "OK",
+      "radiateurs": [
+        "R1-02-a"
+      ]
+    },
+    {
+      "id_local": "R1-03",
+      "niveau": "R+1",
+      "n_rapport": "3",
+      "code": "B21",
+      "designation": "Salle de classe élémentaire 7",
+      "surface_m2": "62.14",
+      "ti_C": "19",
+      "deperd_total_W": "1067.6",
+      "puissance_a_installer_W": "2496.9",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 2497,
+      "P_majoree_W": 2996,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 1498,
+      "statut": "OK",
+      "radiateurs": [
+        "R1-03-a",
+        "R1-03-b"
+      ]
+    },
+    {
+      "id_local": "R1-04",
+      "niveau": "R+1",
+      "n_rapport": "4",
+      "code": "B21",
+      "designation": "Salle de classe élémentaire 6",
+      "surface_m2": "62.14",
+      "ti_C": "19",
+      "deperd_total_W": "1071.7",
+      "puissance_a_installer_W": "2500.9",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 2501,
+      "P_majoree_W": 3001,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 1501,
+      "statut": "OK",
+      "radiateurs": [
+        "R1-04-a",
+        "R1-04-b"
+      ]
+    },
+    {
+      "id_local": "R1-05",
+      "niveau": "R+1",
+      "n_rapport": "5",
+      "code": "B22",
+      "designation": "Atelier élémentaire 2",
+      "surface_m2": "30.89",
+      "ti_C": "19",
+      "deperd_total_W": "803.4",
+      "puissance_a_installer_W": "1513.9",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1514,
+      "P_majoree_W": 1817,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1817,
+      "statut": "OK",
+      "radiateurs": [
+        "R1-05-a"
+      ]
+    },
+    {
+      "id_local": "R1-06",
+      "niveau": "R+1",
+      "n_rapport": "6",
+      "code": "B21",
+      "designation": "Salle de classe élémentaire 5",
+      "surface_m2": "62.51",
+      "ti_C": "19",
+      "deperd_total_W": "1979.9",
+      "puissance_a_installer_W": "3417.6",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 3418,
+      "P_majoree_W": 4101,
+      "nb_rad": 2,
+      "P_par_radiateur_W": 2051,
+      "statut": "OK",
+      "radiateurs": [
+        "R1-06-a",
+        "R1-06-b"
+      ]
+    },
+    {
+      "id_local": "R1-07",
+      "niveau": "R+1",
+      "n_rapport": "7",
+      "code": "B25",
+      "designation": "WC élémentaire 4",
+      "surface_m2": "13.35",
+      "ti_C": "19",
+      "deperd_total_W": "800.5",
+      "puissance_a_installer_W": "1107.6",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1108,
+      "P_majoree_W": 1329,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1329,
+      "statut": "OK",
+      "radiateurs": [
+        "R1-07-a"
+      ]
+    },
+    {
+      "id_local": "R1-08",
+      "niveau": "R+1",
+      "n_rapport": "8",
+      "code": "B25",
+      "designation": "WC élémentaire 5",
+      "surface_m2": "13.54",
+      "ti_C": "19",
+      "deperd_total_W": "848.6",
+      "puissance_a_installer_W": "1160.0",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 1160,
+      "P_majoree_W": 1392,
+      "nb_rad": 1,
+      "P_par_radiateur_W": 1392,
+      "statut": "OK",
+      "radiateurs": [
+        "R1-08-a"
+      ]
+    },
+    {
+      "id_local": "R1-09",
+      "niveau": "R+1",
+      "n_rapport": "9",
+      "code": "-",
+      "designation": "R+1 - Circulation",
+      "surface_m2": "122.65",
+      "ti_C": "19",
+      "deperd_total_W": "4983.9",
+      "puissance_a_installer_W": "7804.9",
+      "base": "puissance_a_installer_W",
+      "P_base_W": 7805,
+      "P_majoree_W": 9366,
+      "nb_rad": 0,
+      "P_par_radiateur_W": "",
+      "statut": "FLAG local du bilan sans radiateur dessiné",
+      "radiateurs": []
+    }
+  ],
+  "radiateurs": [
+    {
+      "id": "R0-07-a",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-07",
+      "local": "Salle de classe élémentaire 1",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 0.08,
+        "y": -5.93,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (175,415) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2018,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3782,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier + R+1 raccordé(s)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 4068,
+        "Qv_m3h": 0.35,
+        "V_ms": 0.31,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [
+          "R1-06-a"
+        ],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 1, façade"
+    },
+    {
+      "id": "R0-07-b",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-07",
+      "local": "Salle de classe élémentaire 1",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 8.38,
+        "y": -1.02,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (665,125) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2018,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3782,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 2018,
+        "Qv_m3h": 0.173,
+        "V_ms": 0.31,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 1, cloison est"
+    },
+    {
+      "id": "R0-06-a",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-06",
+      "local": "Atelier élémentaire 1",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 0.08,
+        "y": -8.9,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (175,590) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1693,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3174,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier + R+1 raccordé(s)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 3510,
+        "Qv_m3h": 0.302,
+        "V_ms": 0.27,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [
+          "R1-05-a"
+        ],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "atelier élém. 1, façade"
+    },
+    {
+      "id": "NR-ST1-a",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "NR-ST1",
+      "local": "(absent du bilan)",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 8.92,
+        "y": -10.76,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (697,700) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": null,
+      "facteur_regime": 0.511,
+      "P50_requise_W": null,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "FLAG puissance inconnue"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier + R+1 raccordé(s)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 2050,
+        "Qv_m3h": 0.176,
+        "V_ms": 0.32,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [
+          "R1-06-b",
+          "NR-ST2-a"
+        ],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "stockage 1 (7,56 m²) absent du bilan émetteurs"
+    },
+    {
+      "id": "R0-05-a",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-05",
+      "local": "Salle de classe élémentaire 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 0.08,
+        "y": -16.26,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (175,1025) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1451,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2720,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier + R+1 raccordé(s)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 2952,
+        "Qv_m3h": 0.254,
+        "V_ms": 0.22,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [
+          "R1-04-a"
+        ],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 2, façade"
+    },
+    {
+      "id": "R0-05-b",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-05",
+      "local": "Salle de classe élémentaire 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 8.69,
+        "y": -19.23,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (683,1200) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1451,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2720,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1451,
+        "Qv_m3h": 0.125,
+        "V_ms": 0.31,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 2, cloison est"
+    },
+    {
+      "id": "R0-08-a",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-08",
+      "local": "Hall + circulation élémentaire",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 8.21,
+        "y": -13.13,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (655,840) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 8021,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 15038,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier + R+1 raccordé(s)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 28x1",
+        "P_transitee_W": 9522,
+        "Qv_m3h": 0.819,
+        "V_ms": 0.43,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [
+          "R1-04-b"
+        ],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "étiqueté 1500x750, angle porte classe 2 / circulation : affecté au hall + circulation élém."
+    },
+    {
+      "id": "R0-03-a",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-03",
+      "local": "WC élémentaire 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 0.68,
+        "y": -24.9,
+        "z_bas_mm": 150,
+        "source": "PDF t5 (210,160) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 720,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1351,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier + R+1 raccordé(s)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2218,
+        "Qv_m3h": 0.191,
+        "V_ms": 0.26,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [
+          "R1-03-a"
+        ],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "wc élém. 2"
+    },
+    {
+      "id": "R0-03-b",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-03",
+      "local": "WC élémentaire 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 8.92,
+        "y": -27.52,
+        "z_bas_mm": 150,
+        "source": "PDF t5 (697,315) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 720,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1351,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier + R+1 raccordé(s)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2218,
+        "Qv_m3h": 0.191,
+        "V_ms": 0.26,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [
+          "R1-03-b"
+        ],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "wc élém. 2"
+    },
+    {
+      "id": "R0-02-a",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-02",
+      "local": "Salle de classe élémentaire 3",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 0.14,
+        "y": -30.49,
+        "z_bas_mm": 150,
+        "source": "PDF t5 (178,490) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1348,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2528,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier + R+1 raccordé(s)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 3212,
+        "Qv_m3h": 0.276,
+        "V_ms": 0.24,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [
+          "R1-02-a"
+        ],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 3, façade"
+    },
+    {
+      "id": "R0-02-b",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-02",
+      "local": "Salle de classe élémentaire 3",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 8.64,
+        "y": -34.55,
+        "z_bas_mm": 150,
+        "source": "PDF t5 (680,730) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1348,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2528,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier + R+1 raccordé(s)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 4712,
+        "Qv_m3h": 0.405,
+        "V_ms": 0.36,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [
+          "NR-ST3-a",
+          "R1-08-a",
+          "R1-01-b"
+        ],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 3, cloison est"
+    },
+    {
+      "id": "R0-01-a",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-01",
+      "local": "Salle de classe élémentaire 4",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 0.14,
+        "y": -36.92,
+        "z_bas_mm": 150,
+        "source": "PDF t5 (178,870) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1839,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3448,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier + R+1 raccordé(s)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 3810,
+        "Qv_m3h": 0.328,
+        "V_ms": 0.29,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [
+          "R1-01-a"
+        ],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 4, façade"
+    },
+    {
+      "id": "R0-01-b",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-01",
+      "local": "Salle de classe élémentaire 4",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 8.64,
+        "y": -42.17,
+        "z_bas_mm": 150,
+        "source": "PDF t5 (680,1180) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1839,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3448,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1839,
+        "Qv_m3h": 0.158,
+        "V_ms": 0.29,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 4, cloison est"
+    },
+    {
+      "id": "R0-13-a",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-13",
+      "local": "WC prof élé + Ménage 2 + SAS",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 12.56,
+        "y": -28.2,
+        "z_bas_mm": 150,
+        "source": "PDF t5 (912,355) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 531,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 996,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 531,
+        "Qv_m3h": 0.046,
+        "V_ms": 0.16,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "zone SAS / wc prof élé / ménage 2"
+    },
+    {
+      "id": "R0-10-a",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-10",
+      "local": "Salle polyvalente / activités périscolaires",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 12.56,
+        "y": -14.82,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (912,940) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 3492,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 6547,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier + R+1 raccordé(s)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 4821,
+        "Qv_m3h": 0.415,
+        "V_ms": 0.37,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [
+          "R1-07-a"
+        ],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "salle polyvalente"
+    },
+    {
+      "id": "R0-10-b",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-10",
+      "local": "Salle polyvalente / activités périscolaires",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 20.4,
+        "y": -15.3,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (1375,968) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 3492,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 6547,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 3492,
+        "Qv_m3h": 0.3,
+        "V_ms": 0.27,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "étiqueté 1500x750, limite salle / préau"
+    },
+    {
+      "id": "R0-11-a",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-11",
+      "local": "Rangement 1",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 20.49,
+        "y": -27.69,
+        "z_bas_mm": 150,
+        "source": "PDF t5 (1380,325) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 244,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 457,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 244,
+        "Qv_m3h": 0.021,
+        "V_ms": 0.07,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "étiqueté 1500x750, rangement 1"
+    },
+    {
+      "id": "R0-14-a",
+      "niveau": "RDC",
+      "circuit_dce": "ELEM",
+      "id_local": "R0-14",
+      "local": "Laverie 1 élémentaire",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 17.61,
+        "y": -31.47,
+        "z_bas_mm": 150,
+        "source": "PDF t5 (1210,548) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 723,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1355,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 723,
+        "Qv_m3h": 0.062,
+        "V_ms": 0.22,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "laverie 1 élém."
+    },
+    {
+      "id": "R0-09-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-09",
+      "local": "WC élémentaire 3",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 12.95,
+        "y": -8.14,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (935,545) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 492,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 922,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 492,
+        "Qv_m3h": 0.042,
+        "V_ms": 0.15,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "wc élém. 3"
+    },
+    {
+      "id": "R0-12-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-12",
+      "local": "Rangement 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 18.54,
+        "y": -8.14,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (1265,545) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 455,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 853,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 455,
+        "Qv_m3h": 0.039,
+        "V_ms": 0.14,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "rangement 2"
+    },
+    {
+      "id": "R0-37-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-37",
+      "local": "Direction élémentaire",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 20.35,
+        "y": -6.27,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (1372,435) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 955,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1790,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 955,
+        "Qv_m3h": 0.082,
+        "V_ms": 0.29,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "direction élém."
+    },
+    {
+      "id": "R0-36-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-36",
+      "local": "Salle des enseignants",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 21.51,
+        "y": -8.64,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (1440,575) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1301,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2439,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1301,
+        "Qv_m3h": 0.112,
+        "V_ms": 0.27,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "salle des enseignants"
+    },
+    {
+      "id": "R0-38-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-38",
+      "local": "Psychologue",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 26.11,
+        "y": -6.19,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (45,430) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 944,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1770,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 944,
+        "Qv_m3h": 0.081,
+        "V_ms": 0.29,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "mur mitoyen psychologue / direction périsco"
+    },
+    {
+      "id": "R0-39-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-39",
+      "local": "Direction périsco",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 26.87,
+        "y": -4.41,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (90,325) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1007,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1888,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 1007,
+        "Qv_m3h": 0.087,
+        "V_ms": 0.31,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "direction périsco"
+    },
+    {
+      "id": "R0-35-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-35",
+      "local": "Salle des animateurs",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 23.62,
+        "y": -12.45,
+        "z_bas_mm": 150,
+        "source": "PDF t1 (1565,800) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 837,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1569,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 837,
+        "Qv_m3h": 0.072,
+        "V_ms": 0.25,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "salle des animateurs"
+    },
+    {
+      "id": "R0-35-b",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-35",
+      "local": "Salle des animateurs",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 29.1,
+        "y": -9.07,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (222,600) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 837,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1569,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 837,
+        "Qv_m3h": 0.072,
+        "V_ms": 0.25,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "dos à dos avec RASED"
+    },
+    {
+      "id": "R0-40-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-40",
+      "local": "Circulation autour B12/B33/C2/D3/B13/C3/D4",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 27.55,
+        "y": -8.19,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (130,548) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 711,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1333,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 711,
+        "Qv_m3h": 0.061,
+        "V_ms": 0.22,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "affecté à la circulation PÉRI (n°40)"
+    },
+    {
+      "id": "R0-34-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-34",
+      "local": "Salle RASED",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 29.41,
+        "y": -9.07,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (240,600) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1428,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2677,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1428,
+        "Qv_m3h": 0.123,
+        "V_ms": 0.3,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "salle RASED, dos à dos avec animateurs"
+    },
+    {
+      "id": "R0-33-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-33",
+      "local": "Hall périsco",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 35.47,
+        "y": -9.66,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (598,635) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1962,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3678,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1962,
+        "Qv_m3h": 0.169,
+        "V_ms": 0.3,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "hall périsco"
+    },
+    {
+      "id": "R0-41-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-41",
+      "local": "Salle de service des ATSEM et enseignants",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 42.11,
+        "y": -4.41,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (990,325) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1911,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3583,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1911,
+        "Qv_m3h": 0.164,
+        "V_ms": 0.3,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "salle ATSEM"
+    },
+    {
+      "id": "R0-30-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-30",
+      "local": "Bibliothèque",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 38.47,
+        "y": -8.14,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (775,545) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1766,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3312,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1766,
+        "Qv_m3h": 0.152,
+        "V_ms": 0.27,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "bibliothèque"
+    },
+    {
+      "id": "R0-30-b",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-30",
+      "local": "Bibliothèque",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 46.09,
+        "y": -8.52,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (1225,568) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1766,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3312,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1766,
+        "Qv_m3h": 0.152,
+        "V_ms": 0.27,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "bibliothèque"
+    },
+    {
+      "id": "R0-31-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI",
+      "id_local": "R0-31",
+      "local": "WC admin 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 37.87,
+        "y": -13.3,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (740,850) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 503,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 943,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 503,
+        "Qv_m3h": 0.043,
+        "V_ms": 0.15,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "cloison wc admin 2 / bibliothèque"
+    },
+    {
+      "id": "R0-15-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI-RESTAU",
+      "id_local": "R0-15",
+      "local": "Cantine élémentaire / Zone de self",
+      "type_dessine": "PLINTHE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 23.32,
+        "y": -28.37,
+        "z_bas_mm": 150,
+        "source": "PDF t5 (1547,365) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 3400.0,
+      "P_part_W": 2533,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4749,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2533,
+        "Qv_m3h": 0.218,
+        "V_ms": 0.3,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "plinthe cantine / self"
+    },
+    {
+      "id": "R0-15-b",
+      "niveau": "RDC",
+      "circuit_dce": "PERI-RESTAU",
+      "id_local": "R0-15",
+      "local": "Cantine élémentaire / Zone de self",
+      "type_dessine": "PLINTHE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 26.75,
+        "y": -28.37,
+        "z_bas_mm": 150,
+        "source": "PDF t6 (83,365) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 3400.0,
+      "P_part_W": 2533,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4749,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2533,
+        "Qv_m3h": 0.218,
+        "V_ms": 0.3,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "plinthe cantine / self"
+    },
+    {
+      "id": "R0-15-c",
+      "niveau": "RDC",
+      "circuit_dce": "PERI-RESTAU",
+      "id_local": "R0-15",
+      "local": "Cantine élémentaire / Zone de self",
+      "type_dessine": "PLINTHE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 34.66,
+        "y": -28.37,
+        "z_bas_mm": 150,
+        "source": "PDF t6 (550,365) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 3050.0,
+      "P_part_W": 2533,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4749,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2533,
+        "Qv_m3h": 0.218,
+        "V_ms": 0.3,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "plinthe cantine / self"
+    },
+    {
+      "id": "R0-16-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI-RESTAU",
+      "id_local": "R0-16",
+      "local": "Cantine élémentaire",
+      "type_dessine": "PLINTHE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 42.19,
+        "y": -28.37,
+        "z_bas_mm": 150,
+        "source": "PDF t6 (995,365) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 3050.0,
+      "P_part_W": 2606,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4885,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2606,
+        "Qv_m3h": 0.224,
+        "V_ms": 0.31,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "plinthe cantine E1 (nommée « cantine maternelle » sur CVPS_01)"
+    },
+    {
+      "id": "R0-16-b",
+      "niveau": "RDC",
+      "circuit_dce": "PERI-RESTAU",
+      "id_local": "R0-16",
+      "local": "Cantine élémentaire",
+      "type_dessine": "PLINTHE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 46.04,
+        "y": -28.37,
+        "z_bas_mm": 150,
+        "source": "PDF t6 (1222,365) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 2950.0,
+      "P_part_W": 2606,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4885,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2606,
+        "Qv_m3h": 0.224,
+        "V_ms": 0.31,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "plinthe cantine E1"
+    },
+    {
+      "id": "R0-18-a",
+      "niveau": "RDC",
+      "circuit_dce": "PERI-RESTAU",
+      "id_local": "R0-18",
+      "local": "Salle de repos agents",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 21.59,
+        "y": -37.51,
+        "z_bas_mm": 150,
+        "source": "PDF t5 (1445,905) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 935,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1753,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 935,
+        "Qv_m3h": 0.08,
+        "V_ms": 0.28,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "salle de repos agents "
+    },
+    {
+      "id": "R0-42-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-42",
+      "local": "Direction maternelle",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 51.59,
+        "y": -3.34,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (1550,262) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 968,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1815,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 968,
+        "Qv_m3h": 0.083,
+        "V_ms": 0.29,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "direction mat"
+    },
+    {
+      "id": "R0-29-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-29",
+      "local": "WC maternelle",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 48.2,
+        "y": -10.0,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (1350,655) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 546,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1024,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 546,
+        "Qv_m3h": 0.047,
+        "V_ms": 0.17,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "wc maternelle"
+    },
+    {
+      "id": "R0-29-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-29",
+      "local": "WC maternelle",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 55.85,
+        "y": -8.19,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (135,548) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 546,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1024,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 546,
+        "Qv_m3h": 0.047,
+        "V_ms": 0.17,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "wc maternelle"
+    },
+    {
+      "id": "R0-27-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-27",
+      "local": "Salle de motricité / activités périscolaires maternelles",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 48.29,
+        "y": -13.3,
+        "z_bas_mm": 150,
+        "source": "PDF t2 (1355,850) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 3023,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 5667,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 3023,
+        "Qv_m3h": 0.26,
+        "V_ms": 0.23,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "motricité"
+    },
+    {
+      "id": "R0-27-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-27",
+      "local": "Salle de motricité / activités périscolaires maternelles",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 55.43,
+        "y": -11.95,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (110,770) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 3023,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 5667,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 3023,
+        "Qv_m3h": 0.26,
+        "V_ms": 0.23,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "motricité"
+    },
+    {
+      "id": "R0-27-c",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-27",
+      "local": "Salle de motricité / activités périscolaires maternelles",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 58.9,
+        "y": -18.55,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (315,1160) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 3023,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 5667,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 3023,
+        "Qv_m3h": 0.26,
+        "V_ms": 0.23,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "motricité, dos à dos avec classe mat 3"
+    },
+    {
+      "id": "R0-45-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-45",
+      "local": "Salle de sieste 1",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 70.25,
+        "y": -0.77,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (985,110) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1815,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3403,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1815,
+        "Qv_m3h": 0.156,
+        "V_ms": 0.28,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "sieste 1"
+    },
+    {
+      "id": "R0-45-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-45",
+      "local": "Salle de sieste 1",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 63.56,
+        "y": -7.8,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (590,525) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1815,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3403,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1815,
+        "Qv_m3h": 0.156,
+        "V_ms": 0.28,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "sieste 1"
+    },
+    {
+      "id": "R0-46-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-46",
+      "local": "Salle de classe maternelle 1",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 71.68,
+        "y": -0.77,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (1070,110) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2032,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3809,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 2032,
+        "Qv_m3h": 0.175,
+        "V_ms": 0.32,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe mat 1"
+    },
+    {
+      "id": "R0-46-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-46",
+      "local": "Salle de classe maternelle 1",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 73.21,
+        "y": -8.69,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (1160,578) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2032,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3809,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 2032,
+        "Qv_m3h": 0.175,
+        "V_ms": 0.32,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe mat 1"
+    },
+    {
+      "id": "R0-55-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-55",
+      "local": "Salle de classe maternelle 3",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 60.09,
+        "y": -11.3,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (385,732) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2140,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4011,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2140,
+        "Qv_m3h": 0.184,
+        "V_ms": 0.25,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe mat 3"
+    },
+    {
+      "id": "R0-55-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-55",
+      "local": "Salle de classe maternelle 3",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 59.46,
+        "y": -18.72,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (348,1170) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2140,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4011,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2140,
+        "Qv_m3h": 0.184,
+        "V_ms": 0.25,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe mat 3"
+    },
+    {
+      "id": "R0-56-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-56",
+      "local": "Circulation autour classes matern 1/3/4 + sieste 1",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 75.58,
+        "y": -9.07,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (1300,600) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1029,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1929,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 1029,
+        "Qv_m3h": 0.088,
+        "V_ms": 0.31,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "circulation mat 1/3/4 + sieste 1"
+    },
+    {
+      "id": "R0-56-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-56",
+      "local": "Circulation autour classes matern 1/3/4 + sieste 1",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 66.94,
+        "y": -12.11,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (790,780) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1029,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1929,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 1029,
+        "Qv_m3h": 0.088,
+        "V_ms": 0.31,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "étiqueté 1500x750, cloison mat 3 / mat 4 côté circulation"
+    },
+    {
+      "id": "R0-54-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-54",
+      "local": "Salle de classe maternelle 4",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 74.77,
+        "y": -12.28,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (1252,790) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2194,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4114,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2194,
+        "Qv_m3h": 0.189,
+        "V_ms": 0.26,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe mat 4"
+    },
+    {
+      "id": "R0-54-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-54",
+      "local": "Salle de classe maternelle 4",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 74.77,
+        "y": -18.55,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (1252,1160) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2194,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4114,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2194,
+        "Qv_m3h": 0.189,
+        "V_ms": 0.26,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe mat 4"
+    },
+    {
+      "id": "R0-53-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-53",
+      "local": "WC maternelle 3",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 75.16,
+        "y": -13.3,
+        "z_bas_mm": 150,
+        "source": "PDF t3 (1275,850) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 468,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 877,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 468,
+        "Qv_m3h": 0.04,
+        "V_ms": 0.14,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "wc mat 3"
+    },
+    {
+      "id": "R0-47-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-47",
+      "local": "Salle de classe maternelle 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 89.07,
+        "y": -0.77,
+        "z_bas_mm": 150,
+        "source": "PDF t4 (430,110) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2030,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3807,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 2030,
+        "Qv_m3h": 0.175,
+        "V_ms": 0.32,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe mat 2"
+    },
+    {
+      "id": "R0-47-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-47",
+      "local": "Salle de classe maternelle 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 90.09,
+        "y": -8.69,
+        "z_bas_mm": 150,
+        "source": "PDF t4 (490,578) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2030,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3807,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 2030,
+        "Qv_m3h": 0.175,
+        "V_ms": 0.32,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe mat 2"
+    },
+    {
+      "id": "R0-48-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-48",
+      "local": "Salle de sieste 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 96.77,
+        "y": -0.77,
+        "z_bas_mm": 150,
+        "source": "PDF t4 (885,110) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1776,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3331,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1776,
+        "Qv_m3h": 0.153,
+        "V_ms": 0.28,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "sieste 2"
+    },
+    {
+      "id": "R0-48-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-48",
+      "local": "Salle de sieste 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 103.6,
+        "y": -7.8,
+        "z_bas_mm": 150,
+        "source": "PDF t4 (1288,525) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1776,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3331,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1776,
+        "Qv_m3h": 0.153,
+        "V_ms": 0.28,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "sieste 2"
+    },
+    {
+      "id": "R0-52-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-52",
+      "local": "Circulation autour classes matern 2/5/6 + sieste 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 93.98,
+        "y": -11.27,
+        "z_bas_mm": 150,
+        "source": "PDF t4 (720,730) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 4390,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 8230,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 4390,
+        "Qv_m3h": 0.377,
+        "V_ms": 0.33,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "circulation mat 2/5/6 + sieste 2"
+    },
+    {
+      "id": "R0-51-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-51",
+      "local": "WC maternelle 4",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 90.8,
+        "y": -12.28,
+        "z_bas_mm": 150,
+        "source": "PDF t4 (532,790) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2956,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 5542,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 22x1",
+        "P_transitee_W": 2956,
+        "Qv_m3h": 0.254,
+        "V_ms": 0.22,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "cloison LT eau / wc mat 4"
+    },
+    {
+      "id": "R0-50-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-50",
+      "local": "Salle de classe maternelle 5",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 92.37,
+        "y": -12.28,
+        "z_bas_mm": 150,
+        "source": "PDF t4 (625,790) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2140,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4011,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2140,
+        "Qv_m3h": 0.184,
+        "V_ms": 0.25,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe mat 5"
+    },
+    {
+      "id": "R0-50-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-50",
+      "local": "Salle de classe maternelle 5",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 92.37,
+        "y": -18.72,
+        "z_bas_mm": 150,
+        "source": "PDF t4 (625,1170) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2140,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4011,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2140,
+        "Qv_m3h": 0.184,
+        "V_ms": 0.25,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe mat 5"
+    },
+    {
+      "id": "R0-49-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-49",
+      "local": "Salle de classe maternelle 6",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 107.7,
+        "y": -12.03,
+        "z_bas_mm": 150,
+        "source": "PDF t4 (1530,775) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2603,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4880,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2603,
+        "Qv_m3h": 0.224,
+        "V_ms": 0.31,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe mat 6"
+    },
+    {
+      "id": "R0-49-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-49",
+      "local": "Salle de classe maternelle 6",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 107.7,
+        "y": -18.55,
+        "z_bas_mm": 150,
+        "source": "PDF t4 (1530,1160) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2603,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4880,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2603,
+        "Qv_m3h": 0.224,
+        "V_ms": 0.31,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "classe mat 6"
+    },
+    {
+      "id": "R0-19-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-19",
+      "local": "Office cuisine 1 élé + office cuisine 2 mat",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 27.29,
+        "y": -37.68,
+        "z_bas_mm": 150,
+        "source": "PDF t6 (115,915) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1506,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2823,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1506,
+        "Qv_m3h": 0.129,
+        "V_ms": 0.32,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "office cuisine élé"
+    },
+    {
+      "id": "R0-19-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-19",
+      "local": "Office cuisine 1 élé + office cuisine 2 mat",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 43.12,
+        "y": -36.92,
+        "z_bas_mm": 150,
+        "source": "PDF t6 (1050,870) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1506,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2823,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1506,
+        "Qv_m3h": 0.129,
+        "V_ms": 0.32,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "office cuisine mat"
+    },
+    {
+      "id": "R0-20-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-20",
+      "local": "Laverie 2 mat",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 45.83,
+        "y": -37.09,
+        "z_bas_mm": 150,
+        "source": "PDF t6 (1210,880) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 952,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1785,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 952,
+        "Qv_m3h": 0.082,
+        "V_ms": 0.29,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "laverie 2 mat"
+    },
+    {
+      "id": "R0-25-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-25",
+      "local": "Vestiaires 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 49.9,
+        "y": -32.86,
+        "z_bas_mm": 150,
+        "source": "PDF t6 (1450,630) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1850,
+      "facteur_regime": 0.511,
+      "P50_requise_W": 3622,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1850,
+        "Qv_m3h": 0.159,
+        "V_ms": 0.29,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "vestiaires 2"
+    },
+    {
+      "id": "R0-21-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-21",
+      "local": "Vestiaire 1",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 50.1,
+        "y": -38.87,
+        "z_bas_mm": 150,
+        "source": "PDF t6 (1462,985) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2128,
+      "facteur_regime": 0.511,
+      "P50_requise_W": 4167,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2128,
+        "Qv_m3h": 0.183,
+        "V_ms": 0.25,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "vestiaire 1"
+    },
+    {
+      "id": "R0-24-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-24",
+      "local": "Ménage",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 48.29,
+        "y": -29.13,
+        "z_bas_mm": 150,
+        "source": "PDF t6 (1355,410) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 637,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1194,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 637,
+        "Qv_m3h": 0.055,
+        "V_ms": 0.19,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "ménage E10"
+    },
+    {
+      "id": "R0-26-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-26",
+      "local": "Local stockage matériel d'animation",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 55.06,
+        "y": -31.08,
+        "z_bas_mm": 150,
+        "source": "PDF t7 (88,525) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 704,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 1320,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 704,
+        "Qv_m3h": 0.061,
+        "V_ms": 0.21,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "local stockage matériel d'animation"
+    },
+    {
+      "id": "R0-28-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-28",
+      "local": "Couloir le long salle de motricité A23 - Zone maternelle",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 53.94,
+        "y": -34.81,
+        "z_bas_mm": 150,
+        "source": "PDF t7 (22,745) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2156,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4043,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2156,
+        "Qv_m3h": 0.185,
+        "V_ms": 0.26,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "couloir le long de la salle de motricité"
+    },
+    {
+      "id": "R0-28-b",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-28",
+      "local": "Couloir le long salle de motricité A23 - Zone maternelle",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 52.69,
+        "y": -34.55,
+        "z_bas_mm": 150,
+        "source": "PDF t6 (1615,730) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 2156,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 4043,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 18x1",
+        "P_transitee_W": 2156,
+        "Qv_m3h": 0.185,
+        "V_ms": 0.26,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "couloir le long de la salle de motricité"
+    },
+    {
+      "id": "R0-22-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-22",
+      "local": "Buanderie",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 53.45,
+        "y": -38.45,
+        "z_bas_mm": 150,
+        "source": "PDF t6 (1660,960) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1357,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2544,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1357,
+        "Qv_m3h": 0.117,
+        "V_ms": 0.29,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "buanderie"
+    },
+    {
+      "id": "R0-23-a",
+      "niveau": "RDC",
+      "circuit_dce": "MAT",
+      "id_local": "R0-23",
+      "local": "WC maternelle 2",
+      "type_dessine": "V1500x750",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 55.73,
+        "y": -37.35,
+        "z_bas_mm": 150,
+        "source": "PDF t7 (128,895) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1243,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2330,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "branche RDC piquée sur distribution acier",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1243,
+        "Qv_m3h": 0.107,
+        "V_ms": 0.26,
+        "longueur_m": null,
+        "parent_RDC": null,
+        "ecart_aplomb_m": null,
+        "enfants_R1": [],
+        "statut_aplomb": null
+      },
+      "statut": "OK",
+      "remarque": "wc maternelle 2"
+    },
+    {
+      "id": "R1-06-a",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "R1-06",
+      "local": "Salle de classe élémentaire 5",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 0.06,
+        "y": -2.23,
+        "z_bas_mm": 150,
+        "source": "PDF c1 (110,228) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 1000.0,
+      "P_part_W": 2050,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3844,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 2050,
+        "Qv_m3h": 0.176,
+        "V_ms": 0.32,
+        "longueur_m": 7.2,
+        "parent_RDC": "R0-07-a",
+        "ecart_aplomb_m": 3.7,
+        "enfants_R1": [],
+        "statut_aplomb": "FLAG aucun radiateur RDC à ≤ 1.0 m - proposition provisoire = radiateur RDC ELEM le plus proche + 3.7 m en plafond RDC (à valider)"
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 5, façade"
+    },
+    {
+      "id": "R1-06-b",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "R1-06",
+      "local": "Salle de classe élémentaire 5",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 7.62,
+        "y": -7.68,
+        "z_bas_mm": 150,
+        "source": "PDF c1 (765,700) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 1000.0,
+      "P_part_W": 2050,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3844,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 2050,
+        "Qv_m3h": 0.176,
+        "V_ms": 0.32,
+        "longueur_m": 6.84,
+        "parent_RDC": "NR-ST1-a",
+        "ecart_aplomb_m": 3.34,
+        "enfants_R1": [],
+        "statut_aplomb": "FLAG aucun radiateur RDC à ≤ 1.0 m - proposition provisoire = radiateur RDC ELEM le plus proche + 3.3 m en plafond RDC (à valider)"
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 5, côté porte"
+    },
+    {
+      "id": "R1-05-a",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "R1-05",
+      "local": "Atelier élémentaire 2",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 0.06,
+        "y": -9.52,
+        "z_bas_mm": 150,
+        "source": "PDF c1 (110,860) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 1000.0,
+      "P_part_W": 1817,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3406,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1817,
+        "Qv_m3h": 0.156,
+        "V_ms": 0.28,
+        "longueur_m": 4.12,
+        "parent_RDC": "R0-06-a",
+        "ecart_aplomb_m": 0.62,
+        "enfants_R1": [],
+        "statut_aplomb": "OK radiateur RDC à l'aplomb"
+      },
+      "statut": "OK",
+      "remarque": "atelier élém. 2, façade"
+    },
+    {
+      "id": "NR-ST2-a",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "NR-ST2",
+      "local": "(absent du bilan)",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 8.89,
+        "y": -10.79,
+        "z_bas_mm": 150,
+        "source": "PDF c1 (875,970) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": null,
+      "facteur_regime": 0.511,
+      "P50_requise_W": null,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "FLAG puissance inconnue"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 0,
+        "Qv_m3h": 0.0,
+        "V_ms": "",
+        "longueur_m": 3.54,
+        "parent_RDC": "NR-ST1-a",
+        "ecart_aplomb_m": 0.04,
+        "enfants_R1": [],
+        "statut_aplomb": "OK radiateur RDC à l'aplomb"
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "stockage 2 absent du bilan émetteurs"
+    },
+    {
+      "id": "R1-07-a",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "R1-07",
+      "local": "WC élémentaire 4",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 14.78,
+        "y": -10.5,
+        "z_bas_mm": 150,
+        "source": "PDF c1 (1385,945) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1329,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2492,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1329,
+        "Qv_m3h": 0.114,
+        "V_ms": 0.28,
+        "longueur_m": 8.36,
+        "parent_RDC": "R0-10-a",
+        "ecart_aplomb_m": 4.86,
+        "enfants_R1": [],
+        "statut_aplomb": "FLAG aucun radiateur RDC à ≤ 1.0 m - proposition provisoire = radiateur RDC ELEM le plus proche + 4.9 m en plafond RDC (à valider)"
+      },
+      "statut": "OK",
+      "remarque": "wc élém. 4"
+    },
+    {
+      "id": "R1-04-a",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "R1-04",
+      "local": "Salle de classe élémentaire 6",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 0.75,
+        "y": -20.32,
+        "z_bas_mm": 150,
+        "source": "PDF c1 (170,1795) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 1000.0,
+      "P_part_W": 1500,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2813,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1500,
+        "Qv_m3h": 0.129,
+        "V_ms": 0.32,
+        "longueur_m": 7.61,
+        "parent_RDC": "R0-05-a",
+        "ecart_aplomb_m": 4.11,
+        "enfants_R1": [],
+        "statut_aplomb": "FLAG aucun radiateur RDC à ≤ 1.0 m - proposition provisoire = radiateur RDC ELEM le plus proche + 4.1 m en plafond RDC (à valider)"
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "classe élém. 6 : mur escalier (CVPS_02) / façade (ARCH_03)"
+    },
+    {
+      "id": "R1-04-b",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "R1-04",
+      "local": "Salle de classe élémentaire 6",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 7.99,
+        "y": -13.33,
+        "z_bas_mm": 150,
+        "source": "PDF c1 (797,1190) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 1000.0,
+      "P_part_W": 1500,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2813,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1500,
+        "Qv_m3h": 0.129,
+        "V_ms": 0.32,
+        "longueur_m": 3.8,
+        "parent_RDC": "R0-08-a",
+        "ecart_aplomb_m": 0.3,
+        "enfants_R1": [],
+        "statut_aplomb": "OK radiateur RDC à l'aplomb"
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 6, côté porte"
+    },
+    {
+      "id": "R1-03-a",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "R1-03",
+      "local": "Salle de classe élémentaire 7",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 0.75,
+        "y": -23.07,
+        "z_bas_mm": 150,
+        "source": "PDF c2 (170,200) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 1000.0,
+      "P_part_W": 1498,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2808,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1498,
+        "Qv_m3h": 0.129,
+        "V_ms": 0.32,
+        "longueur_m": 5.33,
+        "parent_RDC": "R0-03-a",
+        "ecart_aplomb_m": 1.83,
+        "enfants_R1": [],
+        "statut_aplomb": "FLAG aucun radiateur RDC à ≤ 1.0 m - proposition provisoire = radiateur RDC ELEM le plus proche + 1.8 m en plafond RDC (à valider)"
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "classe élém. 7 : mur escalier (CVPS_02) / façade (ARCH_03)"
+    },
+    {
+      "id": "R1-03-b",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "R1-03",
+      "local": "Salle de classe élémentaire 7",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 8.02,
+        "y": -30.06,
+        "z_bas_mm": 150,
+        "source": "PDF c2 (800,805) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 1000.0,
+      "P_part_W": 1498,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2808,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1498,
+        "Qv_m3h": 0.129,
+        "V_ms": 0.32,
+        "longueur_m": 6.19,
+        "parent_RDC": "R0-03-b",
+        "ecart_aplomb_m": 2.69,
+        "enfants_R1": [],
+        "statut_aplomb": "FLAG aucun radiateur RDC à ≤ 1.0 m - proposition provisoire = radiateur RDC ELEM le plus proche + 2.7 m en plafond RDC (à valider)"
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 7, côté porte"
+    },
+    {
+      "id": "R1-02-a",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "R1-02",
+      "local": "Atelier élémentaire 3",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 0.06,
+        "y": -32.65,
+        "z_bas_mm": 150,
+        "source": "PDF c2 (110,1030) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 1000.0,
+      "P_part_W": 1863,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3493,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1863,
+        "Qv_m3h": 0.16,
+        "V_ms": 0.29,
+        "longueur_m": 5.66,
+        "parent_RDC": "R0-02-a",
+        "ecart_aplomb_m": 2.16,
+        "enfants_R1": [],
+        "statut_aplomb": "FLAG aucun radiateur RDC à ≤ 1.0 m - proposition provisoire = radiateur RDC ELEM le plus proche + 2.2 m en plafond RDC (à valider)"
+      },
+      "statut": "OK",
+      "remarque": "atelier élém. 3, façade"
+    },
+    {
+      "id": "NR-ST3-a",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "NR-ST3",
+      "local": "(absent du bilan)",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 8.89,
+        "y": -32.02,
+        "z_bas_mm": 150,
+        "source": "PDF c2 (875,975) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": null,
+      "facteur_regime": 0.511,
+      "P50_requise_W": null,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "FLAG puissance inconnue"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 12x1",
+        "P_transitee_W": 0,
+        "Qv_m3h": 0.0,
+        "V_ms": "",
+        "longueur_m": 6.04,
+        "parent_RDC": "R0-02-b",
+        "ecart_aplomb_m": 2.54,
+        "enfants_R1": [],
+        "statut_aplomb": "FLAG aucun radiateur RDC à ≤ 1.0 m - proposition provisoire = radiateur RDC ELEM le plus proche + 2.5 m en plafond RDC (à valider)"
+      },
+      "statut": "A_CONFIRMER",
+      "remarque": "stockage 3 absent du bilan émetteurs"
+    },
+    {
+      "id": "R1-08-a",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "R1-08",
+      "local": "WC élémentaire 5",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 13.2,
+        "y": -34.33,
+        "z_bas_mm": 150,
+        "source": "PDF c2 (1248,1175) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 750.0,
+      "P_part_W": 1392,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 2610,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 14x1",
+        "P_transitee_W": 1392,
+        "Qv_m3h": 0.12,
+        "V_ms": 0.29,
+        "longueur_m": 8.07,
+        "parent_RDC": "R0-02-b",
+        "ecart_aplomb_m": 4.57,
+        "enfants_R1": [],
+        "statut_aplomb": "FLAG aucun radiateur RDC à ≤ 1.0 m - proposition provisoire = radiateur RDC ELEM le plus proche + 4.6 m en plafond RDC (à valider)"
+      },
+      "statut": "OK",
+      "remarque": "wc élém. 5"
+    },
+    {
+      "id": "R1-01-b",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "R1-01",
+      "local": "Salle de classe élémentaire 8",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "H",
+      "position_m": {
+        "x": 7.79,
+        "y": -35.89,
+        "z_bas_mm": 150,
+        "source": "PDF c2 (780,1310) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 1000.0,
+      "P_part_W": 1972,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3696,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1972,
+        "Qv_m3h": 0.17,
+        "V_ms": 0.31,
+        "longueur_m": 5.09,
+        "parent_RDC": "R0-02-b",
+        "ecart_aplomb_m": 1.59,
+        "enfants_R1": [],
+        "statut_aplomb": "FLAG aucun radiateur RDC à ≤ 1.0 m - proposition provisoire = radiateur RDC ELEM le plus proche + 1.6 m en plafond RDC (à valider)"
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 8, côté porte"
+    },
+    {
+      "id": "R1-01-a",
+      "niveau": "R+1",
+      "circuit_dce": "ELEM",
+      "id_local": "R1-01",
+      "local": "Salle de classe élémentaire 8",
+      "type_dessine": "NON_SPECIFIE",
+      "orientation_plan": "V",
+      "position_m": {
+        "x": 0.08,
+        "y": -42.0,
+        "z_bas_mm": 150,
+        "source": "PDF c2 (112,1840) ±0.3 m",
+        "a_remplacer_par": "coordonnées DWG/RVT"
+      },
+      "L_dispo_mm": 1000.0,
+      "P_part_W": 1972,
+      "facteur_regime": 0.533,
+      "P50_requise_W": 3696,
+      "selection": {
+        "modele": "",
+        "P50_cat_W": "",
+        "P_regime_cat_W": "",
+        "statut": "CATALOGUE REQUIS (P50 requise calculée)"
+      },
+      "raccordement": {
+        "nature": "lien vertical R+1 depuis radiateur RDC (traversée de dalle)",
+        "materiau": "cuivre apparent",
+        "diametre": "Cu 16x1",
+        "P_transitee_W": 1972,
+        "Qv_m3h": 0.17,
+        "V_ms": 0.31,
+        "longueur_m": 8.58,
+        "parent_RDC": "R0-01-a",
+        "ecart_aplomb_m": 5.08,
+        "enfants_R1": [],
+        "statut_aplomb": "FLAG aucun radiateur RDC à ≤ 1.0 m - proposition provisoire = radiateur RDC ELEM le plus proche + 5.1 m en plafond RDC (à valider)"
+      },
+      "statut": "OK",
+      "remarque": "classe élém. 8, façade"
+    }
+  ],
+  "reservations_dalle": [
+    {
+      "id": "RES-R1-01",
+      "radiateur_R1": "R1-06-a",
+      "radiateur_RDC": "R0-07-a",
+      "x_m": 0.06,
+      "y_m": -2.23,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 16x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "A_VALIDER (pas d'aplomb RDC)"
+    },
+    {
+      "id": "RES-R1-02",
+      "radiateur_R1": "R1-06-b",
+      "radiateur_RDC": "NR-ST1-a",
+      "x_m": 7.62,
+      "y_m": -7.68,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 16x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "A_VALIDER (pas d'aplomb RDC)"
+    },
+    {
+      "id": "RES-R1-03",
+      "radiateur_R1": "R1-05-a",
+      "radiateur_RDC": "R0-06-a",
+      "x_m": 0.06,
+      "y_m": -9.52,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 16x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "OK"
+    },
+    {
+      "id": "RES-R1-04",
+      "radiateur_R1": "NR-ST2-a",
+      "radiateur_RDC": "NR-ST1-a",
+      "x_m": 8.89,
+      "y_m": -10.79,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 12x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "OK"
+    },
+    {
+      "id": "RES-R1-05",
+      "radiateur_R1": "R1-07-a",
+      "radiateur_RDC": "R0-10-a",
+      "x_m": 14.78,
+      "y_m": -10.5,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 14x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "A_VALIDER (pas d'aplomb RDC)"
+    },
+    {
+      "id": "RES-R1-06",
+      "radiateur_R1": "R1-04-a",
+      "radiateur_RDC": "R0-05-a",
+      "x_m": 0.75,
+      "y_m": -20.32,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 14x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "A_VALIDER (pas d'aplomb RDC)"
+    },
+    {
+      "id": "RES-R1-07",
+      "radiateur_R1": "R1-04-b",
+      "radiateur_RDC": "R0-08-a",
+      "x_m": 7.99,
+      "y_m": -13.33,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 14x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "OK"
+    },
+    {
+      "id": "RES-R1-08",
+      "radiateur_R1": "R1-03-a",
+      "radiateur_RDC": "R0-03-a",
+      "x_m": 0.75,
+      "y_m": -23.07,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 14x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "A_VALIDER (pas d'aplomb RDC)"
+    },
+    {
+      "id": "RES-R1-09",
+      "radiateur_R1": "R1-03-b",
+      "radiateur_RDC": "R0-03-b",
+      "x_m": 8.02,
+      "y_m": -30.06,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 14x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "A_VALIDER (pas d'aplomb RDC)"
+    },
+    {
+      "id": "RES-R1-10",
+      "radiateur_R1": "R1-02-a",
+      "radiateur_RDC": "R0-02-a",
+      "x_m": 0.06,
+      "y_m": -32.65,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 16x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "A_VALIDER (pas d'aplomb RDC)"
+    },
+    {
+      "id": "RES-R1-11",
+      "radiateur_R1": "NR-ST3-a",
+      "radiateur_RDC": "R0-02-b",
+      "x_m": 8.89,
+      "y_m": -32.02,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 12x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "A_VALIDER (pas d'aplomb RDC)"
+    },
+    {
+      "id": "RES-R1-12",
+      "radiateur_R1": "R1-08-a",
+      "radiateur_RDC": "R0-02-b",
+      "x_m": 13.2,
+      "y_m": -34.33,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 14x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "A_VALIDER (pas d'aplomb RDC)"
+    },
+    {
+      "id": "RES-R1-13",
+      "radiateur_R1": "R1-01-b",
+      "radiateur_RDC": "R0-02-b",
+      "x_m": 7.79,
+      "y_m": -35.89,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 16x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "A_VALIDER (pas d'aplomb RDC)"
+    },
+    {
+      "id": "RES-R1-14",
+      "radiateur_R1": "R1-01-a",
+      "radiateur_RDC": "R0-01-a",
+      "x_m": 0.08,
+      "y_m": -42.0,
+      "niveau_dalle": "plancher haut RDC / bas R+1",
+      "dimensions_mm": "150x80",
+      "tubes": "2 × Cu 16x1",
+      "calfeutrement": "coupe-feu au degré du plancher (à définir avec le bureau de contrôle)",
+      "statut": "A_VALIDER (pas d'aplomb RDC)"
+    }
+  ],
+  "reseau": {
+    "troncons": [],
+    "chemins": [],
+    "note": "Vide tant que le modèle Revit (ou le DWG) n'est pas tracé ; rempli par export_network.py puis le recalcul"
+  }
+}

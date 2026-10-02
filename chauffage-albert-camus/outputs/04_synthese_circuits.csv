@@ -1,5 +1,6 @@
 circuit;nb_radiateurs;nb_sans_puissance;P_kW;Qv_m3h;DN_depart_mini;designation
-ELEM;32;1;48.07;4.13;50;50/60
-MAT;38;4;47.82;4.11;50;50/60
-PERI;15;1;13.9;1.2;32;33/42
-PERI-RESTAU;6;4;5.57;0.48;20;20/27
+ELEM;32;3;53.39;4.59;50;50/60
+MAT;38;0;70.66;6.08;65;66/76
+PERI;15;0;16.88;1.45;32;33/42
+PERI-RESTAU;6;0;13.75;1.18;32;33/42
+PERI (départ total);21;0;30.63;2.63;40;40/49

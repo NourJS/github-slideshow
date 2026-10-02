@@ -1,0 +1,460 @@
+{
+  "meta": {
+    "projet": "Réhabilitation et extension du groupe scolaire Albert Camus",
+    "adresse": "28 rue Lavoisier, 33400 Talence",
+    "lot": "CVC-PLB : chauffage à eau chaude par radiateurs",
+    "objet": "Modèle descriptif pour le dessin Revit (radiateurs, réseaux, réservations) et le recalcul",
+    "version_schema": "1.0",
+    "genere_le": null,
+    "genere_par": "calc/calc_chauffage.py (ne pas éditer à la main : modifier data/ puis relancer)",
+    "sources": {
+      "F1": "CVPS_01 Plan de réseau de chauffage RDC, DCE ind. 0 du 27/03/2026 (BE Vivien)",
+      "F2": "CVPS_02 Plan de réseau de chauffage R+1, DCE ind. 0 (tracé R+1 ABANDONNÉ, voir regles_trace.R+1)",
+      "F3": "Bilan thermique EN 12831 ind-A, résultats génération (totalisation)",
+      "F3b": "Bilan thermique EN 12831 ind-A, résultats émetteurs, p. 129 à 137 (puissances par local)",
+      "F4": "ARCH_03 Plan de l'étage, DCE ind. A, mars 2026",
+      "F5": "Note « Dimensionnement réseau hydraulique » (tableau DN / V / Qv / P)",
+      "D1": "Décision du 02/10/2026 : tracé DCE au RDC uniquement ; R+1 raccordé radiateur par radiateur depuis le radiateur RDC à l'aplomb, avec une réservation par radiateur ; couleurs DCE ; distribution principale en acier, raccordements apparents en cuivre"
+    },
+    "unites": {
+      "longueur": "m",
+      "position": "m (repère local)",
+      "diametre": "mm",
+      "puissance": "W",
+      "debit": "m3/h",
+      "vitesse": "m/s",
+      "pression": "Pa",
+      "temperature": "°C"
+    }
+  },
+  "conventions": {
+    "identifiants": {
+      "local": "R0-nn / R1-nn = n° du local dans le bilan émetteurs (RDC / R+1). NR-xxx = local dessiné absent du bilan",
+      "radiateur": "<id_local>-a, -b, -c… (un suffixe par radiateur du local)",
+      "reservation": "RES-R1-nn",
+      "systeme": "CH-<CIRCUIT>-A (aller) / CH-<CIRCUIT>-R (retour)"
+    },
+    "repere": "Repère local RDC = R+1 : origine au nu intérieur de la façade ouest de l'aile élémentaire, sur le mur nord de la classe élém. 1 ; x vers la droite de la feuille, y vers le haut de la feuille. Précision ±0,3 m (relevé PDF). À recaler sur les coordonnées DWG/RVT (transformation à 2 points : façade ouest et mur nord classe élém. 1)."
+  },
+  "regles": [
+    {
+      "id": 1,
+      "texte": "Puissance requise du local (bilan émetteurs) × 1,20 avant toute sélection"
+    },
+    {
+      "id": 2,
+      "texte": "Plusieurs radiateurs dans un local : répartition à parts égales, chaque radiateur est sélectionné pour sa part"
+    },
+    {
+      "id": 3,
+      "texte": "Position et taille selon l'architecte ; un radiateur qui ne rentre pas est signalé (FLAG) avec une alternative, jamais déplacé en silence"
+    },
+    {
+      "id": 4,
+      "texte": "Tracé : DCE au RDC ; R+1 raccordé radiateur par radiateur depuis le radiateur RDC à l'aplomb (décision D1). Tracé et calcul découplés"
+    },
+    {
+      "id": 5,
+      "texte": "Dimensionnement du radiateur le plus éloigné vers la source, selon la note F5"
+    },
+    {
+      "id": 6,
+      "texte": "Couleurs des systèmes = légende DCE ; distribution principale en acier ; raccordements apparents en cuivre"
+    }
+  ],
+  "niveaux": [
+    {
+      "id": "RDC",
+      "elevation_m": 0.0,
+      "source": "référence"
+    },
+    {
+      "id": "R+1",
+      "elevation_m": 3.5,
+      "source": "HYPOTHÈSE H-11 (à lire sur les coupes architecte)"
+    }
+  ],
+  "materiaux": {
+    "distribution_principale": {
+      "materiau": "acier noir",
+      "norme": "NF EN 10255 (≤ DN100) ; NF EN 10216 / 10217 au-delà",
+      "revit_type_canalisation": "CH_Acier_EN10255",
+      "assemblage": "soudé ou fileté, au choix de l'entreprise (CCTP)",
+      "perimetre": "nourrice de chaufferie → collecteurs et antennes de circulation jusqu'aux tés de piquage des radiateurs (RDC)",
+      "diametres": []
+    },
+    "raccordements_apparents": {
+      "materiau": "cuivre",
+      "norme": "NF EN 1057",
+      "revit_type_canalisation": "CH_Cuivre_EN1057",
+      "assemblage": "brasure ou sertissage (CCTP)",
+      "perimetre": "té de piquage sur l'acier → robinet du radiateur RDC, et liens verticaux R+1 depuis le radiateur RDC à travers la dalle",
+      "diametres": []
+    },
+    "regle_transition": "Changement de matériau au té de piquage : raccord acier/cuivre isolant (manchon diélectrique) côté cuivre. Le diamètre cuivre est choisi pour le débit transité (radiateur RDC + radiateur(s) R+1 raccordé(s))."
+  },
+  "systemes": [
+    {
+      "id": "CH-MAT-A",
+      "circuit": "MAT",
+      "sens": "aller",
+      "classification_revit": "Hydronic Supply",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE MAT ALLER",
+      "rgb_legende": [
+        255,
+        0,
+        0
+      ],
+      "rgb_plan": [
+        255,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "CH-MAT-R",
+      "circuit": "MAT",
+      "sens": "retour",
+      "classification_revit": "Hydronic Return",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE MAT RETOUR",
+      "rgb_legende": [
+        255,
+        0,
+        255
+      ],
+      "rgb_plan": [
+        255,
+        0,
+        255
+      ]
+    },
+    {
+      "id": "CH-ELEM-A",
+      "circuit": "ELEM",
+      "sens": "aller",
+      "classification_revit": "Hydronic Supply",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE ELEM ALLER",
+      "rgb_legende": [
+        205,
+        105,
+        40
+      ],
+      "rgb_plan": [
+        205,
+        105,
+        40
+      ]
+    },
+    {
+      "id": "CH-ELEM-R",
+      "circuit": "ELEM",
+      "sens": "retour",
+      "classification_revit": "Hydronic Return",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE ELEM RETOUR",
+      "rgb_legende": [
+        242,
+        103,
+        34
+      ],
+      "rgb_plan": [
+        242,
+        103,
+        34
+      ]
+    },
+    {
+      "id": "CH-PERI-A",
+      "circuit": "PERI",
+      "sens": "aller",
+      "classification_revit": "Hydronic Supply",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE PERI ALLER",
+      "rgb_legende": [
+        153,
+        27,
+        30
+      ],
+      "rgb_plan": [
+        153,
+        27,
+        30
+      ]
+    },
+    {
+      "id": "CH-PERI-R",
+      "circuit": "PERI",
+      "sens": "retour",
+      "classification_revit": "Hydronic Return",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE PERI RETOUR",
+      "rgb_legende": [
+        205,
+        32,
+        39
+      ],
+      "rgb_plan": [
+        147,
+        39,
+        143
+      ],
+      "ecart": "D-15 : violet sur le plan, rouge dans la légende. Couleur légende retenue (règle 6)"
+    },
+    {
+      "id": "CH-CTA-A",
+      "circuit": "CTA",
+      "sens": "aller",
+      "classification_revit": "Hydronic Supply",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE CTA ALLER",
+      "rgb_legende": [
+        0,
+        38,
+        0
+      ],
+      "rgb_plan": [
+        19,
+        103,
+        52
+      ]
+    },
+    {
+      "id": "CH-CTA-R",
+      "circuit": "CTA",
+      "sens": "retour",
+      "classification_revit": "Hydronic Return",
+      "nom_dce": "RESEAU EAU DE CHAUFFAGE CTA RETOUR",
+      "rgb_legende": [
+        0,
+        165,
+        41
+      ],
+      "rgb_plan": [
+        19,
+        155,
+        72
+      ]
+    },
+    {
+      "id": "CH-PRIM-A",
+      "circuit": "PRIMAIRE",
+      "sens": "aller",
+      "classification_revit": "Hydronic Supply",
+      "nom_dce": "(non légendé) PAC → ballons → bouteille → nourrice",
+      "rgb_legende": null,
+      "rgb_plan": [
+        237,
+        28,
+        36
+      ],
+      "ecart": "Couleur hors légende, à définir"
+    },
+    {
+      "id": "CH-PRIM-R",
+      "circuit": "PRIMAIRE",
+      "sens": "retour",
+      "classification_revit": "Hydronic Return",
+      "nom_dce": "(non légendé)",
+      "rgb_legende": null,
+      "rgb_plan": null,
+      "ecart": "Couleur hors légende, à définir"
+    }
+  ],
+  "sous_reseaux": [
+    {
+      "id": "PERI-RESTAU",
+      "systemes": [
+        "CH-PERI-A",
+        "CH-PERI-R"
+      ],
+      "description": "Restauration (cantines, salle de repos agents) sur le départ Admin/Péri, isolée par des V2V motorisées « réseaux restauration ». Couleurs du plan (242,113,114) / (169,83,160) hors légende : dessin avec les couleurs PÉRI de la légende + paramètre CVC_Sous_Reseau = RESTAU",
+      "statut": "A_CONFIRMER (D-06)"
+    }
+  ],
+  "modes_pose": {
+    "source": "Légende DCE : 3 représentations par système",
+    "valeurs": {
+      "plinthe": "trait fin",
+      "dalle_enterre": "trait fin",
+      "plafond": "trait épais"
+    },
+    "parametre_revit": "CVC_Mode_Pose",
+    "note": "La distinction entre plinthe et dalle n'est pas lisible sur le PDF : à relire sur les calques DWG"
+  },
+  "filtres_vues": [
+    {
+      "nom": "CH - MAT",
+      "regle": "Type de système commence par CH-MAT",
+      "couleurs": "rgb_legende des systèmes"
+    },
+    {
+      "nom": "CH - ELEM",
+      "regle": "Type de système commence par CH-ELEM",
+      "couleurs": "rgb_legende"
+    },
+    {
+      "nom": "CH - PERI",
+      "regle": "Type de système commence par CH-PERI",
+      "couleurs": "rgb_legende"
+    },
+    {
+      "nom": "CH - CTA",
+      "regle": "Type de système commence par CH-CTA",
+      "couleurs": "rgb_legende"
+    },
+    {
+      "nom": "CH - Acier",
+      "regle": "Type de canalisation = CH_Acier_EN10255",
+      "graphisme": "trait épais"
+    },
+    {
+      "nom": "CH - Cuivre apparent",
+      "regle": "Type de canalisation = CH_Cuivre_EN1057",
+      "graphisme": "trait fin"
+    },
+    {
+      "nom": "CH - FLAG",
+      "regle": "CVC_Statut contient FLAG",
+      "graphisme": "remplissage rouge"
+    },
+    {
+      "nom": "CH - Critique",
+      "regle": "CVC_Critique = OUI",
+      "graphisme": "trait très épais"
+    },
+    {
+      "nom": "CH - Réservations",
+      "regle": "Catégorie Ouvertures / modèles génériques RES-R1-*",
+      "graphisme": "hachure"
+    }
+  ],
+  "production": {
+    "local": "Chaufferie RDC (sous-station, près de la restauration)",
+    "equipements": [
+      {
+        "id": "PAC-01",
+        "type": "PAC eau/eau géothermique",
+        "marque": "AERMEC",
+        "modele": "WRL 300",
+        "dimensions_mm": "1320x845x1380",
+        "poids_vide_kg": 381
+      },
+      {
+        "id": "BT-01",
+        "type": "Ballon tampon PAC",
+        "volume_L": 500,
+        "reference": "Atlantic Corprimo 1950 × Ø650"
+      },
+      {
+        "id": "BT-02",
+        "type": "Ballon tampon PAC",
+        "volume_L": 750,
+        "reference": "Atlantic Corklim 2000 × Ø900"
+      },
+      {
+        "id": "BM-01",
+        "type": "Bouteille de mélange"
+      },
+      {
+        "id": "FM-01",
+        "type": "Filtre magnétique"
+      },
+      {
+        "id": "VE-01",
+        "type": "Vase(s) d'expansion"
+      },
+      {
+        "id": "NOU-01",
+        "type": "Nourrice de distribution 4 départs avec circulateurs"
+      },
+      {
+        "id": "GEO",
+        "type": "Sondes géothermiques 200 m, regard et nourrices",
+        "perimetre": "lot forage (limite de prestation)"
+      }
+    ]
+  },
+  "departs": [
+    {
+      "id": "PERI",
+      "ordre_nourrice": 1,
+      "libelle_dce": "Départ Admin / Péri",
+      "systemes": [
+        "CH-PERI-A",
+        "CH-PERI-R"
+      ],
+      "trace_RDC": "Depuis la nourrice vers l'ouest, puis vers le nord dans la circulation verticale de l'aile élémentaire (en parallèle de l'ÉLÉM) jusqu'à la circulation nord ; ensuite vers l'est le long de la circulation nord jusqu'à la salle ATSEM / bibliothèque. Piquages : wc élém. 3, rangement 2, direction élém., salle des enseignants, psychologue, direction périsco, animateurs, RASED, hall périsco, bibliothèque, wc admin 2, ATSEM. Sous-réseau restauration (V2V) vers les cantines E1/E2 et la salle de repos agents.",
+      "statut_trace": "DCE CVPS_01 à suivre"
+    },
+    {
+      "id": "ELEM",
+      "ordre_nourrice": 2,
+      "libelle_dce": "Départ Élémentaire",
+      "systemes": [
+        "CH-ELEM-A",
+        "CH-ELEM-R"
+      ],
+      "trace_RDC": "Depuis la nourrice vers l'ouest, puis vers le nord dans la circulation longeant les classes élémentaires ; antennes vers l'ouest (classes 4, 3, 2, 1, wc élém. 2, ateliers, stockage 1), boucle vers la salle polyvalente et antenne vers la zone SAS / rangement 1 / laverie 1.",
+      "trace_R1": "AUCUNE distribution au R+1 : chaque radiateur R+1 est raccordé en cuivre sur le radiateur RDC à l'aplomb (voir radiateurs[].raccordement et reservations_dalle)",
+      "statut_trace": "DCE CVPS_01 à suivre au RDC ; CVPS_02 abandonné"
+    },
+    {
+      "id": "CTA",
+      "ordre_nourrice": 3,
+      "libelle_dce": "Départ CTA",
+      "systemes": [
+        "CH-CTA-A",
+        "CH-CTA-R"
+      ],
+      "trace_RDC": "Depuis la nourrice vers l'est le long de la circulation sud, puis vers le nord le long de la cour maternelle jusqu'aux locaux CTA (CTA 5,0 m², LT CTA 3,7 m², CTA 4,25 m²) ; une antenne vers la CTA en terrasse.",
+      "statut_trace": "DCE CVPS_01 ; puissances des batteries chaudes inconnues (D-17)"
+    },
+    {
+      "id": "MAT",
+      "ordre_nourrice": 4,
+      "libelle_dce": "Départ Maternelle",
+      "systemes": [
+        "CH-MAT-A",
+        "CH-MAT-R"
+      ],
+      "trace_RDC": "Depuis la nourrice vers l'est le long de la circulation sud (piquages office, laverie 2, vestiaires, ménage E10, buanderie, wc mat 2, local stockage, couloir motricité), puis vers le nord le long de la cour maternelle jusqu'à la circulation centrale ; antennes nord (sieste 1, classes mat 1 et 2, sieste 2) et sud (classes mat 3 à 6, wc mat 3 et 4) ; antenne ouest vers wc maternelle, motricité et direction maternelle.",
+      "statut_trace": "DCE CVPS_01 à suivre"
+    }
+  ],
+  "regles_trace": {
+    "RDC": "Suivre le tracé DCE CVPS_01 (distribution acier, mode de pose selon la légende). Chaque radiateur est piqué par un té sur l'acier puis raccordé en cuivre apparent.",
+    "R+1": "Ne pas dessiner le réseau CVPS_02. Pour chaque radiateur R+1 : 2 tubes cuivre apparents (aller/retour) partant du radiateur RDC à l'aplomb (piquage en amont de son robinet), montant dans une réservation de la dalle (RES-R1-nn) jusqu'au robinet du radiateur R+1.",
+    "recalcul": "Toute modification de tracé passe par l'export des tronçons Revit → data/troncons_*.csv → calc_chauffage.py --troncons → réinjection. Ne pas éditer ce JSON à la main."
+  },
+  "import_dwg": {
+    "statut": "À remplir à réception des DWG CVPS_01 / ARCH",
+    "correspondance_calques": {
+      "<calque DWG réseau MAT aller>": "CH-MAT-A",
+      "<calque DWG réseau MAT retour>": "CH-MAT-R",
+      "<calque ELEM aller>": "CH-ELEM-A",
+      "<calque ELEM retour>": "CH-ELEM-R",
+      "<calque PERI aller>": "CH-PERI-A",
+      "<calque PERI retour>": "CH-PERI-R",
+      "<calque CTA aller>": "CH-CTA-A",
+      "<calque CTA retour>": "CH-CTA-R"
+    },
+    "bloc_radiateur": "<nom du bloc « RADIATEUR A EAU »> → extraction X, Y, rotation, longueur (AutoCAD EXTRACTDONNEES) → remplace position_m",
+    "regle": "Au RDC, polylignes des calques → canalisations acier du système correspondant, à la hauteur du mode de pose (plafond / dalle / plinthe). Les polylignes du R+1 (CVPS_02) ne sont PAS importées."
+  },
+  "procedure_dessin_revit": [
+    "1. Charger le gabarit et créer les niveaux de niveaux[] ; lier le modèle architecte (DWG/RVT) et recaler le repère (conventions.repere)",
+    "2. Créer les types de canalisation de materiaux[] avec les diamètres listés ; créer les 10 types de systèmes de systemes[] (classification, abréviation, couleur rgb_legende)",
+    "3. Créer les filtres de filtres_vues[] et les gabarits de vue (tous circuits, puis un par circuit)",
+    "4. Créer les espaces MEP de locaux[] (Number = id_local) et renseigner les paramètres CVC_*",
+    "5. Placer les radiateurs de radiateurs[] (position_m, z_bas_mm, orientation, famille selon type_dessine et selection) sans aucun déplacement ; poser CVC_Statut",
+    "6. Tracer la distribution acier RDC par départ (import_dwg : polylignes des calques DCE → canalisations), selon departs[].trace_RDC ; piquer chaque radiateur RDC en cuivre (raccordement.diametre)",
+    "7. Pour chaque radiateur R+1 : placer la réservation de reservations_dalle[] dans la dalle et tracer les 2 tubes cuivre depuis le radiateur RDC parent (raccordement.parent_RDC)",
+    "8. Exporter les tronçons (export_network.py) → recalcul → apply_results.py (diamètres acier et cuivre, paramètres CVC_*, CVC_Critique)",
+    "9. Contrôles : systèmes sans élément non connecté, rapport de pertes de pression Revit comparé au moteur (écart ≤ 15 %), détection de conflits, nomenclatures"
+  ],
+  "hypotheses": {},
+  "locaux": [],
+  "radiateurs": [],
+  "reservations_dalle": [],
+  "reseau": {
+    "troncons": [],
+    "chemins": [],
+    "note": "Vide tant que le modèle Revit (ou le DWG) n'est pas tracé ; rempli par export_network.py puis le recalcul"
+  }
+}

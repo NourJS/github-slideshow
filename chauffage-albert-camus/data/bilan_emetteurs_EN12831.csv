@@ -1,0 +1,66 @@
+id_local;niveau;n_rapport;code;designation;surface_m2;ti_C;ref_ea;ref_extr;deperd_transm_W;deperd_ventil_W;deperd_total_W;puissance_a_installer_W
+R0-01;RDC;1;B21;Salle de classe élémentaire 4;62.03;19;900;43.1;1286.3;351.8;1638.1;3064.8
+R0-02;RDC;2;B21;Salle de classe élémentaire 3;60.06;19;900;23.6;673.9;192.5;866.4;2247.8
+R0-03;RDC;3;B25;WC élémentaire 2;31.53;19;200;12.4;374.6;101.0;475.7;1200.9
+R0-04;RDC;4;B32;Réserve info;8.42;19;0;3.3;11;27;38;231.9
+R0-05;RDC;5;B21;Salle de classe élémentaire 2;62.07;19;900;24.4;791.6;198.9;990.5;2418.2
+R0-06;RDC;6;B22;Atelier élémentaire 1;31.88;19;450;12.5;575.6;102.2;677.7;1411.0
+R0-07;RDC;7;B21;Salle de classe élémentaire 1;62.93;19;900;43.7;1557.9;357.0;1914.8;3362.2
+R0-08;RDC;8;B11;Hall + circulation élémentaire;162.60;19;0;113;2021.9;922.3;2944.2;6684.0
+R0-09;RDC;9;B25;WC élémentaire 3;14.90;19;210;5.9;20;48;68;410.3
+R0-10;RDC;10;B24;Salle polyvalente / activités périscolaires;124.30;19;2500;67.5;2410.8;550.6;2961.3;5820.2
+R0-11;RDC;11;B24;Rangement 1;6.60;19;0;2.6;30;21;51;203.0
+R0-12;RDC;12;B24;Rangement 2;13.02;19;0;5.1;38;42;79;378.9
+R0-13;RDC;13;B14+B33;WC prof élé + Ménage 2 + SAS;14.39;19;0;5.7;65;46;111.5;442.4
+R0-14;RDC;14;E5;Laverie 1 élémentaire;19.60;19;900;7.7;89;63;151.8;602.6
+R0-15;RDC;15;E2;Cantine élémentaire / Zone de self;125.91;19;2750;60.7;2941.8;495.5;3437.3;6333.2
+R0-16;RDC;16;E1;Cantine élémentaire;93.55;19;2150;44.7;1825.4;365.1;2190.5;4342.2
+R0-17;RDC;17;E9;Local poubelles;8.43;19;0;3.5;561.1;28;589.4;783.2
+R0-18;RDC;18;E8;Salle de repos agents;11.43;19;150;4.5;479.3;37;515.9;778.8
+R0-19;RDC;19;E4;Office cuisine 1 élé + office cuisine 2 mat;42.82;19;800;17.8;1380.0;145.6;1525.6;2510.4
+R0-20;RDC;20;E4;Laverie 2 mat;12.53;19;783;5.2;462.3;43;504.9;793.1
+R0-21;RDC;21;E7;Vestiaire 1;9.20;20;140;143.8;338.9;1222.6;1561.5;1773.1
+R0-22;RDC;22;A32;Buanderie;6.38;19;90;92.7;228.3;756.1;984.4;1131.2
+R0-23;RDC;23;A24;WC maternelle 2;5.53;19;90;92.3;155.1;753.2;908.3;1035.5
+R0-24;RDC;24;E10;Ménage;5.13;19;45;47;29;383.6;412.8;530.8
+R0-25;RDC;25;E7;Vestiaires 2;10.86;20;140;144.3;66;1226.3;1292.0;1541.7
+R0-26;RDC;26;D9;Local stockage matériel d'animation;10.73;19;30;34.2;61;279.2;340.1;586.9
+R0-27;RDC;27;A23;Salle de motricité / activités périscolaires maternelles;172.59;19;2500;93.7;2822.5;764.4;3587.0;7556.6
+R0-28;RDC;28;-;Couloir le long salle de motricité A23 - Zone maternelle;46.27;19;0;20.1;2365.9;164.2;2530.1;3594.3
+R0-29;RDC;29;A24;WC maternelle;27.12;19;230;11;195.9;90;285.9;909.7
+R0-30;RDC;30;C1;Bibliothèque;60.70;19;900;23.8;1353.7;194.5;1548.2;2944.3
+R0-31;RDC;31;C4;WC admin 2;5.27;19;0;2.1;280.9;17;297.8;419.0
+R0-32;RDC;32;C4;WC admin 1;5.54;19;0;2.2;25;18;43;170.4
+R0-33;RDC;33;D2;Hall périsco;21.15;19;0;14.7;1028.8;120.0;1148.8;1635.2
+R0-34;RDC;34;C3;Salle RASED;24.47;19;150;9.6;548.8;78;627.2;1190.0
+R0-35;RDC;35;D4;Salle des animateurs;26.69;19;500;10.5;695.8;86;781.3;1395.2
+R0-36;RDC;36;B13;Salle des enseignants;24.43;19;300;9.6;444.1;78;522.4;1084.2
+R0-37;RDC;37;B12;Direction élémentaire;12.70;19;75;5;463.0;41;503.7;795.8
+R0-38;RDC;38;C2;Psychologue;12.80;19;75;8.9;419.5;73;492.1;786.5
+R0-39;RDC;39;D3;Direction périsco;15.00;19;75;10.4;409.5;85;494.5;839.5
+R0-40;RDC;40;-;Circulation autour B12/B33/C2/D3/B13/C3/D4;18.29;19;0;7.2;113.3;59;171.9;592.6
+R0-41;RDC;41;A13;Salle de service des ATSEM et enseignants;28.40;19;300;19.7;778.5;161.1;939.6;1592.8
+R0-42;RDC;42;A12;Direction maternelle;12.70;19;75;5;474.2;41;514.9;807.0
+R0-43;RDC;43;-;Circulation autour A13/A33/A12/A24/C1/C4;18.29;19;0;7.2;113.3;59;171.9;592.6
+R0-44;RDC;44;A11;Hall maternelle;35.00;19;0;24.3;1348.8;198.5;1547.3;2352.3
+R0-45;RDC;45;A22;Salle de sieste 1;60.26;19;900;55.3;1187.4;451.4;1638.8;3024.8
+R0-46;RDC;46;A21;Salle de classe maternelle 1;59.88;19;900;55.2;1558.1;450.8;2008.9;3386.1
+R0-47;RDC;47;A21;Salle de classe maternelle 2;59.80;19;900;55.2;1558.4;450.7;2009.1;3384.5
+R0-48;RDC;48;A22;Salle de sieste 2;60.06;19;900;55.2;1128.9;450.7;1579.6;2961.0
+R0-49;RDC;49;A21;Salle de classe maternelle 6;59.17;19;900;52.9;2545.5;431.7;2977.2;4338.1
+R0-50;RDC;50;A21;Salle de classe maternelle 5;60.49;19;900;29.9;1930.8;243.9;2174.7;3566.0
+R0-51;RDC;51;A24;WC maternelle 4;24.41;19;240;17;1763.5;138.5;1902.0;2463.4
+R0-52;RDC;52;-;Circulation autour classes matern 2/5/6 + sieste 2;57.17;19;0;39.7;2018.9;324.3;2343.1;3658.1
+R0-53;RDC;53;A24;WC maternelle 3;8.94;19;110;6.2;133.4;51;184.1;389.7
+R0-54;RDC;54;A21;Salle de classe maternelle 4;60.49;19;900;29.9;2022.2;243.9;2266.1;3657.3
+R0-55;RDC;55;A21;Salle de classe maternelle 3;60.49;19;900;29.9;1930.8;243.9;2174.7;3566.0
+R0-56;RDC;56;-;Circulation autour classes matern 1/3/4 + sieste 1;57.17;19;0;22.5;216.9;183.2;400.1;1715.0
+R1-01;R+1;1;B21;Salle de classe élémentaire 8;62.29;19;900;43.3;1499.5;353.3;1852.8;3285.5
+R1-02;R+1;2;B22;Atelier élémentaire 3;31.89;19;450;12.5;716.9;102.2;819.1;1552.6
+R1-03;R+1;3;B21;Salle de classe élémentaire 7;62.14;19;900;24.4;868.5;199.1;1067.6;2496.9
+R1-04;R+1;4;B21;Salle de classe élémentaire 6;62.14;19;900;24.4;872.5;199.1;1071.7;2500.9
+R1-05;R+1;5;B22;Atelier élémentaire 2;30.89;19;450;12.1;704.4;99;803.4;1513.9
+R1-06;R+1;6;B21;Salle de classe élémentaire 5;62.51;19;900;43.5;1625.3;354.6;1979.9;3417.6
+R1-07;R+1;7;B25;WC élémentaire 4;13.35;19;210;9.3;724.8;76;800.5;1107.6
+R1-08;R+1;8;B25;WC élémentaire 5;13.54;19;210;9.4;771.8;77;848.6;1160.0
+R1-09;R+1;9;-;R+1 - Circulation;122.65;19;0;85.3;4288.2;695.7;4983.9;7804.9
