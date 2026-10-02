@@ -722,6 +722,7 @@ catalogue, DWG ou H-xx) ; français technique du projet.
 ```
 chauffage-albert-camus/
 ├── DOSSIER_PROJET_CHAUFFAGE.md            ← ce document
+├── PROMPT_MODELISATION_REVIT.md          ← prompt pour l'agent qui construit le modèle dans Revit
 ├── model/
 │   ├── modele_chauffage_albert_camus.json  ← modèle à dessiner (GÉNÉRÉ)
 │   └── reseau_rdc_geometrie.json           ← polylignes du réseau RDC (GÉNÉRÉ)

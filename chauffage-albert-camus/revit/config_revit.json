@@ -1,6 +1,8 @@
 {
   "_lisezmoi": "Réglages propres au modèle Revit. À adapter AVANT de lancer build_from_json.py. Les noms de familles/types doivent exister dans le projet (familles chargées).",
   "dry_run": true,
+  "enregistrer_apres": false,
+  "_enregistrer_note": "true pour enregistrer le .rvt après validation (indispensable avec « pyrevit run », qui ouvre le modèle dans une session Revit séparée).",
   "etapes": ["niveaux", "systemes", "types_canalisation", "filtres", "radiateurs", "cta", "reservations", "reseau", "liens_R1"],
   "niveaux": {"RDC": "RDC", "R+1": "R+1", "creer_si_absent": true},
   "transformation": {

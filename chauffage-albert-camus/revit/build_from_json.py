@@ -579,6 +579,12 @@ def main():
     else:
         tg.Assimilate()
         log("Modèle validé.")
+        if CFG.get("enregistrer_apres", False):
+            try:
+                doc.Save()
+                log("Modèle enregistré :", doc.PathName)
+            except Exception as ex:
+                log("Enregistrement impossible :", ex)
     with io.open(os.path.join(ICI, "journal_build.txt"), "w", encoding="utf-8") as f:
         f.write(u"\n".join(JOURNAL))
     log("Journal :", os.path.join(ICI, "journal_build.txt"))
